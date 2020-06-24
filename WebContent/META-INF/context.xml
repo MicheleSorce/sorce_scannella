@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context >
+	<Resource auth="Container"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		maxActive="1220"		
+		minIdle="244"
+        maxIdle="6"
+		maxWait="1000"
+		name="jdbc/sorcescannella"
+		username="root"
+		password="SistemiWeb2020"
+		type="javax.sql.DataSource"
+		url="jdbc:mysql://localhost:3306/sorcescannella?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Rome"
+		testOnBorrow="true"
+		validationQuery="SELECT 1" />		
+</Context>
