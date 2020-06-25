@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> Home Amministratore </title>
-<link Rel="icon" type="image/ico" href="immagini/logo.png"> <!-- per il logo in alto -->
+<link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
 <link href="../css/AmministratoreCSS.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
@@ -15,7 +15,7 @@
 <script>
 //pulsante lingua
 
-
+//*
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
   
@@ -219,7 +219,7 @@ $(document).ready(function(){
 	      <i class="fa fa-clock-o"></i> Dom: Chiuso <br />
 
 
-	  <img src="immagini/logo.png" width="68px" height="60px" style="padding-left:40%">
+	  <img src="../immagini/logo.png" width="68px" height="60px" style="padding-left:40%">
 	  <div style="color: black; text-align: center;">Copyright &copy; 2020. All Rights Reserved.</div>
 
 	 </div>	
