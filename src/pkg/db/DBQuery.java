@@ -2,11 +2,9 @@ package pkg.db;
 
 import pkg.bean.*;
 import java.sql.*;
-
-import org.apache.catalina.Context;
-import org.apache.tomcat.jdbc.pool.DataSource;
-
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class DBQuery {
 	// public Context ctx ;
