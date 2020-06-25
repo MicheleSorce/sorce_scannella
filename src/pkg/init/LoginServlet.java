@@ -60,8 +60,9 @@ public class LoginServlet extends HttpServlet {
 				ammin.setSesso((Integer)array_fields[7]);	
 				
 				String address_a="/jsp/AmministratoreHome.jsp";
-				RequestDispatcher dispatcher_a = request.getRequestDispatcher(address_a);
-				dispatcher_a.forward(request, response);
+				
+				response.sendRedirect(request.getContextPath() + address_a);
+				
 				break;
 			case("barista"):
 				Barista barista= (Barista)session.getAttribute("barista");
@@ -80,8 +81,7 @@ public class LoginServlet extends HttpServlet {
 				barista.setSesso((Integer)array_fields2[7]);
 				
 				String address_bar="/html/Bar.html";
-				RequestDispatcher dispatcher_bar = request.getRequestDispatcher(address_bar);
-				dispatcher_bar.forward(request, response);
+				response.sendRedirect(request.getContextPath() + address_bar);
 				break;
 			case("bagnino"):
 				Bagnino bagnino= (Bagnino)session.getAttribute("bagnino");
@@ -100,18 +100,32 @@ public class LoginServlet extends HttpServlet {
 				bagnino.setSesso((Integer)array_fields3[7]);
 				
 				String address_bag="/html/Bagnino.html";
-				RequestDispatcher dispatcher_bag = request.getRequestDispatcher(address_bag);
-				dispatcher_bag.forward(request, response);
+				response.sendRedirect(request.getContextPath() + address_bag);
 				break;
 			case("cliente"):
+				Cliente cliente= (Cliente)session.getAttribute("cliente");
+				if(cliente == null) {
+					cliente= new Cliente();
+					session.setAttribute("cliente", cliente);
+				}
+				Object[] array_fields4=(Object[])db.searchCliente(email,"id_cliente");
+				cliente.setIdCliente((Integer)array_fields4[0]);
+				cliente.setNome((String)array_fields4[1]);
+				cliente.setCognome((String)array_fields4[2]);
+				cliente.setTelefono((String)array_fields4[3]);
+				cliente.setEmail((String)array_fields4[4]);
+				cliente.setPw((String)array_fields4[5]);
+				cliente.setData((String)array_fields4[6]);
+				cliente.setSesso((Integer)array_fields4[7]);
+				cliente.setTot_pagamento((Float)array_fields4[8]);
+				
 				String address_c="/html/Cliente.html";
-				RequestDispatcher dispatcher_c = request.getRequestDispatcher(address_c);
-				dispatcher_c.forward(request, response);
+				response.sendRedirect(request.getContextPath() + address_c);
+				
 				break;
 			default: //utente non registrato perche non trova email-pw sul db
 				String address_out="/jsp_result/login_failed.jsp";
-				RequestDispatcher dispatcher_out = request.getRequestDispatcher(address_out);
-				dispatcher_out.forward(request, response);
+				response.sendRedirect(request.getContextPath() + address_out);
 				break;
 		}
 	}

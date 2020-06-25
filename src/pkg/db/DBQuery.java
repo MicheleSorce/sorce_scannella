@@ -227,6 +227,40 @@ public class DBQuery {
 		}
 		return array_fields;
 	}
+	
+	public Object searchCliente(String email, String id){
+		Object[] array_fields= new Object[9];
+
+		try {
+			Connection connection4 = ds.getConnection();
+			PreparedStatement statement = connection4.prepareStatement("SELECT * FROM cliente WHERE email=?");
+			statement.setString(1, email);
+			
+			ResultSet rs = statement.executeQuery();
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				array_fields[0]=rs.getInt(id);
+				array_fields[1]=rs.getString("nome");
+				array_fields[2]=rs.getString("cognome");
+				array_fields[3]=rs.getString("telefono");
+				array_fields[4]=rs.getString("email");
+				array_fields[5]=rs.getString("pw");
+				array_fields[6]=rs.getString("data_nascita");
+				array_fields[7]=rs.getInt("sesso");
+				array_fields[8]=rs.getFloat("tot_pagamento");
+			}
+			rs.close();
+			statement.close();
+			connection4.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return array_fields;
+		
+	}
+	
+	
+	
 }	
 	
 	

@@ -7,10 +7,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> Home Amministratore </title>
-
 <link Rel="icon" type="image/ico" href="immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
-<link href="css/AmministratoreCSS.css" type="text/css" rel="stylesheet">
+<link href="../css/AmministratoreCSS.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
 <script>
@@ -128,7 +127,7 @@ $(document).ready(function(){
 </head>
 <body class=”it”>
 
-	<div class="navbar"  >
+	<div class="navbar" style= "width:99% " >
 		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
