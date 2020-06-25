@@ -231,7 +231,7 @@ public class DBQuery {
 		}
 		return array_fields;
 	}
-	
+}	
 	
 	
 	
@@ -240,88 +240,3 @@ public class DBQuery {
 	
 	
 		
-	
-//	protected void finalize() {
-//		try{
-//			connection.close();
-//		}
-//		catch(SQLException e){
-//			e.printStackTrace();
-//		}			
-//	}
-//
-//	public int validate(String nomeUtente, String passwd){
-//		int result = -1;
-//		
-//		try{
-//			Statement stat = conn.createStatement();
-//			String sql = String.format("SELECT Permessi FROM users WHERE NomeUtente = \"%s\" AND Password = \"%s\"", nomeUtente, passwd);
-//			ResultSet rs = stat.executeQuery(sql);
-//			
-//			if (rs.next())
-//				result = rs.getInt("Permessi");
-//			
-//			rs.close();
-//			stat.close();
-//		}
-//		catch(SQLException e){
-//			e.printStackTrace();
-//		}
-//
-//		return result;
-//	}
-	
-		
-	/*
-	 * public String[] selectStudent(String id) { String[] s = new String[4]; try{
-	 * PreparedStatement statement =
-	 * connection.prepareStatement("SELECT * FROM student WHERE ID=?");
-	 * statement.setString(1, id); ResultSet rs = statement.executeQuery();
-	 * 
-	 * if (rs.next()) { s[0] = rs.getString("code"); s[1] =
-	 * rs.getString("firstname"); s[2] = rs.getString("lastname"); s[3] =
-	 * rs.getString("birthdate"); } rs.close(); statement.close(); }
-	 * catch(SQLException e){ e.printStackTrace(); }
-	 * 
-	 * return s; }
-	 * 
-	 * public int insertUtente(int code, String firstname, String lastname, Date
-	 * birthdate) { int risultato = -1;
-	 * 
-	 * try{ PreparedStatement statement = connection.
-	 * prepareStatement("INSERT INTO users (NomeUtente, Password, Permessi) VALUES (?,?,?)"
-	 * ); statement.setInt(1, code); statement.setString(2, firstname);
-	 * statement.setString(3, lastname); statement.setDate(4, birthdate); risultato
-	 * = statement.executeUpdate();
-	 * 
-	 * statement.close(); } catch(SQLException e){ e.printStackTrace(); }
-	 * 
-	 * return risultato; }
-	 * 
-	 * 
-	 * 
-	 * // public int updateUtente(String oldNome, String newNome, String password,
-	 * String permessi) { // int risultato = -1; // // try{ // PreparedStatement
-	 * statement = connection.
-	 * prepareStatement("UPDATE users SET NomeUtente=?, Password=?, Permessi=? WHERE NomeUtente=?"
-	 * ); // statement.setString(1, newNome); // statement.setString(2, password);
-	 * // statement.setString(3, permessi); // statement.setString(4, oldNome); //
-	 * risultato = statement.executeUpdate(); // // statement.close(); // } //
-	 * catch(SQLException e){ // e.printStackTrace(); // } // // return risultato;
-	 * // }
-	 * 
-	 * 
-	 * 
-	 * public int deleteUtente(String nomeUtente) { int risultato = -1;
-	 * 
-	 * try{ PreparedStatement statement =
-	 * connection.prepareStatement("DELETE FROM student WHERE code = ?");
-	 * statement.setString(1, nomeUtente); risultato = statement.executeUpdate();
-	 * 
-	 * statement.close(); } catch(SQLException e){ e.printStackTrace(); }
-	 * 
-	 * return risultato; }
-	 */
-}
-	
-	
