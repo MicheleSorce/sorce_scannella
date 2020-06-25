@@ -115,9 +115,9 @@ $(document).ready(function(){
 		  }
 	});
 	
-	$('#accedi').click(function(){
-		$.post('../LoginServlet');
-	});
+// 	$('#accedi').click(function(){
+// 		$.post('../LoginServlet');
+// 	});
 });
 
 
@@ -137,14 +137,14 @@ $(document).ready(function(){
 	<div id="accesso" class="princ" >
 		<div id="logIn">
 	
-
+			 <form action="../LoginServlet" method="POST">
 				<img alt="logo" src="../immagini/logo.png"id="logo">
 				<h3>Accedi a MSBeach</h3>
 				<input type="text" name="insert_email" id="id" placeholder="E-mail"><br>
 				<input type="password" name="insert_password" id="password" placeholder="password" ><br>
 				<button id="accedi" type="submit">Accedi</button><br>
 				<hr>
-
+			</form>
 			
 			<a href="">hai dimenticato la password?</a><!-- inserire immagini app -->
 		</div>

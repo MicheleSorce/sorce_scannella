@@ -1,18 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Amministratore Spiaggia</title>
+<title> Home Amministratore </title>
 
-<link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
+<link Rel="icon" type="image/ico" href="immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
-<link href="../css/AmministratoreCSS.css" type="text/css" rel="stylesheet">
+<link href="css/AmministratoreCSS.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
-
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
 <script>
 //pulsante lingua
+
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
@@ -32,7 +35,7 @@ window.onclick = function(event) {
         openDropdown.classList.remove("show");
       }
     }
-  } 
+  }
   
 $(document).ready(function(){
 	
@@ -158,12 +161,21 @@ $(document).ready(function(){
 <div class="riuso" >
 
 
+<%--  <% // Using session...
+   HttpSession session1 = request.getSession();
+   String user = (String) session1.getAttribute("user");
+   %>
+<span class="session"> Welcome:<%=user%></span>
+ --%>
+
+
 <div class="bg_top"> 
 	<div style="text-align: left; padding:8%;">
 		<br /><br /><br /><br />
 		<div class="descrizione txt_hover">
 		<h2 style="font-family:Sofia;color:white;  font-size: 70px;text-align: center;" >Amministrazione</h2>
-		<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;">Home Page</p>
+		<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;"> Benvenuto testa di... ${ammin.nome}!</p>
+		
 		</div>
 	</div>
 </div>
@@ -208,7 +220,7 @@ $(document).ready(function(){
 	      <i class="fa fa-clock-o"></i> Dom: Chiuso <br />
 
 
-	  <img src="../immagini/logo.png" width="68px" height="60px" style="padding-left:40%">
+	  <img src="immagini/logo.png" width="68px" height="60px" style="padding-left:40%">
 	  <div style="color: black; text-align: center;">Copyright &copy; 2020. All Rights Reserved.</div>
 
 	 </div>	

@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 				ammin.setData((String)array_fields[6]);
 				ammin.setSesso((Integer)array_fields[7]);	
 				
-				String address_a="/html/AmministratoreSpiaggia.html";
+				String address_a="/jsp/AmministratoreHome.jsp";
 				RequestDispatcher dispatcher_a = request.getRequestDispatcher(address_a);
 				dispatcher_a.forward(request, response);
 				break;
@@ -85,21 +85,20 @@ public class LoginServlet extends HttpServlet {
 				break;
 			case("bagnino"):
 				Bagnino bagnino= (Bagnino)session.getAttribute("bagnino");
-			if(bagnino == null) {
-				bagnino= new Bagnino();
-				session.setAttribute("bagnino", bagnino);
-			}
-			Object[] array_fields3=(Object[])db.searchAmm_Bar_Bag(email,type,"id_bagnino");
-			bagnino.setIdBagnino((Integer)array_fields3[0]);
-			bagnino.setNome((String)array_fields3[1]);
-			bagnino.setCognome((String)array_fields3[2]);
-			bagnino.setTelefono((String)array_fields3[3]);
-			bagnino.setEmail((String)array_fields3[4]);
-			bagnino.setPw((String)array_fields3[5]);
-			bagnino.setData((String)array_fields3[6]);
-			bagnino.setSesso((Integer)array_fields3[7]);
-			
-			
+				if(bagnino == null) {
+					bagnino= new Bagnino();
+					session.setAttribute("bagnino", bagnino);
+				}
+				Object[] array_fields3=(Object[])db.searchAmm_Bar_Bag(email,type,"id_bagnino");
+				bagnino.setIdBagnino((Integer)array_fields3[0]);
+				bagnino.setNome((String)array_fields3[1]);
+				bagnino.setCognome((String)array_fields3[2]);
+				bagnino.setTelefono((String)array_fields3[3]);
+				bagnino.setEmail((String)array_fields3[4]);
+				bagnino.setPw((String)array_fields3[5]);
+				bagnino.setData((String)array_fields3[6]);
+				bagnino.setSesso((Integer)array_fields3[7]);
+				
 				String address_bag="/html/Bagnino.html";
 				RequestDispatcher dispatcher_bag = request.getRequestDispatcher(address_bag);
 				dispatcher_bag.forward(request, response);
