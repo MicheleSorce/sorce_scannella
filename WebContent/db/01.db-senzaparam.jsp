@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Test DB</title>
+<title>Test22 DB</title>
 </head>
 <body>
 	<%
