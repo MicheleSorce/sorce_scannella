@@ -1,12 +1,10 @@
 package pkg.db;
+
+import pkg.bean.*;
 import java.sql.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import pkg.bean.Cliente;
+import org.apache.catalina.Context;
+import org.apache.tomcat.jdbc.pool.DataSource;
 
 
 
@@ -24,7 +22,7 @@ public class DBQuery {
 			try {
 				Context ctx = new InitialContext();
 				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/sorcescannella"); //l'unica che mi connette al db
-			} catch (NamingException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
