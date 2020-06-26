@@ -321,8 +321,11 @@ public class DBQuery {
 
 	
 	
-	public Ombrellone getOmbrelloneFromDb(int id) {
-		Ombrellone ombrellone=null;
+	@SuppressWarnings("null")
+	public boolean getOmbrelloneFromDb(int id) {
+		Ombrellone ombrellone=new Ombrellone();
+		boolean result=false;
+		
 		try {
 			Connection connection = ds.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM ombrellone WHERE id_ombrellone=?");
@@ -351,7 +354,9 @@ public class DBQuery {
 				ombrellone.setZona(zona);
 				ombrellone.setPrezzo(prezzo);
 				ombrellone.setLibero(stato_occupazione);
-				ombrellone.setPulito(stato_pulizia);	
+				ombrellone.setPulito(stato_pulizia);
+				
+				result=true;
 			}
 			rs.close();
 			statement.close();
@@ -359,7 +364,7 @@ public class DBQuery {
 		}catch(SQLException e){
 				e.printStackTrace();
 		}
-		return ombrellone;
+		return result;
 	}
 	
 	

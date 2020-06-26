@@ -34,11 +34,11 @@ public class MappaSpiaggiaServlet extends HttpServlet {
 		//for(int i=0; i< mappaSpiaggiaOmbrelloni.length; i++){
 		//	Ombrellone mappaSpiaggiaOmbrelloni[i]=db.getOmbrelloneFromDb(i);
 		//}
-		Ombrellone ombr=db.getOmbrelloneFromDb(1);
+		boolean res=db.getOmbrelloneFromDb(2);
 		
-		request.setAttribute("ombrellone", ombr);
+	//	request.setAttribute("ombrellone", ombr);
 		
-		if(ombr==null) {
+		if(res==false) {
 			String address="/jsp_result/registrazione_failed.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 			dispatcher.forward(request, response);
