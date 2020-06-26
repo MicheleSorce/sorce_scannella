@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		String email =request.getParameter("insert_email");
 		String pw =request.getParameter("insert_password");					//dal form
 	
-		String type= db.whoUserType2(email, pw);
+		String type= db.whoUserType(email, pw);
 
 		
 		

@@ -4,7 +4,7 @@
 </head>
 
 <body>
-	<h1>Fallita Password. Riprova. </h1>
-	<a href="html/ForgetPw.html" >Indietro </a>
+	<h1>E-mail/password non corretta. </h1>
+	<a href="html/ForgetPw.html" >Riprova </a>
 	
 </body>

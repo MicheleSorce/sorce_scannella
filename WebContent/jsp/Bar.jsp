@@ -73,7 +73,7 @@ $(document).ready(function(){
 		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
-		  <a href="logIn.html"><i class="fa fa-fw fa-user"></i> Login</a>
+		  <a href="logIn.html"><i class="fa fa-fw fa-user"></i> Logout</a>
 		  <a href="https://www.google.com/maps/dir/37.2669805,13.5784017/Realmonte+-+Baia+delle+Sirene-Giallonardo,+92010+Realmonte+AG/@37.3003778,13.4278911,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x131a7b97e08653c7:0x264a8eab65c24eb!2m2!1d13.4173862!2d37.3150145"><i class="fa fa-car"></i> Come arrivare</a>
 		  <div class="dropdown">
 		  <a onclick="myFunction()" class="dropbtn "> <i class="fa fa-language" aria-hidden="true"></i> Lingua</a>

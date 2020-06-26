@@ -5,7 +5,7 @@
 
 <body>
 <h1>Fallita login. Riprova. </h1>
-	<a href="html/logIn.html" >Indietro </a>
+	<a href="../html/logIn.html" >Indietro </a>
 	
 	
 </body>

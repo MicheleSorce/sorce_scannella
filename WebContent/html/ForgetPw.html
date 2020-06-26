@@ -108,7 +108,7 @@ input:hover{
 <img alt="logo" src="../immagini/logo.png" id="logo" width="100px" height="100px" >
 <h1>Hai dimenticato la password? </h1>
 <hr>
-<span style="font-variant: small-caps; float: left"> Inserisci i tuoi dati:</span><br/><br/>
+<span style="font-variant: small-caps; float: left"> Inserisci i tuoi dati:</span> <input type="reset"value="Resetta" style="float: right"class="pulsanti"><br/><br/>
 
 <form action="../ForgetPwServlet" method="POST"> 
  <span style="font-variant: small-caps">E-mail</span><br /><input type="email" name="insert_email" required="required" id="email" placeholder="mario.rossi@gmail.com"><br /><br />
@@ -120,8 +120,10 @@ input:hover{
 	
 	<hr>
 	<br />
-	<input type="reset"value="Resetta" class="pulsanti">
-	<input type="submit" value="Aggiorna password" id="submit" class="pulsanti">
+	
+	
+	<input type="submit" style="float: right" value="Aggiorna password" id="submit" class="pulsanti">
+	<button onclick="window.location.href='logIn.html'" style="float: left" class="pulsanti" >Indietro</button><br />
 </form>
 
 </div>

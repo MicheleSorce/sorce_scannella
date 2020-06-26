@@ -109,35 +109,9 @@ public class DBQuery {
 		return res+1;
 	}
 	
-	/*
-	 * public String whoUserType(String email, String pw) { String[] user = {
-	 * "amministratore", "bagnino", "barista", "cliente"};
-	 * 
-	 * String user_win="";
-	 * 
-	 * try { Connection connection3 = ds.getConnection();
-	 * 
-	 * String search = "SELECT * FROM  amministratore WHERE email=? AND pw=?";
-	 * PreparedStatement statement = connection3.prepareStatement(search);
-	 * statement.setString(1, email); statement.setString(2, pw);
-	 * 
-	 * ResultSet rs = statement.executeQuery();
-	 * 
-	 * if (rs.next()) { //true-> matcha qualcosa user_win="amministratore";
-	 * rs.close(); statement.close(); connection3.close(); }else {
-	 * 
-	 * String search2 = "SELECT * FROM  bagnino WHERE email=? AND pw=?";
-	 * PreparedStatement statement2 = connection3.prepareStatement(search2);
-	 * statement2.setString(1, email); statement2.setString(2, pw);
-	 * 
-	 * ResultSet rs2 = statement2.executeQuery();
-	 * 
-	 * if (rs2.next()) { //true-> matcha qualcosa user_win="bagnino"; rs2.close();
-	 * statement2.close(); connection3.close(); } } }catch(SQLException e) {
-	 * e.printStackTrace(); } return user_win; }
-	 */
 	
-	public String whoUserType2(String email, String pw) {
+	
+	public String whoUserType(String email, String pw) {
 		
 		String user_win="";
 		try {
@@ -201,7 +175,6 @@ public class DBQuery {
 	public Object searchAmm_Bar_Bag(String email, String type_utente, String id) {
 	
 		Object[] array_fields= new Object[8];
-
 		try {
 			Connection connection4 = ds.getConnection();
 			PreparedStatement statement = connection4.prepareStatement("SELECT * FROM " + type_utente + " WHERE email=?");
@@ -264,48 +237,33 @@ public class DBQuery {
 		boolean isModified = false;
 		try {
 			Connection connection5 = ds.getConnection();
-		
+			Connection connection6 = ds.getConnection();
+			Connection connection7 = ds.getConnection();
+			Connection connection8 = ds.getConnection();
+			Connection connection9 = ds.getConnection();
+			
 			String search = "SELECT * FROM amministratore WHERE email=?";
 			boolean isEmail= checkEmail(search ,connection5, email);
-			System.out.println("isEmail: " + isEmail);
 			if (isEmail==true) {
-				//qui ci entra
-				Connection connection6 = ds.getConnection();
-
-				String update = "UPDATE amministratore SET pw=? WHERE email=?";
-				
-				PreparedStatement statement2 = connection6.prepareStatement(update);
-				
-				statement2.setString(1, new_pw); 
-				statement2.setString(2, email);	  		 
-		 		 
-		System.out.println("Stampa executeUpdate()" + statement2.executeUpdate());
-				
-				if(statement2.executeUpdate()==0) {	//num righe che ha modificato
-					isModified= false;
-				}else {
-					isModified = true;
-				}
-
-				statement2.close();
-				connection6.close();
-				
-				
+				isModified=updatePw("amministratore", connection6, email, new_pw);	
 			}else {
-				/*
-				 * String search2 = "SELECT * FROM  bagnino WHERE email=?"; boolean isEmail2=
-				 * checkEmail(search2 ,connection5, email); if(isEmail2== true) {
-				 * user="bagnino"; isModified2= updatePw( user, connection5, email, new_pw);
-				 * return isModified2; }else { String search3 =
-				 * "SELECT * FROM  barista WHERE email=?"; boolean isEmail3= checkEmail(search3
-				 * ,connection5, email);
-				 * 
-				 * if(isEmail3== true) { user="barista"; isModified2= updatePw( user,
-				 * connection5, email, new_pw); return isModified2; }else { String search4 =
-				 * "SELECT * FROM  cliente WHERE email=?"; boolean isEmail4= checkEmail(search4
-				 * ,connection5, email); if(isEmail4== true) { user="cliente"; isModified2=
-				 * updatePw( user, connection5, email, new_pw); return isModified2; } } }
-				 */ 
+				String search2 = "SELECT * FROM  bagnino WHERE email=?"; 
+				boolean isEmail2=checkEmail(search2 ,connection5, email); 
+				if(isEmail2== true) {
+					isModified=updatePw("bagnino", connection7, email, new_pw);
+				 } else { 
+					 String search3 = "SELECT * FROM  barista WHERE email=?"; 
+					 boolean isEmail3= checkEmail(search3,connection5, email);
+					 if(isEmail3== true) { 
+						isModified= updatePw( "barista", connection8, email, new_pw);
+						}else { 
+							String search4 = "SELECT * FROM  cliente WHERE email=?"; 
+							boolean isEmail4= checkEmail(search4 ,connection5, email); 
+							if(isEmail4== true) { 
+								isModified=updatePw( "cliente", connection9, email, new_pw); 
+							}
+						} 
+					}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -337,38 +295,28 @@ public class DBQuery {
 	}
 	
 	public boolean updatePw( String user,Connection conn, String email, String new_pw) {
-		boolean res = false;
+		boolean isModified = false;
 		try {
-			//String update =  " UPDATE " + user +" SET pw=? WHERE email= " + email;
-			//System.out.println("update: " + update);
+			String update = "UPDATE " + user + " SET pw=? WHERE email=?";
+			PreparedStatement statement = conn.prepareStatement(update);
 			
-			Statement statement = conn.createStatement();
+			statement.setString(1, new_pw); 
+			statement.setString(2, email);	  		 
 			
-			int update_ok = statement.executeUpdate("UPDATE " + user + " SET pw= " + new_pw + " WHERE email= " + email);
-			
-			System.out.println("Valore update_ok"+ update_ok);
-			if(update_ok!=0) {
-				res=true;
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
 			}else {
-				res=false;
+				isModified = true;
 			}
-			
-				
-			
-			/*
-			 * PreparedStatement statement = conn.prepareStatement(update);
-			 * statement.setString(1, new_pw); ResultSet rs= statement.executeQuery();
-			 * 
-			 * if (rs.next()) { //true-> matcha qualcosa System.out.println("res_selt: " +
-			 * rs.next()); res= true; }else { res= false; } rs.close();
-			 */
+
 			statement.close();
 			conn.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return res;
+		return isModified;
 	}
 
 	
