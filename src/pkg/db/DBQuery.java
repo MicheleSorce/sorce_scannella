@@ -259,6 +259,120 @@ public class DBQuery {
 		
 	}
 	
+	public boolean modifyPw(String email, String new_pw){
+		//String user="";
+		boolean isModified = false;
+		try {
+			Connection connection5 = ds.getConnection();
+		
+			String search = "SELECT * FROM amministratore WHERE email=?";
+			boolean isEmail= checkEmail(search ,connection5, email);
+			System.out.println("isEmail: " + isEmail);
+			if (isEmail==true) {
+				//qui ci entra
+				Connection connection6 = ds.getConnection();
+
+				String update = "UPDATE amministratore SET pw=? WHERE email=?";
+				
+				PreparedStatement statement2 = connection6.prepareStatement(update);
+				
+				statement2.setString(1, new_pw); 
+				statement2.setString(2, email);	  		 
+		 		 
+		System.out.println("Stampa executeUpdate()" + statement2.executeUpdate());
+				
+				if(statement2.executeUpdate()==0) {	//num righe che ha modificato
+					isModified= false;
+				}else {
+					isModified = true;
+				}
+
+				statement2.close();
+				connection6.close();
+				
+				
+			}else {
+				/*
+				 * String search2 = "SELECT * FROM  bagnino WHERE email=?"; boolean isEmail2=
+				 * checkEmail(search2 ,connection5, email); if(isEmail2== true) {
+				 * user="bagnino"; isModified2= updatePw( user, connection5, email, new_pw);
+				 * return isModified2; }else { String search3 =
+				 * "SELECT * FROM  barista WHERE email=?"; boolean isEmail3= checkEmail(search3
+				 * ,connection5, email);
+				 * 
+				 * if(isEmail3== true) { user="barista"; isModified2= updatePw( user,
+				 * connection5, email, new_pw); return isModified2; }else { String search4 =
+				 * "SELECT * FROM  cliente WHERE email=?"; boolean isEmail4= checkEmail(search4
+				 * ,connection5, email); if(isEmail4== true) { user="cliente"; isModified2=
+				 * updatePw( user, connection5, email, new_pw); return isModified2; } } }
+				 */ 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return isModified;
+	}	
+	
+	public boolean checkEmail(String search, Connection conn, String email) {
+			PreparedStatement statement;
+			try {
+				statement = conn.prepareStatement(search);
+				statement.setString(1, email);
+		
+				ResultSet rs = statement.executeQuery();
+				
+				if (rs.next()) { //true-> matcha qualcosa
+					rs.close();
+					statement.close();
+					conn.close();
+					return true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+
+	}
+	
+	public boolean updatePw( String user,Connection conn, String email, String new_pw) {
+		boolean res = false;
+		try {
+			//String update =  " UPDATE " + user +" SET pw=? WHERE email= " + email;
+			//System.out.println("update: " + update);
+			
+			Statement statement = conn.createStatement();
+			
+			int update_ok = statement.executeUpdate("UPDATE " + user + " SET pw= " + new_pw + " WHERE email= " + email);
+			
+			System.out.println("Valore update_ok"+ update_ok);
+			if(update_ok!=0) {
+				res=true;
+			}else {
+				res=false;
+			}
+			
+				
+			
+			/*
+			 * PreparedStatement statement = conn.prepareStatement(update);
+			 * statement.setString(1, new_pw); ResultSet rs= statement.executeQuery();
+			 * 
+			 * if (rs.next()) { //true-> matcha qualcosa System.out.println("res_selt: " +
+			 * rs.next()); res= true; }else { res= false; } rs.close();
+			 */
+			statement.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	
+	
 	
 	
 }	
