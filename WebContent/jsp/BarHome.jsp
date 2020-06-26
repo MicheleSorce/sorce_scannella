@@ -106,7 +106,7 @@ $(document).ready(function(){
 	<div style="text-align: left; padding:8%;">
 		<br /><br /><br /><br />
 		<div class="descrizione txt_hover">
-			<h2 style="font-family:Sofia;color:white; font-size: 70px;text-align: center;" >Lato Bar</h2>
+			<h2 style="font-family:Sofia;color:white; font-size: 70px;text-align: center;" >Benvenuto ${barista.nome} ${barista.cognome}!!</h2>
 			<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;">Gestisci come vuoi il tuo Bar</p>
 		</div>
 	</div>

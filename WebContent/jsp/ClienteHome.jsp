@@ -85,7 +85,7 @@ window.onclick = function(event) {
 	<div class="txt_hover" style="text-align: left; padding:2%;" >
 		
 		
-		<h2 style="font-family:Sofia; font-size: 70px;text-align: center;" >Benvenuto</h2>
+		<h2 style="font-family:Sofia; font-size: 70px;text-align: center;" >Benvenuto ${cliente.nome} ${cliente.cognome}</h2>
 		<p style="font-variant: small-caps; font-size:25px; text-align: center;">sulla tua HomePage!</p>
 	</div>
 </div>

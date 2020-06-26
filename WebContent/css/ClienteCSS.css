@@ -1,11 +1,14 @@
 @charset "UTF-8";
-
+body{
+	background-color:#eaffff;
+	/*background-color: rgba(137, 196, 244, 1);*/
+}
 
 /* Immagine di sfondo mare con sedia sdraio*/
 .bg_top {
-  background-image: url("https://www.salvamentoagency.it/wp-content/uploads/2015/03/bagnini2a-1170x780.png");
+  background-image: url("https://www.travelfar.it/wp-content/uploads/Guida-delle-Maldive-il-relax-sul-mare.jpg");
   position:relative;
-  height: 500px; 
+  height: 700px; 
   width: 100%;
   background-attachment:scroll;
   background-position: center;
@@ -32,32 +35,23 @@
 /* 	background-color:#ff0700 ; occupato */
 	transform: scale(1.1); 
 }
-
-.ristorante:hover{
-	border: none ;
-	border-radius: 5px 5px 5px 5px;
-	transition: 0.2s;
-	border-style: none;
-	padding: 5px;
-	border-radius: 5px 5px 5px 5px ;
- 	
-
-	transform: scale(1.1); 
-}
-
  
 /* NAVBAR 2*/
-
-
 .navbar {
-    position:absolute;
+<<<<<<< HEAD
+  position:absolute;
   width: 100%;
   height: 40px;
   background-color: #004fcb;
+=======
+  position:fixed;
+  width: 98%;
+  height: 50px;
+  background-color: transparent;
+>>>>>>> dbeefc1b583de2edd0477eedddf14f3ee9256e2e
   overflow: auto;
  
 }
-
 
 /* Navbar links con a */
 
@@ -65,41 +59,41 @@
   float: left;
   text-align: center;
   padding: 12px;
-  color: white;
+  color: black;
   text-decoration: none;
   font-size: 17px;
 }
 
 /* Navbar links con mouse-over */
 .navbar a:hover {
-  background-color: #366fe8;
+  color:blue;
 }
 
 /* Navbar link attivo*/
 .active {
-  background-color: #72a1ff;
+  background-color: #bbd1ff;
 }
-
-
 
 
 /* MENU LATERALE */
 
 #mySidenav_left a {
   position: fixed; /* Position them relative to the browser window */
-  left: -80px; /* Position them outside of the screen */
+  left: -50px; /* Position them outside of the screen */
   transition: 0.3s; /* Add transition on hover */
   padding: 8px; /* 15px padding */
   width: 100px; /* Set a specific width */
   text-decoration: none; /* Remove underline */
   font-size: 20px; /* Increase font size */
-  color: white; /* White text color */
+  color: black; /* White text color */
+  border: 2px solid black;
   border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
   z-index: 3;
 }
 
 #mySidenav_left a:hover {
   left: 0; /* On mouse-over, make the elements appear as they should */
+  background-color: #72a1ff;
 }
 
 
@@ -113,12 +107,50 @@
   background-color: #1a70f0; 
   
 }
-
 #opzione3 {
   top: 270px;
   background-color: #a7f0ff; 
 }
 #opzione4 {
+  top: 330px;
+  background-color: #1a70f0;
+  
+  }
+  
+#mySidenav_right a {
+  position: fixed; /* Position them relative to the browser window */
+  right: -73px; /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 8px; 
+  width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: black; /* White text color */
+  border: 2px solid black;
+  border-radius:  5px 0 0 5px ; /* Rounded corners on the top right and bottom right side */
+  z-index: 3;
+}
+#mySidenav_right a:hover {
+  right: 0; /* On mouse-over, make the elements appear as they should */
+  background-color: #72a1ff;
+}
+
+
+#opzione5 {
+  top: 150px;
+  background-color: #a7f0ff;
+
+}
+#opzione6 {
+  top: 210px;
+  background-color: #1a70f0; 
+  
+}
+#opzione7 {
+  top: 270px;
+  background-color: #a7f0ff; 
+}
+#opzione8 {
   top: 330px;
   background-color: #1a70f0;
   
@@ -179,7 +211,17 @@
 	
 }
 
+.ristorante:hover{
+	border: none ;
+	border-radius: 5px 5px 5px 5px;
+	transition: 0.2s;
+	border-style: none;
+	padding: 5px;
+	border-radius: 5px 5px 5px 5px ;
+ 	
 
+	transform: scale(1.1); 
+}
 
 
 
@@ -222,7 +264,7 @@
 
 /* ------Scelta lingua------- */
 .dropbtn {
-  background-color: #004fcb;
+  background-color: transparent;
   color: white;
   padding: 10px;
   font-size: 16px;
@@ -231,7 +273,7 @@
 }
 
 .dropbtn:hover, .dropbtn:focus {
-  background-color: #366fe8;
+ /* background-color: #366fe8;*/
 }
 
 .dropdown {
@@ -241,7 +283,7 @@
 
 .dropdown-content {
   display: none;
-  background-color: #72a1ff;
+  background-color: transparent;
   min-width: 16px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -250,13 +292,13 @@
 
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 10px;
   text-decoration: none;
   display: block;
 
 }
 
-.dropdown a:hover {background-color: #366fe8;}
+.dropdown a:hover {/*background-color: #366fe8;*/}
 
 .show {display: block;}
 
