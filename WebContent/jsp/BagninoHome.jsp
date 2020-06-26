@@ -80,7 +80,7 @@ window.onclick = function(event) {
 		
 		
 		<h2 style="font-family:Sofia; font-size: 70px;text-align: center;" >Benvenuto</h2>
-		<p style="font-variant: small-caps; font-size:25px; text-align: center;"> ${bagnino.nome}!!</p>
+		<p style="font-variant: small-caps; font-size:25px; text-align: center;"> ${bagnino.nome} ${bagnino.cognome}!!</p> 
 	</div>
 </div>
 

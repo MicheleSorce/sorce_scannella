@@ -179,7 +179,7 @@ $(document).ready(function(){
 		<br /><br /><br /><br />
 		<div class="descrizione txt_hover">
 		<h2 style="font-family:Sofia;color:white;  font-size: 70px;text-align: center;" >Amministrazione</h2>
-		<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;"> Benvenuto testa di... ${ammin.nome}!</p>
+		<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;"> Benvenuto testa di... ${ammin.nome} ${ammin.cognome}!</p>
 		
 		</div>
 	</div>
