@@ -321,6 +321,46 @@ public class DBQuery {
 
 	
 	
+	public Ombrellone getOmbrelloneFromDb(int id) {
+		Ombrellone ombrellone=null;
+		try {
+			Connection connection = ds.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM ombrellone WHERE id_ombrellone=?");
+			statement.setInt(1, id);
+			
+			ResultSet rs = statement.executeQuery();
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				int id_ombrellone=rs.getInt("id_ombrellone");
+				int num_persone=rs.getInt("num_persone");
+				int num_lettini=rs.getInt("num_lettini");
+				int num_sdraio=rs.getInt("num_sdraio");
+				int slot_orario=rs.getInt("slot_orario");
+				String data_prenotazione=rs.getString("data_prenotazione");
+				String zona=rs.getString("zona");
+				float prezzo=rs.getFloat("prezzo");
+				boolean stato_occupazione=rs.getBoolean("stato_occupazione");
+				boolean stato_pulizia=rs.getBoolean("stato_pulizia");
+				
+				ombrellone.setId_ombrellone(id_ombrellone);
+				ombrellone.setNum_persone(num_persone);
+				ombrellone.setNum_lettini(num_lettini);
+				ombrellone.setNum_sdraio(num_sdraio);
+				ombrellone.setSlot_orario(slot_orario);
+				ombrellone.setData_prenotazione(data_prenotazione);
+				ombrellone.setZona(zona);
+				ombrellone.setPrezzo(prezzo);
+				ombrellone.setLibero(stato_occupazione);
+				ombrellone.setPulito(stato_pulizia);	
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return ombrellone;
+	}
 	
 	
 }	

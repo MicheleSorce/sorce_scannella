@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<title>Registrazione fallita</title>
+<title>Registrazione Perfetta</title>
 </head>
 
 <body>
