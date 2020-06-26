@@ -33,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
 		Amministratore ammin= (Amministratore)session.getAttribute("ammin");
 		if(ammin != null) {
 			session.removeAttribute("ammin");
-			System.out.println("ciao");
+
 			response.sendRedirect(request.getContextPath() + "/html/Home.html");
 			
 		}else {

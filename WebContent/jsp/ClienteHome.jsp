@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bagnino</title>
+<title>HomeCliente</title>
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
-<link href="../css/BagninoCSS.css" type="text/css" rel="stylesheet">
+<link href="../css/ClienteCSS.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
@@ -49,7 +49,7 @@ window.onclick = function(event) {
 		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
-		  <a href="logIn.html"><i class="fa fa-fw fa-user"></i> Logout</a>
+		  <a id="id_logout" href="../LogoutServlet" ><i class="fa fa-fw fa-user"></i> Logout</a> 
 		  <a href="https://www.google.com/maps/dir/37.2669805,13.5784017/Realmonte+-+Baia+delle+Sirene-Giallonardo,+92010+Realmonte+AG/@37.3003778,13.4278911,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x131a7b97e08653c7:0x264a8eab65c24eb!2m2!1d13.4173862!2d37.3150145"><i class="fa fa-car"></i> Come arrivare</a>
 		  <div class="dropdown">
 		  <a onclick="myFunction()" class="dropbtn "> <i class="fa fa-language" aria-hidden="true"></i> Lingua</a>
@@ -68,12 +68,18 @@ window.onclick = function(event) {
 	</div>
 
 	<div id="mySidenav_left" class="sidenav">
-	  <a href="#" id="opzione1">Visione Ombrellone</a>
-	  <a href="#" id="opzione2">Servizio Pedalò</a>
-	  <a href="#" id="opzione3">Stato Pulizia Spiaggia </a>	  
+	  <a href="#" id="opzione1">Prenotazione Ombrellone</a>
+	  <a href="#" id="opzione2">Prenotazione Pedalò</a>
+	  <a href="#" id="opzione3">Modifica Prenotazione</a>
+	  <a href="#" id="opzione4">Elimina Prenotazione</a>
 	</div>
 
-	
+	<!-- <div id="mySidenav_right" class="sidenav">
+	  <a href="#" id="opzione5">Ordine </br> Bar</a>
+	  <a href="#" id="opzione6">Riepilogo Costo Servizi</a>
+	  <a href="#" id="opzione7">Ordine Doccia</a>
+	  <a href="#" id="opzione8">Riepilogo Costo Ombrellone</a>
+	</div> -->
 	
 <br /><br /><br /><br />
 	<div class="txt_hover" style="text-align: left; padding:2%;" >
@@ -87,7 +93,8 @@ window.onclick = function(event) {
 <br />
 <div style="text-align:center">
 	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
-	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione. </em><br /> <br />
+	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione.</em> 
+	<br /> <br />
 	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
 	<hr width="300px"/>
 </div>	
@@ -97,7 +104,7 @@ window.onclick = function(event) {
     
  
 <br /><br />
- <div  class="contenitore"  >
+ <div  class="contenitore" >
  <a id="surfista"style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
  <a id="pedalò" class="ristorante" style="font-size:80px;z-index:2;position:absolute;top:-25px;left:125px"> &#128676;</a>
  <a id="runner" style="font-size:50px;z-index:2;position:absolute;top:75px;left:390px">&#127939;  </a>
@@ -135,6 +142,7 @@ window.onclick = function(event) {
 <a id="doccia3" class="img_ombrellone"  style="font-size:20px;z-index:2;position:absolute;top:890px;left:647px">&#128705;</a> 
 <a id="doccia4" class="img_ombrellone"  style="font-size:20px;z-index:2;position:absolute;top:910px;left:647px">&#128705;</a> 
 
+
 <a id="ombrellone21" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:80px">&#9969;&#65039;</a> 
 <a id="ombrellone22" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:240px">&#9969;&#65039;</a> 
 <a id="ombrellone23" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:720px">&#9969;&#65039;</a> 	
@@ -143,6 +151,7 @@ window.onclick = function(event) {
 
 
 
+<div style="position:absolute;">vjhg </div>
 
  
 
@@ -160,24 +169,6 @@ window.onclick = function(event) {
 <!-- 	<hr width="300px"/> -->
 <!-- </div>	 -->
 <!-- <br /> -->
-<br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/>
-
-<div style="position: absolute; top:1790px; text-align:center; margin-left:42%; background-color:red;">
-
-	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
-	<em>Operazioni</em><br /> <br />
-	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
-	<hr width="300px"/>
-</div>
-
-
-
-
-<div id="out" style="position: absolute; top:2000px; text-align:center; margin-left:42%; background-color:red;">
-</div>
-
-
-
 
 
 

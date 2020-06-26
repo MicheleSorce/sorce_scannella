@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 				barista.setData((String)array_fields2[6]);
 				barista.setSesso((Integer)array_fields2[7]);
 				
-				String address_bar="/html/Bar.html";
+				String address_bar="/jsp/BarHome.jsp";
 				response.sendRedirect(request.getContextPath() + address_bar);
 				break;
 			case("bagnino"):
@@ -100,7 +100,7 @@ public class LoginServlet extends HttpServlet {
 				bagnino.setData((String)array_fields3[6]);
 				bagnino.setSesso((Integer)array_fields3[7]);
 				
-				String address_bag="/html/Bagnino.html";
+				String address_bag="/jsp/BagninoHome.jsp";
 				response.sendRedirect(request.getContextPath() + address_bag);
 				break;
 			case("cliente"):
@@ -120,7 +120,7 @@ public class LoginServlet extends HttpServlet {
 				cliente.setSesso((Integer)array_fields4[7]);
 				cliente.setTot_pagamento((Float)array_fields4[8]);
 				
-				String address_c="/html/Cliente.html";
+				String address_c="/jsp/ClienteHome.jsp";
 				response.sendRedirect(request.getContextPath() + address_c);
 				
 				break;
