@@ -4,6 +4,8 @@ import pkg.bean.*;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -378,6 +380,45 @@ public class DBQuery {
 		return result;
 	}
 	
+	public ArrayList<ClientePrenotaOmbrellone> getListaPrenotazioneOmbrellone(String data_scelta){
+		 ArrayList<ClientePrenotaOmbrellone> lista= new ArrayList<ClientePrenotaOmbrellone>();
+		 Object[] result= new Object[5];
+		
+			
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_ombrellone WHERE data_prenotazione=?");
+				statement.setString(1, data_scelta);
+				
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					ClientePrenotaOmbrellone prenotazione= new ClientePrenotaOmbrellone();
+					
+					result[0]=rs.getInt("cliente_id_cliente");
+					result[1]=rs.getInt("ombrellone_id_ombrellone");
+					result[2]=rs.getInt("quantita");
+					result[3]=rs.getBoolean("stato_pagamento");
+					result[4]=rs.getDate("data_prenotazione");
+					
+					prenotazione.setId_cliente((Integer)result[0]);
+					prenotazione.setId_ombrellone((Integer)result[1]);
+					prenotazione.setQuantita((Integer)result[2]);
+					prenotazione.setPagato((boolean)result[3]);
+					prenotazione.setData_prenotazione(data_scelta);
+					
+					lista.add(prenotazione);
+					prenotazione= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+		return lista;
+	}
 	
 }	
 	

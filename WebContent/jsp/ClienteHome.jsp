@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.io.*,java.util.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,22 +9,28 @@
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
 <link href="../css/ClienteCSS.css" type="text/css" rel="stylesheet">
+<link href="../css/InsertDataWindow.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
-
-<script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+</head>
 
 <script>
+$(function(){
+    var dtToday = new Date();
 
- 
-/* $(document).ready(function() {
-    $("#opzione1").click(function() {
-      $.post("../MappaSpiaggiaServlet", function(data, status) {
-        if (status == "success")
-          $("#mappa_div").text(data.result);
-      });
-    });
-  }); 
- */
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var maxDate = year + '-' + month + '-' + day;    
+    $('#data_first').attr('min', maxDate);
+});
+
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
@@ -34,7 +40,7 @@ function myFunction() {
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
 	
-}
+
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
@@ -44,7 +50,8 @@ window.onclick = function(event) {
         openDropdown.classList.remove("show");
       }
     }
-  } 	  
+  } 
+}
 </script>
 
 
@@ -52,7 +59,7 @@ window.onclick = function(event) {
 
 
 
-</head>
+
 <body class=”it” >
 
 
@@ -82,8 +89,7 @@ window.onclick = function(event) {
 
 	<div id="mySidenav_left" class="sidenav">
 
-	  <a id="opzione1" href="../MappaSpiaggiaServlet">Prenotazione Ombrellone</a>  
-<!-- 	  <a id="opzione1">Prenotazione Ombrellone</a> -->
+ 	  <button  id="opzione1"  onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Prenotazione Ombrellone</button> 
 	  <a href="#" id="opzione2">Prenotazione Pedalò</a>
 	  <a href="#" id="opzione3">Modifica Prenotazione</a>
 	  <a href="#" id="opzione4">Elimina Prenotazione</a>
@@ -97,13 +103,28 @@ window.onclick = function(event) {
 	</div> -->
 	
 <br /><br /><br /><br />
-	<div class="txt_hover" style="text-align: left; padding:2%;" >
-		
-		
+	<div class="txt_hover" style="text-align: left; padding:2%;" >	
 		<h2 style="font-family:Sofia; font-size: 70px;text-align: center;" >Benvenuto ${cliente.nome} ${cliente.cognome}</h2>
 		<p style="font-variant: small-caps; font-size:25px; text-align: center;">sulla tua HomePage!</p>
 	</div>
 </div>
+
+
+<div id="id01" class="modal" style="text-align: center;">
+  
+  <form class="modal-content" action="../MappaSpiaggiaServlet">
+    <div class="container">
+    	<h1>Inserisci data di prenotazione</h1>
+    	<hr>
+        <b>Scegli il giorno </b>
+		<input id="data_first" type="date" name="data_scelta" min="2020-11-11" > <br><br>
+      	<div class="clearfix">
+       		 <button type="submit" >Conferma</button>
+     	</div>
+     </div>
+  </form>
+</div>
+
 
 <br />
 <div style="text-align:center">
@@ -118,7 +139,12 @@ window.onclick = function(event) {
 
 <br /><br />
 
-<div  id="mappa_div"></div>
+<div  style="background-color: yellow;"   id="mappa_div">
+
+wlijebwevpijwvn
+<span id="result"></span>
+
+</div>
 
 
 
@@ -177,5 +203,4 @@ window.onclick = function(event) {
 </div>
 </body>
 </html>
-
 
