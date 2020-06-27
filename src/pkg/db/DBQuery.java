@@ -323,10 +323,7 @@ public class DBQuery {
 		return isModified;
 	}
 
-	
-	
-	@SuppressWarnings("null")
-	public Object[] getOmbrelloneFromDb(int id) {
+	public Object[] getOmbrelloneFromDb(int id) { 			//non ci serve per ora
 		//Ombrellone ombrellone=new Ombrellone();
 		Object[] result= new Object[10];
 		
@@ -349,27 +346,6 @@ public class DBQuery {
 				result[7]=rs.getFloat("prezzo");
 				result[8]=rs.getBoolean("stato_occupazione");
 				result[9]=rs.getBoolean("stato_pulizia");
-				
-				/*
-				 * int id_ombrellone=rs.getInt("id_ombrellone"); int
-				 * num_persone=rs.getInt("num_persone"); int
-				 * num_lettini=rs.getInt("num_lettini"); int num_sdraio=rs.getInt("num_sdraio");
-				 * int slot_orario=rs.getInt("slot_orario"); String
-				 * data_prenotazione=rs.getString("data_prenotazione"); String
-				 * zona=rs.getString("zona"); float prezzo=rs.getFloat("prezzo"); boolean
-				 * stato_occupazione=rs.getBoolean("stato_occupazione"); boolean
-				 * stato_pulizia=rs.getBoolean("stato_pulizia");
-				 */
-				/*
-				 * ombrellone.setId_ombrellone(id_ombrellone);
-				 * ombrellone.setNum_persone(num_persone);
-				 * ombrellone.setNum_lettini(num_lettini); ombrellone.setNum_sdraio(num_sdraio);
-				 * ombrellone.setSlot_orario(slot_orario);
-				 * ombrellone.setData_prenotazione(data_prenotazione); ombrellone.setZona(zona);
-				 * ombrellone.setPrezzo(prezzo); ombrellone.setLibero(stato_occupazione);
-				 * ombrellone.setPulito(stato_pulizia);
-				 */
-				
 			}
 			rs.close();
 			statement.close();
@@ -419,6 +395,15 @@ public class DBQuery {
 			}
 		return lista;
 	}
+	
+	public int getNumRighePerData(String data) {
+		int num=0;
+		
+		return num;
+	}
+	
+	
+	
 	
 }	
 	
