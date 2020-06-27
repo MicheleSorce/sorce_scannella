@@ -15,6 +15,17 @@
 
 <script>
 
+ 
+/* $(document).ready(function() {
+    $("#opzione1").click(function() {
+      $.post("../MappaSpiaggiaServlet", function(data, status) {
+        if (status == "success")
+          $("#mappa_div").text(data.result);
+      });
+    });
+  }); 
+ */
+
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
   
@@ -33,11 +44,13 @@ window.onclick = function(event) {
         openDropdown.classList.remove("show");
       }
     }
-  } 
-	
-
-	  
+  } 	  
 </script>
+
+
+
+
+
 
 </head>
 <body class=”it” >
@@ -68,7 +81,9 @@ window.onclick = function(event) {
 	</div>
 
 	<div id="mySidenav_left" class="sidenav">
-	  <a href="../MappaSpiaggiaServlet" id="opzione1">Prenotazione Ombrellone</a>
+
+	  <a id="opzione1" href="../MappaSpiaggiaServlet">Prenotazione Ombrellone</a>  
+<!-- 	  <a id="opzione1">Prenotazione Ombrellone</a> -->
 	  <a href="#" id="opzione2">Prenotazione Pedalò</a>
 	  <a href="#" id="opzione3">Modifica Prenotazione</a>
 	  <a href="#" id="opzione4">Elimina Prenotazione</a>
@@ -102,8 +117,8 @@ window.onclick = function(event) {
 
 
 <br /><br />
- <div  id="mappa_div" >
- </div>
+
+<div  id="mappa_div"></div>
 
 
 
