@@ -6,7 +6,7 @@ public class Ombrellone {
 	private int num_persone;
 	private int num_lettini;
 	private int num_sdraio;
-	private int slot_orario; // 1 mattina 2=pm
+
 	private  String zona; //vip superior standard
 	private  String data_prenotazione;
 	private  Float prezzo;
@@ -38,12 +38,7 @@ public class Ombrellone {
 	public void setNum_sdraio(int num_sdraio) {
 		this.num_sdraio = num_sdraio;
 	}
-	public int getSlot_orario() {
-		return slot_orario;
-	}
-	public void setSlot_orario(int slot_orario) {
-		this.slot_orario = slot_orario;
-	}
+
 	public String getData_prenotazione() {
 		return data_prenotazione;
 	}

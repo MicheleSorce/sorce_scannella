@@ -2,6 +2,9 @@
 
 <link href="../css/ClienteCSS.css" type="text/css" rel="stylesheet">
 
+
+
+
  <div  class="contenitore" >
 	<a id="surfista"style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
 	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:2;position:absolute;top:-25px;left:125px"> &#128676;</a>
@@ -9,7 +12,10 @@
 	<a id="granchio1" style="font-size:15px;z-index:2;position:absolute;top:110px;left:990px"> &#129408; </a>
 	<a id="granchio2" style="font-size:15px;z-index:2;position:absolute; top:120px;left:1010px"> &#129408; </a>
 	
-	<a id="ombrellone1" class="img_ombrellone"style="font-size:60px;z-index:2;position:absolute;top:230px;left: 80px">&#9969;&#65039;</a>
+	
+	
+<a id="ombrellone1" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left: 80px">&#9969;&#65039;</a>
+
 	<a id="ombrellone2" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:240px">&#9969;&#65039;</a>
 	<a id="ombrellone3" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:400px">&#9969;&#65039;</a>
 	<a id="ombrellone4" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:720px">&#9969;&#65039;</a> 

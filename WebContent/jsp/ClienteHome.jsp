@@ -58,7 +58,7 @@ $(document).ready(function() {
      	function(data, status) {
          if (status == "success")
           
-           $('#mappa_div').load("../jsp_util/MappaOmbrelloni.jsp");
+           $('#mappa_div').load("../jsp_util/MappaOmbrelloni2.jsp");
            $("#id_data_scelta").hide();
           
          });

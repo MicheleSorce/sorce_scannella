@@ -6,7 +6,16 @@ public class ClientePrenotaOmbrellone {
 	private int quantita;
 	private boolean pagato;
 	private  String data_prenotazione;
+	private int slot_orario; // 1 mattina 2=pm
 	
+	
+	
+	public int getSlot_orario() {
+		return slot_orario;
+	}
+	public void setSlot_orario(int slot_orario) {
+		this.slot_orario = slot_orario;
+	}
 	
 	public int getId_ombrellone() {
 		return id_ombrellone;
