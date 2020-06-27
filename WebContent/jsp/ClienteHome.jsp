@@ -17,9 +17,9 @@
 <script>
 $(function(){
     var dtToday = new Date();
-
-    var month = dtToday.getMonth() + 1;
+    
     var day = dtToday.getDate();
+    var month = dtToday.getMonth() + 1;
     var year = dtToday.getFullYear();
 
     if(month < 10)
@@ -28,7 +28,7 @@ $(function(){
         day = '0' + day.toString();
 
     var maxDate = year + '-' + month + '-' + day;    
-    $('#data_first').attr('min', maxDate);
+    $('#data_scelta').attr('min', maxDate);
 });
 
 
@@ -139,11 +139,11 @@ $(document).ready(function() {
 <div id="id_data_scelta" class="modal" style="text-align: center;">
 	<div class="modal-content">
 		<div class="container" >
-	     	<h1>Inserisci data di prenotazione</h1> 
+	     	<h2>Inserisci data di prenotazione</h2> 
 	    	<hr> 
-	         <b>Scegli il giorno </b> 
-			<input id="data_scelta" type="date" name="data_scelta" min="2020-06-26" > <br><br>
-			<b>Scegli il periodo </b> 
+	         <b>Giorno: </b> 
+			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" > <br><br>
+			<b>Periodo: </b> 
 			<select id="slot_orario" name="slot">
 				<option value="1"> Mattina </option>
 				<option value="2"> Pomeriggio </option>
@@ -151,7 +151,7 @@ $(document).ready(function() {
 			</select>
 			 <br><br> 
 	      	<div class="clearfix"> 
-	       		 <button id="conferma_data" onclick="" >Conferma</button> 
+	       		 <button id="conferma_data">Conferma</button> 
 	     	</div> 
 	   </div>
 	</div>
@@ -171,8 +171,8 @@ $(document).ready(function() {
 
 <br /><br />
 
-<div  style="background-color: yellow;">
-	<span id="mappa_div" style="background-color: yellow;"> </span>
+<div  id="mappa_div" style="margin-left: 0%;">
+	
 </div>
 
 

@@ -1,74 +1,75 @@
 * {box-sizing: border-box;}
 
-
-
-
-button {
-  background-color: #4CAF50;
+button {/* Ok 154*/
+  background-color: #4c7caf;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 8px 8px;
+  margin: 2px 0px;
   border: none;
   cursor: pointer;
   width: 40%;
   opacity: 0.9;
+  font-size: 15px;
 }
 
-button:hover {
+button:hover {/* Ok 154*/
   opacity:1;
 }
 
 
 
-/* Float cancel and signup buttons and add an equal width */
+/* Float cancel and signup buttons and add an equal width 
 .signupbtn {
   float: left;
   width: 50%;
 }
 
-/* Add padding to container elements */
-.container {
+*/
+.container {/* Ok 140-141*/
   padding: 16px;
 }
 
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+.modal {/* Ok 140*/
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
   background-color: rgba(0,0,0, 0.6); 
   padding-top: 50px;
 }
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+
+.modal-content {/* Ok 140*/
+  background-color: rgba(0,0,0, 0.6); /* Black w/opacity/see-through */
+  color: white;
+  margin: 5% auto 15% auto; 
   border: 1px solid #888;
   width: 40%; 
   height: 50%;
+
 }
 
-/* Style the horizontal ruler */
-hr {
+
+hr {/* Ok 143*/
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
  
-/* Clear floats */
-.clearfix::after {
+
+.clearfix::after {/* Ok 153*/
  
   float: center;
 }
 
-/* Change styles for cancel button and signup button on extra small screens */
+/* Change styles for cancel button and signup button on extra small screens 
 @media screen and (max-width: 300px) {
 .signupbtn {
      width: 100%;
   }
 }
+
+*/
