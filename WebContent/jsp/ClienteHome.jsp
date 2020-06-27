@@ -58,7 +58,7 @@ $(document).ready(function() {
      	function(data, status) {
          if (status == "success")
            $("#mappa_div").text(data);
-           $("#id01").hide();
+           $("#id_data_scelta").hide();
          });
     });
   });	
@@ -109,7 +109,7 @@ $(document).ready(function() {
 
 	<div id="mySidenav_left" class="sidenav">
 
-	  <div onclick="document.getElementById('id01').style.display='block'">
+	  <div onclick="document.getElementById('id_data_scelta').style.display='block'">
  		  <a  id="opzione1"  href="#" style="width:auto;">Prenotazione Ombrellone</a> 
 	  </div>
 	  <a href="#" id="opzione2" style="width:auto;">Prenotazione Pedalò</a>
@@ -132,7 +132,7 @@ $(document).ready(function() {
 </div>
 
 
-<div id="id01" class="modal" style="text-align: center;">
+<div id="id_data_scelta" class="modal" style="text-align: center;">
 	<div class="modal-content">
 		<div class="container" >
 	     	<h1>Inserisci data di prenotazione</h1> 
