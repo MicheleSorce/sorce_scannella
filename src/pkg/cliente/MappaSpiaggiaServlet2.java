@@ -43,12 +43,11 @@ public class MappaSpiaggiaServlet2 extends HttpServlet {
 			ombr.setNum_persone((Integer)res[1]);
 			ombr.setNum_lettini((Integer)res[2]);
 			ombr.setNum_sdraio((Integer)res[3]);
-			ombr.setSlot_orario((Integer)res[4]);
-			ombr.setData_prenotazione((String)res[5]);
-			ombr.setZona((String)res[6]);
-			ombr.setPrezzo((Float)res[7]);
-			ombr.setLibero((Boolean)res[8]);
-			ombr.setPulito((Boolean)res[9]);
+			ombr.setData_prenotazione((String)res[4]);
+			ombr.setZona((String)res[5]);
+			ombr.setPrezzo((Float)res[6]);
+			ombr.setLibero((Boolean)res[7]);
+			ombr.setPulito((Boolean)res[8]);
 			
 			listaOmbrelloni.add(ombr);
 		}

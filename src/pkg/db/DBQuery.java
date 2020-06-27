@@ -356,16 +356,17 @@ public class DBQuery {
 		return result;
 	}
 	
-	public ArrayList<ClientePrenotaOmbrellone> getListaPrenotazioneOmbrellone(String data_scelta){
+	public ArrayList<ClientePrenotaOmbrellone> getListaPrenotazioneOmbrellone(String data_scelta, int slot_orario){
 		 ArrayList<ClientePrenotaOmbrellone> lista= new ArrayList<ClientePrenotaOmbrellone>();
-		 Object[] result= new Object[5];
+		 Object[] result= new Object[6];
 		
 			
 		 try {
 				Connection connection = ds.getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_ombrellone WHERE data_prenotazione=?");
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_ombrellone WHERE data_prenotazione=? and slot_orario=?");
 				statement.setString(1, data_scelta);
-				
+				statement.setInt(2, slot_orario);
+
 				ResultSet rs = statement.executeQuery();
 			
 				while (rs.next()) { //true-> matcha qualcosa
@@ -376,12 +377,14 @@ public class DBQuery {
 					result[2]=rs.getInt("quantita");
 					result[3]=rs.getBoolean("stato_pagamento");
 					result[4]=rs.getDate("data_prenotazione");
+					result[5]=rs.getInt("slot_orario");
 					
 					prenotazione.setId_cliente((Integer)result[0]);
 					prenotazione.setId_ombrellone((Integer)result[1]);
 					prenotazione.setQuantita((Integer)result[2]);
 					prenotazione.setPagato((boolean)result[3]);
 					prenotazione.setData_prenotazione(data_scelta);
+					prenotazione.setSlot_orario(slot_orario);
 					
 					lista.add(prenotazione);
 					prenotazione= null;

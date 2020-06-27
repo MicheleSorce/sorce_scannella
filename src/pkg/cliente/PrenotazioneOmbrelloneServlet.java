@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/PrenotazioneOmbrelloneServlet")
@@ -25,12 +26,16 @@ public class PrenotazioneOmbrelloneServlet extends HttpServlet {
 		DBQuery db= new DBQuery();
 	
 		String data=request.getParameter("data_scelta");
-		ArrayList<ClientePrenotaOmbrellone> listaOmbrelloniPrenotati = db.getListaPrenotazioneOmbrellone(data);
+		int slot=Integer.parseInt(request.getParameter("slot_orario"));
+
+		ArrayList<ClientePrenotaOmbrellone> listaOmbrelloniPrenotati = db.getListaPrenotazioneOmbrellone(data,slot);
 		request.setAttribute("listaOmbrelloni", listaOmbrelloniPrenotati);
 		
+		
 		for(int i=0; i< listaOmbrelloniPrenotati.size(); i++) {
-			request.setAttribute("ombrellonePrenotato"+i , listaOmbrelloniPrenotati.get(i));
-			System.out.println("ombrellonePrenotato"+i);
+			int id= listaOmbrelloniPrenotati.get(i).getId_ombrellone();
+			HttpSession session = request.getSession();
+			session.setAttribute("ombrellonePrenotato"+id , listaOmbrelloniPrenotati.get(i));
 		}
 	
 			String address = "/jsp/ClienteHome.jsp";

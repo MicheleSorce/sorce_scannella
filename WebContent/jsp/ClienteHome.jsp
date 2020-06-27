@@ -54,8 +54,10 @@ window.onclick = function(event) {
 
 $(document).ready(function() {
     $("#conferma_data").click(function() {
-    	$.post("../PrenotazioneOmbrelloneServlet", { data_scelta : $("#data_scelta").val() }, 
-     	function(data, status) {
+    	$.post("../PrenotazioneOmbrelloneServlet", { 
+    		data_scelta : $("#data_scelta").val(),
+    		slot_orario: $("#slot_orario").val() 
+    		}, function(data, status) {
          if (status == "success")
           
            $('#mappa_div').load("../jsp_util/MappaOmbrelloni2.jsp");
@@ -140,7 +142,14 @@ $(document).ready(function() {
 	     	<h1>Inserisci data di prenotazione</h1> 
 	    	<hr> 
 	         <b>Scegli il giorno </b> 
-			<input id="data_scelta" type="date" name="data_scelta" min="2020-06-26" > <br><br> 
+			<input id="data_scelta" type="date" name="data_scelta" min="2020-06-26" > <br><br>
+			<b>Scegli il periodo </b> 
+			<select id="slot_orario" name="slot">
+				<option value="1"> Mattina </option>
+				<option value="2"> Pomeriggio </option>
+				<option value="3"> Giorno intero </option>
+			</select>
+			 <br><br> 
 	      	<div class="clearfix"> 
 	       		 <button id="conferma_data" onclick="" >Conferma</button> 
 	     	</div> 
