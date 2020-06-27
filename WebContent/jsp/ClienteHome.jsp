@@ -57,8 +57,10 @@ $(document).ready(function() {
     	$.post("../PrenotazioneOmbrelloneServlet", { data_scelta : $("#data_scelta").val() }, 
      	function(data, status) {
          if (status == "success")
-           $("#mappa_div").text(data);
+          
+           $('#mappa_div').load("../jsp_util/MappaOmbrelloni.jsp");
            $("#id_data_scelta").hide();
+          
          });
     });
   });	

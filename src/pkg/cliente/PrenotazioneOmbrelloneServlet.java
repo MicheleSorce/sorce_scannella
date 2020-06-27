@@ -4,7 +4,7 @@ import pkg.bean.*;
 import pkg.db.DBQuery;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -25,13 +25,6 @@ public class PrenotazioneOmbrelloneServlet extends HttpServlet {
 		String data=request.getParameter("data_scelta");
 		ArrayList<ClientePrenotaOmbrellone> listaOmbrelloniPrenotati = db.getListaPrenotazioneOmbrellone(data);
 		request.setAttribute("listaOmbrelloni", listaOmbrelloniPrenotati);
-		
-		response.setContentType("application/");
-		PrintWriter out = response.getWriter();
-		
-		for(ClientePrenotaOmbrellone o : listaOmbrelloniPrenotati) {
-			out.println(o.getId_ombrellone() + ": " + o.getData_prenotazione() + " \n");
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
