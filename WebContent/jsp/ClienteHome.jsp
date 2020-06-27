@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="java.io.*,java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +13,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 </head>
-
 <script>
+
+//imposta il giorno corrente
 $(function(){
     var dtToday = new Date();
 
@@ -31,6 +32,20 @@ $(function(){
     $('#data_first').attr('min', maxDate);
 });
 
+$(document).ready(function() {
+	$("#opzione1").click(function() {
+		$.post("../MappaSpiaggiaServlet", {
+			name : "nome",
+			balance :"cognome"
+		}, function(data) {
+			
+				$("#result").text(data.result);
+	
+	});
+});
+	
+	
+
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
@@ -40,7 +55,7 @@ function myFunction() {
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
 	
-
+}
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
@@ -50,8 +65,7 @@ window.onclick = function(event) {
         openDropdown.classList.remove("show");
       }
     }
-  } 
-}
+  } 	  
 </script>
 
 
@@ -89,10 +103,10 @@ window.onclick = function(event) {
 
 	<div id="mySidenav_left" class="sidenav">
 
- 	  <button  id="opzione1"  onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Prenotazione Ombrellone</button> 
-	  <a href="#" id="opzione2">Prenotazione Pedalò</a>
-	  <a href="#" id="opzione3">Modifica Prenotazione</a>
-	  <a href="#" id="opzione4">Elimina Prenotazione</a>
+ 	  <a id="opzione1"  onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Prenotazione Ombrellone</a> 
+	  <a href="#" style="width:auto;" id="opzione2">Prenotazione Pedalò</a>
+	  <a href="#" style="width:auto;" id="opzione3">Modifica Prenotazione</a>
+	  <a href="#" style="width:auto;" id="opzione4">Elimina Prenotazione</a>
 	</div>
 
 	<!-- <div id="mySidenav_right" class="sidenav">
@@ -103,7 +117,9 @@ window.onclick = function(event) {
 	</div> -->
 	
 <br /><br /><br /><br />
-	<div class="txt_hover" style="text-align: left; padding:2%;" >	
+	<div class="txt_hover" style="text-align: left; padding:2%;" >
+		
+		
 		<h2 style="font-family:Sofia; font-size: 70px;text-align: center;" >Benvenuto ${cliente.nome} ${cliente.cognome}</h2>
 		<p style="font-variant: small-caps; font-size:25px; text-align: center;">sulla tua HomePage!</p>
 	</div>
@@ -112,16 +128,22 @@ window.onclick = function(event) {
 
 <div id="id01" class="modal" style="text-align: center;">
   
-  <form class="modal-content" action="../MappaSpiaggiaServlet">
+  <form class="modal-content" action="/action_page.php">
     <div class="container">
-    	<h1>Inserisci data di prenotazione</h1>
-    	<hr>
-        <b>Scegli il giorno </b>
-		<input id="data_first" type="date" name="data_scelta" min="2020-11-11" > <br><br>
-      	<div class="clearfix">
-       		 <button type="submit" >Conferma</button>
-     	</div>
-     </div>
+      <h1>Inserisci data di prenotazione</h1>
+      
+      <hr>
+      <b>Scegli il giorno </b>
+
+   
+	<input id="data_first" type="date" name="bday" min="2020-11-11" >
+
+      <br><br>
+      <div class="clearfix">
+        <button type="submit" >Conferma</button>
+      </div>
+      
+    </div>
   </form>
 </div>
 

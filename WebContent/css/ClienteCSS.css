@@ -79,7 +79,7 @@ body{
 
 #mySidenav_left a {
   position: fixed; /* Position them relative to the browser window */
-  left: -50px; /* Position them outside of the screen */
+  left: -10px; /* Position them outside of the screen */
   transition: 0.3s; /* Add transition on hover */
   padding: 8px; /* 15px padding */
   width: 100px; /* Set a specific width */
@@ -103,16 +103,16 @@ body{
 
 }
 #opzione2 {
-  top: 210px;
+  top: 200px;
   background-color: #1a70f0; 
   
 }
 #opzione3 {
-  top: 270px;
+  top: 250px;
   background-color: #a7f0ff; 
 }
 #opzione4 {
-  top: 330px;
+  top: 300px;
   background-color: #1a70f0;
   
   }
