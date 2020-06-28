@@ -19,7 +19,6 @@
 		}
 	%>
 	
-	
 
  <div  class="contenitore" >
 	<a id="surfista"style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>

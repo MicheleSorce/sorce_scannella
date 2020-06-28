@@ -8,7 +8,7 @@ public class Ombrellone {
 	private int num_sdraio;
 
 	private  String zona; //vip superior standard
-	private  String data_prenotazione;
+
 	private  Float prezzo;
 	private  boolean libero; //true libero, false occupato
 	private  boolean pulito; //false sporco, true pulito
@@ -39,12 +39,7 @@ public class Ombrellone {
 		this.num_sdraio = num_sdraio;
 	}
 
-	public String getData_prenotazione() {
-		return data_prenotazione;
-	}
-	public void setData_prenotazione(String data_prenotazione) {
-		this.data_prenotazione = data_prenotazione;
-	}
+	
 	public Float getPrezzo() {
 		return prezzo;
 	}
