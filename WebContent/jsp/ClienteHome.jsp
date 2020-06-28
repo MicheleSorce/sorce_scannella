@@ -27,8 +27,9 @@ $(function(){
     if(day < 10)
         day = '0' + day.toString();
 
-    var maxDate = year + '-' + month + '-' + day;    
-    $('#data_scelta').attr('min', maxDate);
+    var minDate = year + '-' + month + '-' + day;    
+    $('#data_scelta').attr('min', minDate);
+    $('#data_scelta').attr('value', minDate);
 });
 
 
@@ -142,12 +143,11 @@ $(document).ready(function() {
 	     	<h2>Inserisci data di prenotazione</h2> 
 	    	<hr> 
 	         <b>Giorno: </b> 
-			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" > <br><br>
+			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
 			<b>Periodo: </b> 
 			<select id="slot_orario" name="slot">
 				<option value="1"> Mattina </option>
 				<option value="2"> Pomeriggio </option>
-				<option value="3"> Giorno intero </option>
 			</select>
 			 <br><br> 
 	      	<div class="clearfix"> 

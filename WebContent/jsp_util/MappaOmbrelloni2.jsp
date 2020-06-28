@@ -7,19 +7,35 @@
 	
 	<%	for(int i=1;i<25;i++){
 			if(session.getAttribute("ombrellonePrenotato"+i)!=null){
-				String ombrellone = "ombrellone"+i;
-				session.removeAttribute("ombrellonePrenotato"+i);
+				ClientePrenotaOmbrellone o=(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
+				String ombrellone = "ombrellone"+i;								
 			%>
 			<script type="text/javascript">
-				$(<%=ombrellone%>).css("background-color","#ff0700");//rosso	
-			</script>
-		
-		<%	
+				$(<%=ombrellone%>).css("background-color","#ff0700");//rosso		
+			</script>		
+		<%			
 			}
 		}
+
 	%>
 	
+	<h2 style="text-align: center;" id="informazioni">
+ 	<%for(int i=1;i<25;i++){
+		if(session.getAttribute("ombrellonePrenotato"+i)!=null){
+		ClientePrenotaOmbrellone o =(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
 
+			if(o.getSlot_orario()==1){%>
+				 <%=o.getData_prenotazione()+" Mattina"  %>
+			<%}if(o.getSlot_orario()==2){%>
+			 	<%=o.getData_prenotazione()+" Pomeriggio" %>
+			<%}
+		break;
+		}
+	  }
+ 	 %>
+	
+	</h2>
+<br><br><br>
  <div  class="contenitore" >
 	<a id="surfista"style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
 	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:2;position:absolute;top:-25px;left:125px"> &#128676;</a>
@@ -65,3 +81,10 @@
 	<a id="ombrellone24" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:870px;background-color:#6fff45;">&#9969;&#65039;</a>  
 </div>
 
+	<%	for(int i=1;i<25;i++){
+			if(session.getAttribute("ombrellonePrenotato"+i)!=null){			
+				session.removeAttribute("ombrellonePrenotato"+i);
+			}
+		}
+	%>
+	
