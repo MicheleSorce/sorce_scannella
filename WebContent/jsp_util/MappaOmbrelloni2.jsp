@@ -2,27 +2,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="pkg.bean.ClientePrenotaOmbrellone" %>
+<%@ page import="pkg.bean.Ombrellone" %>
 
+<script type="text/javascript">
 
-<script>
 $(document).ready(function() {
     $(".img_ombrellone").click(function() {
     	$.post(".././DatiOmbrelloneServlet", { 
     		id_ombrellone : $(this).attr("id"),
     		}, function(data, status) {
          if (status == "success")
-           $("#info_test").text("Hello");
-          
+			//Ombrellone ombr=(Ombrellone)session.getAttribute("ombr");
+            $("#id_ombr_form").attr("value", "hello" );
          });
     });
   });	
+
 </script>
 
 
 
-
-	
-	
 	<%	for(int i=1;i<25;i++){
 			if(session.getAttribute("ombrellonePrenotato"+i)!=null){
 				ClientePrenotaOmbrellone o=(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
@@ -102,10 +101,28 @@ $(document).ready(function() {
 
 
 <div style="position:absolute; float: right; background-color: grey;height: 1020px; weight: 25%;">
-<h3>Info Ombrellone!!!!!!!!!</h3>
-<div id="info_test"> </div>
-
+<h3>Dati ombrellone</h3>
 <hr>
+
+<form action="">
+
+	ID-Ombrellone:<br><input id="id_ombr_form" type="text" disabled="disabled" value=""><br><br>
+	Libero:<br><input id="stato_ombr_form" type="text" disabled="disabled" value=""><br><br>
+	Zona:<br><input id="zona_ombr_form" type="text" disabled="disabled" value=""><br><br>
+	Prezzo:<br><input id="prezzo_ombr_form" type="text" disabled="disabled" value=""><br><br>
+
+	<fieldset>
+	<legend>Dati prenotazione</legend>
+	<!-- Aggiungere giorno e periodo (non modificabili) -->
+		Numero persone:<br><input id="num_persone_form" type="text" value=""><br><br>
+		numero lettini:<br><input id="num_lettini_form" type="text" value=""><br><br>
+		numero sdraio:<br><input id="num_sdraio_form" type="text" value=""><br><br>
+	</fieldset><br />
+	
+	<input type="submit" value="Prenota" >
+
+</form>
+
 </div>
 	<%	for(int i=1;i<25;i++){
 			if(session.getAttribute("ombrellonePrenotato"+i)!=null){			

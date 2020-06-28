@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 
 
@@ -26,15 +28,25 @@ public class DatiOmbrelloneServlet extends HttpServlet {
 	
 		
 		String  string_ombr=request.getParameter("id_ombrellone"); 
-		System.out.println("id_ombrell stringa passata" +string_ombr);
-		int id_ombrellone = Integer.parseInt(string_ombr.substring(10));
-		System.out.println("dvcdfv stringa trasformata" +id_ombrellone);
-		
+		int id_ombrellone = Integer.parseInt(string_ombr.substring(10));	
 		Ombrellone ombrellone_sel=db.getOmbrelloneFromDb(id_ombrellone);
 		
+		//----------------
+		
+		
+		/*
+		 * HttpSession session = request.getSession(true);
+		 * session.setAttribute("ombrellone_sel", ombrellone_sel); Ombrellone ombr=
+		 * (Ombrellone)session.getAttribute("ombrellone_sel"); if(ombr == null) { ombr=
+		 * new Ombrellone(); session.setAttribute("ombr", ombr);
+		 * 
+		 * }
+		 */
+        
+          
+        //----------------------
 		request.setAttribute("ombrellone_sel", ombrellone_sel);	
-		System.out.println("pkgrnkhbdcw"+ombrellone_sel);
-	
+
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
