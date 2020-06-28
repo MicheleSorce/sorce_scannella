@@ -3,6 +3,24 @@
 <%@ page import="java.util.List" %>
 <%@ page import="pkg.bean.ClientePrenotaOmbrellone" %>
 
+
+<script>
+$(document).ready(function() {
+    $(".img_ombrellone").click(function() {
+    	$.post(".././DatiOmbrelloneServlet", { 
+    		id_ombrellone : $(this).attr("id"),
+    		}, function(data, status) {
+         if (status == "success")
+           $("#info_test").text("Hello");
+          
+         });
+    });
+  });	
+</script>
+
+
+
+
 	
 	
 	<%	for(int i=1;i<25;i++){
@@ -36,8 +54,8 @@
 	
 	</h2>
 <br><br><br>
- <div  class="contenitore" >
-	<a id="surfista"style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
+ <div  class="contenitore" style="margin-left: 20%" >
+	<a id="surfista"  style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
 	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:2;position:absolute;top:-25px;left:125px"> &#128676;</a>
 	<a id="runner" style="font-size:50px;z-index:2;position:absolute;top:75px;left:390px">&#127939;  </a>
 	<a id="granchio1" style="font-size:15px;z-index:2;position:absolute;top:110px;left:990px"> &#129408; </a>
@@ -81,6 +99,14 @@
 	<a id="ombrellone24" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:870px;background-color:#6fff45;">&#9969;&#65039;</a>  
 </div>
 
+
+
+<div style="position:absolute; float: right; background-color: grey;height: 1020px; weight: 25%;">
+<h3>Info Ombrellone!!!!!!!!!</h3>
+<div id="info_test"> </div>
+
+<hr>
+</div>
 	<%	for(int i=1;i<25;i++){
 			if(session.getAttribute("ombrellonePrenotato"+i)!=null){			
 				session.removeAttribute("ombrellonePrenotato"+i);

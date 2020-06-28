@@ -1,4 +1,4 @@
-package pkg.cliente;
+package pkg.mappa;
 
 import pkg.bean.*;
 import pkg.db.DBQuery;

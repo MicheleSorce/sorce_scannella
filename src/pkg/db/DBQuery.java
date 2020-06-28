@@ -323,9 +323,9 @@ public class DBQuery {
 		return isModified;
 	}
 
-	public Object[] getOmbrelloneFromDb(int id) { 			//non ci serve per ora
-		//Ombrellone ombrellone=new Ombrellone();
-		Object[] result= new Object[10];
+	public Ombrellone getOmbrelloneFromDb(int id) { 			
+		
+		Ombrellone ombrellone=new Ombrellone();
 		
 		try {
 			Connection connection = ds.getConnection();
@@ -336,16 +336,14 @@ public class DBQuery {
 		
 			if (rs.next()) { //true-> matcha qualcosa
 				
-				result[0]=rs.getInt("id_ombrellone");
-				result[1]=rs.getInt("num_persone");
-				result[2]=rs.getInt("num_lettini");
-				result[3]=rs.getInt("num_sdraio");
-				result[4]=rs.getInt("slot_orario");
-				result[5]=rs.getString("data_prenotazione");
-				result[6]=rs.getString("zona");
-				result[7]=rs.getFloat("prezzo");
-				result[8]=rs.getBoolean("stato_occupazione");
-				result[9]=rs.getBoolean("stato_pulizia");
+				ombrellone.setId_ombrellone(rs.getInt("id_ombrellone"));
+				ombrellone.setNum_persone(rs.getInt("num_persone"));
+				ombrellone.setNum_lettini(rs.getInt("num_lettini"));
+				ombrellone.setNum_sdraio(rs.getInt("num_sdraio"));
+				ombrellone.setZona(rs.getString("zona"));
+				ombrellone.setPrezzo(rs.getFloat("prezzo"));
+				ombrellone.setLibero(rs.getBoolean("stato_occupazione"));
+				ombrellone.setPulito(rs.getBoolean("stato_pulizia"));
 			}
 			rs.close();
 			statement.close();
@@ -353,7 +351,7 @@ public class DBQuery {
 		}catch(SQLException e){
 				e.printStackTrace();
 		}
-		return result;
+		return ombrellone;
 	}
 	
 	public ArrayList<ClientePrenotaOmbrellone> getListaPrenotazioneOmbrellone(String data_scelta, int slot_orario){
