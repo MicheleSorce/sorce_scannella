@@ -5,10 +5,9 @@
 <%@ page import="pkg.bean.Ombrellone" %>
 
 <script type="text/javascript">
-
 $(document).ready(function() {
     $(".img_ombrellone").click(function() {
-    	$.post(".././DatiOmbrelloneServlet", { 
+    	$.post("../../DatiOmbrelloneServlet", { 
     		id_ombrellone : $(this).attr("id"),
     		}, function(data, status) {
          if (status == "success")
@@ -17,7 +16,6 @@ $(document).ready(function() {
          });
     });
   });	
-
 </script>
 
 
@@ -33,14 +31,12 @@ $(document).ready(function() {
 		<%			
 			}
 		}
-
 	%>
 	
 	<h2 style="text-align: center;" id="informazioni">
  	<%for(int i=1;i<25;i++){
 		if(session.getAttribute("ombrellonePrenotato"+i)!=null){
 		ClientePrenotaOmbrellone o =(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
-
 			if(o.getSlot_orario()==1){%>
 				 <%=o.getData_prenotazione()+" Mattina"  %>
 			<%}if(o.getSlot_orario()==2){%>
@@ -130,4 +126,3 @@ $(document).ready(function() {
 			}
 		}
 	%>
-	

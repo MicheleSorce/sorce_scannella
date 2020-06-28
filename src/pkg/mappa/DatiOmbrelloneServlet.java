@@ -1,21 +1,15 @@
 package pkg.mappa;
 
-
-import pkg.bean.Ombrellone;
-import pkg.db.DBQuery;
-
 import java.io.IOException;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-
+import pkg.bean.Ombrellone;
+import pkg.db.DBQuery;
 
 @WebServlet("/DatiOmbrelloneServlet")
 
@@ -28,8 +22,11 @@ public class DatiOmbrelloneServlet extends HttpServlet {
 	
 		
 		String  string_ombr=request.getParameter("id_ombrellone"); 
+		
 		int id_ombrellone = Integer.parseInt(string_ombr.substring(10));	
-		Ombrellone ombrellone_sel=db.getOmbrelloneFromDb(id_ombrellone);
+		Ombrellone ombrellone=db.getOmbrelloneFromDb(id_ombrellone);
+		
+		System.out.println("baa " + ombrellone.getId_ombrellone());
 		
 		//----------------
 		
@@ -45,7 +42,7 @@ public class DatiOmbrelloneServlet extends HttpServlet {
         
           
         //----------------------
-		request.setAttribute("ombrellone_sel", ombrellone_sel);	
+		request.setAttribute("ombrellone", ombrellone);	
 
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

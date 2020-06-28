@@ -323,9 +323,10 @@ public class DBQuery {
 		return isModified;
 	}
 
+
 	public Ombrellone getOmbrelloneFromDb(int id) { 			
 		
-		Ombrellone ombrellone=new Ombrellone();
+		Ombrellone ombrellone= new Ombrellone();
 		
 		try {
 			Connection connection = ds.getConnection();
@@ -334,9 +335,11 @@ public class DBQuery {
 			
 			ResultSet rs = statement.executeQuery();
 		
+				
 			if (rs.next()) { //true-> matcha qualcosa
 				
-				ombrellone.setId_ombrellone((Integer)rs.getInt("id_ombrellone"));
+				ombrellone.setId_ombrellone(rs.getInt("id_ombrellone"));
+	
 				ombrellone.setNum_persone(rs.getInt("num_persone"));
 				ombrellone.setNum_lettini(rs.getInt("num_lettini"));
 				ombrellone.setNum_sdraio(rs.getInt("num_sdraio"));
@@ -351,6 +354,8 @@ public class DBQuery {
 		}catch(SQLException e){
 				e.printStackTrace();
 		}
+		
+
 		return ombrellone;
 	}
 	
@@ -396,13 +401,6 @@ public class DBQuery {
 			}
 		return lista;
 	}
-	
-	public int getNumRighePerData(String data) {
-		int num=0;
-		
-		return num;
-	}
-	
 	
 	
 	
