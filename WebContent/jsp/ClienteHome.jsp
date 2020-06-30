@@ -9,6 +9,7 @@
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
 <link href="../css/ClienteCSS.css" type="text/css" rel="stylesheet">
+
 <link href="../css/InsertDataWindow.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
@@ -68,22 +69,8 @@ $(document).ready(function() {
     });
   });	
 
-
-
-// $(document).ready(function() {
-//     $("#conferma_data").click(function() {
-//     	$("#mappa_div").load('../PrenotazioneOmbrelloneServlet');
-//     });
-//   });	
-
 		
 </script>
-
-
-
-
-
-
 
 <body class=”it” >
 
@@ -115,7 +102,7 @@ $(document).ready(function() {
 	<div id="mySidenav_left" class="sidenav">
 
 	  <div onclick="document.getElementById('id_data_scelta').style.display='block'">
- 		  <a  id="opzione1"  href="#" style="width:auto;">Prenotazione Ombrellone</a> 
+ 		  <a  id="opzione1"   style="width:auto;">Prenotazione Ombrellone</a> 
 	  </div>
 	  <a href="#" id="opzione2" style="width:auto;">Prenotazione Pedalò</a>
 	  <a href="#" id="opzione3" style="width:auto;"> Modifica Prenotazione</a>
@@ -197,8 +184,6 @@ $(document).ready(function() {
 <!-- <br /> -->
 
 
-
-
 <div id="finale" class="footer-bottom" style="font-variant: small-caps; ">
 
     <h2  > Contatti</h2>
@@ -213,6 +198,7 @@ $(document).ready(function() {
 	<div class="posizionamento_riga_centrale">
 	      <h4>Informazioni sui contatti</h4>                 
 	      <strong>Dott. Scannella  &amp; Dott. Sorce</strong><br />
+	      
 	      <i class="fa fa-phone"></i> +339 4927388 <br />
 	      <i class="fa fa-envelope" ></i> <a href="mailto:mariaeleonorascannella@gmail.com">mariaeleonorascannella@gmail.com</a> <br />
 	      <i class="fa fa-envelope"></i> <a href="mailto:michele.sorce98@virgilio.it">michele.sorce98@virgilio.it</a> <br />

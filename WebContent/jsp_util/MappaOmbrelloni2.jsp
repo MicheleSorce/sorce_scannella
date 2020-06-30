@@ -5,51 +5,104 @@
 <%@ page import="pkg.bean.Ombrellone" %>
 
 
-
+<!-- Colora l'ombrellone rosso o verde a seconda se era libero o occupato -->
+	<%	for(int i=1;i<25;i++){
+			if(session.getAttribute("ombrellonePrenotato"+i)!=null){
+				ClientePrenotaOmbrellone o=(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
+				String ombrellone = "ombrellone"+i;								
+			%>
+			<script type="text/javascript">
+				$(<%=ombrellone%>).css("background-color","#ff0700");//rosso		
+			</script>		
+		<%			
+			}
+		}
+	%>
+	
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".img_ombrellone").click(function() {
-      $.post("../DatiOmbrelloneServlet", { 
-        id_ombrellone : $(this).attr("id"),
-        }, function(data, status) {
-         if (status == "success")
     
-            $("#id_ombr_form").attr("value", "hello" );
+	$(".img_ombrellone").click(function() {
+    	$.post("../DatiOmbrelloneServlet", { 
+    		id_ombrellone : $(this).attr("id"),
+    		}, function(data, status) {
+	         if (status == "success")
+	 
+	            $("#id_ombr_form").attr("value",  "1" );			//GENERALIZZARE!!!!!!!!!!!!!!!!!!!!!!!
+	 		
+        		$("#stato_ombr_form").attr("value",  "Si" );
+	            
+	            if($("#stato_ombr_form").val()=="Si"){
+	            	$("#hide_if_No").show();
+	            }
+	            $("#zona_ombr_form").attr("value",  "Vip" );	
+	         	$("#prezzo_ombr_form").attr("value",  "25" );	
          });
     });
-  });  
+   
+	
+
+   
+});
+  
+
+
+var a=0;
+function changeNumlettini() {
+	
+	var prezzo_lettino= document.getElementById("prezzo_lettino").value;
+	var num_lettini =document.getElementById("num_lettini_form").value;
+	var tot_lettini = prezzo_lettino * num_lettini;
+	document.getElementById("costo_tot_lettini").value = tot_lettini ;
+
+}
+
+function changeNumSdraio() {
+	
+	var prezzo_sdraio= document.getElementById("prezzo_sdraio").value;
+	var num_sdraio =document.getElementById("num_sdraio_form").value;
+	var tot_sdraio = prezzo_sdraio * num_sdraio;
+	document.getElementById("costo_tot_sdraio").value = tot_sdraio ;
+	
+}
+
+
+$("#num_sdraio_form, #num_lettini_form").change(function(){
+	 var a=parseInt(document.getElementById("costo_tot_sdraio").value);
+	var b=parseInt(document.getElementById("costo_tot_lettini").value);
+	var c= a+b;
+	$("#costo_totale").attr( "value",  c);
+	
+});	
+			
+			
+
+
+
+   
+
 </script>
 
 
-  <%  for(int i=1;i<25;i++){
-      if(session.getAttribute("ombrellonePrenotato"+i)!=null){
-        String ombrellone = "ombrellone"+i;                
-      %>
-      <script type="text/javascript">
-        $(<%=ombrellone%>).css("background-color","#ff0700");//rosso    
-      </script>    
-    <%    
-   	  session.removeAttribute("ombrellonePrenotato"+i);
-      }
-    }
-  %>
-  
-  <h2 style="text-align: center;" id="informazioni">
-   <%for(int i=1;i<25;i++){
-    if(session.getAttribute("ombrellonePrenotato"+i)!=null){
-    ClientePrenotaOmbrellone o =(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
-      if(o.getSlot_orario()==1){%>
-         <%=o.getData_prenotazione()+" Mattina"  %>
-      <%}if(o.getSlot_orario()==2){%>
-         <%=o.getData_prenotazione()+" Pomeriggio" %>
-      <%}
-      session.removeAttribute("ombrellonePrenotato"+i);
-    break;
-    }
-    }
-    %>
+
 	
+	<h2 style="text-align: center;" id="informazioni">
+ 	<%for(int i=1;i<25;i++){
+		if(session.getAttribute("ombrellonePrenotato"+i)!=null){
+		ClientePrenotaOmbrellone o =(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
+			if(o.getSlot_orario()==1){%>
+				 <%=o.getData_prenotazione()+" Mattina"  %>
+			<%}if(o.getSlot_orario()==2){%>
+			 	<%=o.getData_prenotazione()+" Pomeriggio" %>
+			<%}
+		break;
+		}
+	  }
+ 	 %>
 	</h2>
+	
+	
+	
 <br><br><br>
  <div  class="contenitore" style="margin-left: 20%" >
 	<a id="surfista"  style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
@@ -59,6 +112,8 @@ $(document).ready(function() {
 	<a id="granchio2" style="font-size:15px;z-index:2;position:absolute; top:120px;left:1010px"> &#129408; </a>
 	
 	<a id="ombrellone1" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left: 80px ;background-color:#6fff45;">&#9969;&#65039;</a>
+	
+	
 	<a id="ombrellone2" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:240px;background-color:#6fff45 ;">&#9969;&#65039;</a>
 	<a id="ombrellone3" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:400px;background-color:#6fff45 ;">&#9969;&#65039;</a>
 	<a id="ombrellone4" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:720px;background-color:#6fff45 ;">&#9969;&#65039;</a> 
@@ -98,28 +153,81 @@ $(document).ready(function() {
 
 
 
-<div style="position:absolute; float: right; background-color: grey;height: 1020px; weight: 25%;">
-<h3>Dati ombrellone</h3>
+<div style="position:absolute; float: right; background-color: #59C3D8;height: 1020px; weight: 25%; padding:2%; ">
+
+
+<h3>Dati ombrellone  </h3>
 <hr>
 
-<form action="">
+<form action="../Prenotazione">
 
-	ID-Ombrellone:<br><input id="id_ombr_form" type="text" disabled="disabled" value=""><br><br>
-	Libero:<br><input id="stato_ombr_form" type="text" disabled="disabled" value=""><br><br>
-	Zona:<br><input id="zona_ombr_form" type="text" disabled="disabled" value=""><br><br>
-	Prezzo:<br><input id="prezzo_ombr_form" type="text" disabled="disabled" value=""><br><br>
+	<fieldset>
+	<legend>Dati generali</legend>
+	
+	ID-Ombrellone:<br><input id="id_ombr_form" name="id_ombr_form" type="text" disabled="disabled" value=" "><br><br>
+	Libero:<br><input id="stato_ombr_form" name="stato_ombr_form" type="text" disabled="disabled" value=""><br><br>
+	Zona:<br><input id="zona_ombr_form" name="zona_ombr_form" type="text" disabled="disabled" value=""><br><br>
+	Prezzo ombrellone €/pz:<br><input id="prezzo_ombr_form" name="prezzo_ombr_form" type="text" disabled="disabled" value=""><br><br>
+	Prezzo lettino €/pz:<br><input id="prezzo_lettino" name="prezzo_lettino" type="text" disabled="disabled" value="5"><br><br>
+	Prezzo sdraio €/pz:<br><input id="prezzo_sdraio" name="prezzo_sdraio" type="text" disabled="disabled" value="3">
+	</fieldset>
+<br><br>
 
+<div id="hide_if_No" hidden="">
 	<fieldset>
 	<legend>Dati prenotazione</legend>
 	<!-- Aggiungere giorno e periodo (non modificabili) -->
-		Numero persone:<br><input id="num_persone_form" type="text" value=""><br><br>
-		numero lettini:<br><input id="num_lettini_form" type="text" value=""><br><br>
-		numero sdraio:<br><input id="num_sdraio_form" type="text" value=""><br><br>
+		Numero persone:
+		<select id="num_persone_form"  name="num_persone"> 
+			<option value="1">1</option>
+			<option value="2">2</option>						
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select> <br>
+		<i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 5 persone</i>
+		<br><br>
+		Numero lettini:
+		<select id="num_lettini_form" onchange="changeNumlettini()" name="num_lettini"> 
+	
+			<option value="1">1</option>
+			<option value="2">2</option>						
+			<option value="3">3</option>
+		</select> <br>
+		<i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 3 lettini</i>
+		<br><br>
+		Numero sdraio:
+		<select id="num_sdraio_form"  onchange="changeNumSdraio()" name="num_sdraio"> 
+			<option value="1">1</option>
+			<option value="2">2</option>						
+			<option value="3">3</option>
+		</select> <br>
+		<i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 3 sdraio</i>
+			<br><br>
+	
 	</fieldset><br />
 	
-	<input type="submit" value="Prenota" >
+	<fieldset>
+	<legend>Dati pagamento</legend>
+	Costo tot ombrellone <br><input id="costo_tot_ombrellone" name="costo_tot_ombrellone" type="text" value=""><br> 	<!-- //value lo prendo la sopra -->
+	Costo tot lettini:<br><input id="costo_tot_lettini" name="costo_tot_lettini"  type="text" value="5"><br>
+	Costo tot sdraio:<br><input id="costo_tot_sdraio" name="costo_tot_sdraio" type="text" value="3">
+	<br/>
+	<hr style="background-color: black">
+	
+	Costo totale : <br><input id="costo_totale" name="costo_totale" type="text" value=" ">
+	</fieldset>
+	
+	<br><br>
+	<input style="float: right" id="prenota_azione" type="submit" value="Prenota" >
+	</div>
 
 </form>
 
 </div>
-	
+	<%	for(int i=1;i<25;i++){
+			if(session.getAttribute("ombrellonePrenotato"+i)!=null){			
+				session.removeAttribute("ombrellonePrenotato"+i);
+			}
+		}
+	%>
