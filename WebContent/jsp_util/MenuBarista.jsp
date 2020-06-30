@@ -74,9 +74,7 @@
     padding: 30px;
     
     }
-.elementi_menu{
-	text-align: left;
-}
+
 button{
 	 background-color: #4c7caf;
 	 color: white;
@@ -94,6 +92,7 @@ button{
 }
 .elementi_menu{
 	width: 100%;
+	text-align: left;
 }
 .elementi_menu th {
   padding-top: 12px;

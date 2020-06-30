@@ -5,10 +5,11 @@
 <%
 	
 	int numOrdini= (Integer) session.getAttribute("numOrdini");
-	for(int i=0;i<numOrdini;i++){
+	session.removeAttribute("numOrdini");
+	
+	for(int i=1;i<=numOrdini;i++){
 		ClientePrenotaPiatto prenotazione =(ClientePrenotaPiatto) session.getAttribute("ordine"+i);
-		
-		
+			
       	int id_ordine= prenotazione.getId_ordine();
       	int id_piatto= prenotazione.getId_piatto();
       	int id_cliente= prenotazione.getId_cliente();
@@ -16,22 +17,33 @@
       	boolean stato_pagamento= prenotazione.getStato_pagamento();
       	String stato_completamento= prenotazione.getStato_completamento();
 
-      	<tr><td>Id Ordine</td><td>Piatto</td><td>Cliente</td><td>Quantita</td><td>Stato Pagamento</td><td>Stato Completamento</td><tr>
+      	String list= "<tr>"+
+      					"<td>"+id_ordine+"</td>"+
+      					"<td>"+id_piatto+"</td>"+
+      					"<td>"+id_cliente+"</td>"+
+      					"<td>"+quantita+"</td>"+
+      					"<td>"+stato_pagamento+"</td>"+
+      					"<td>"+
+      					"<input type='text' class='stato_comp' id='"+i+"' value='"+stato_completamento+"'"+
+      					"</td>"+
+      				"<tr>";
+      
       	
-		String list= "<tr> <td id='"+id_lista_bevanda+"'>"+bibita+"</td><td class='Td3'>"+prezzo+"</td><td class='Td3'><input type='text' class='disponibilita' id='"+id_disp_bevanda+"' value='"+disponibilita+"'</td></tr>";
+//       	<select id="completamento">
+//       		<option value="In consegna" selected="selected">Ingegneria Informatica</option>
+//       		<option value="Ingegneria Elettronica">Ingegneria Elettronica</option>
+//       		<option value="Ingegneria Cibernetica">Ingegneria Cibernetica</option>
+//       		<option value="Ingegneria dell'Innovazione">Ingegneria dell'Innovazione</option>
+//       	</select><br /><br />
 
 		%>
    	      <script type="text/javascript">      	      
-    	        $("#bibita").append("<%=list%>");
+    	        $("#lista_ordini").append("<%=list%>");
    	      </script>    
 	    <%   
 	}
 
 %>
-
-
-
-
 
 <style>
 table, th, td {
@@ -48,23 +60,25 @@ th{
 #menu{
    width: 60%;
    color: white;
+   background-color: rgba(0,0,0,0.8);
    text-align: center;
    margin: auto;
    border: 2px solid white;
    padding: 30px;
 }
+.elementi_menu{
+	width: 100%;
+	text-align: left;
+}
+.elementi_menu tr:hover {
+	background-color: rgba(160,160,160,0.48);
+}
+
 </style>
-
-
-
-
-
-
-
 
     <div id="menu">
     <h2>Lista Ordinazioni</h2>
- 	<table id="lista_ordini">
+ 	<table class="elementi_menu"  id="lista_ordini">
  		<tr>	
  			<th>Id Ordine</th><th>Piatto</th><th>Cliente</th><th>Quantita</th><th>Stato Pagamento</th><th>Stato Completamento</th>
  		</tr>
