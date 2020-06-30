@@ -25,25 +25,10 @@ public class DatiOmbrelloneServlet extends HttpServlet {
 		
 		int id_ombrellone = Integer.parseInt(string_ombr.substring(10));	
 		Ombrellone ombrellone=db.getOmbrelloneFromDb(id_ombrellone);
-		
-		System.out.println("baa " + ombrellone.getId_ombrellone());
-		
-		//----------------
-		
-		
-		/*
-		 * HttpSession session = request.getSession(true);
-		 * session.setAttribute("ombrellone_sel", ombrellone_sel); Ombrellone ombr=
-		 * (Ombrellone)session.getAttribute("ombrellone_sel"); if(ombr == null) { ombr=
-		 * new Ombrellone(); session.setAttribute("ombr", ombr);
-		 * 
-		 * }
-		 */
-        
-          
-        //----------------------
-		request.setAttribute("ombrellone", ombrellone);	
 
+		request.setAttribute("ombrellone", ombrellone);	
+		
+	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -22,7 +22,7 @@ function myFunction() {
 	// Close the dropdown if the user clicks outside of it
 	window.onclick = function(event) {
 		
-	}
+	
 	  if (!event.target.matches(".dropbtn")) {
 	    var dropdowns = document.getElementsByClassName("dropdown-content");
 	    var i;
@@ -33,35 +33,37 @@ function myFunction() {
 	      }
 	    }
 	  } 
+	}
 	  
-
-$(document).ready(function(){
-
-
-		    $( "#opzione1" ).on( "click", function() {
-			  
-		    	$(".riuso").html('<br><br><br><div style="height: 700px; background-color:red;"></div>');  
-	
+$(document).ready(function() {
+		  
+		  
+		  //lista ordinazioni
+		    $("#opzione1").click(function() {
+		    	$.post("../BarServlet", { 
+		    		operazione : "lista_ordinazioni"
+		    		
+		    		}, function(data, status) {
+		         if (status == "success")	          
+		          	$('#riuso').load("../jsp_util/ListaOrdinazioni.jsp");
+		          
+		         });
 		    });
-		    
-		    $( "#opzione2" ).on( "click", function() {		  
-		    	$(".riuso").html('<br><br><br><div style="height: 700px; background-color:gray;"></div>'); 
-	
-		    	
+		  	
+
+		  
+		  //menu Bar
+		    $("#opzione2").click(function() {
+		    	$.post("../BarServlet", { 
+		    		operazione : "menu_bar"
+		    		
+		    		}, function(data, status) {
+		         if (status == "success")	          
+		          	$('#riuso').load("../jsp_util/MenuBarista.jsp");
+		          
+		         });
 		    });
-		    
-		    $( "#opzione3" ).on( "click", function() {	  
-		    	$(".riuso").html('<br><br><br><div style="height: 700px; background-color:blue;"></div>'); 
-		    });
- 
-
-});	  
-
-
-	  
-	  
-	  
-	  
+});	
 
 </script>
 
@@ -92,15 +94,17 @@ $(document).ready(function(){
 	</div>
 
 	<div id="mySidenav_left" class="sidenav" >
-	  <a href="#" id="opzione1" style="top: 170px;">Aggiungi Ordinazione</a>
-		<a href="#" id="opzione2">Lista Ordinazioni</a>
-		<a href="#" id="opzione3">Menù Bar</a> <!-- con stato dispensa-->
+	 <!-- <a href="#" id="opzione1" style="top: 170px;">Aggiungi Ordinazione</a>  --> 
+		<a href="#" id="opzione1">Lista Ordinazioni</a>
+		<a href="#" id="opzione2">Menù Bar</a> <!-- con stato dispensa-->
 	
 	</div>
 	
 	
-<div class="riuso" >
+<br>
+<br>
 
+<div id="riuso" >
 
 <div class="bg_top"> 
 	<div style="text-align: left; padding:8%;">
@@ -113,14 +117,7 @@ $(document).ready(function(){
 </div>
  
 <br />
-<!-- 
-<div style="text-align:center">
-	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
-	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione. </em><br /> <br />
-	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
-	<hr width="300px"/>
-</div>	
- -->
+ 
 </div>
 
 <div id="finale" class="footer-bottom" style="font-variant: small-caps;">

@@ -4,48 +4,50 @@
 <%@ page import="pkg.bean.ClientePrenotaOmbrellone" %>
 <%@ page import="pkg.bean.Ombrellone" %>
 
+
+
 <script type="text/javascript">
 $(document).ready(function() {
     $(".img_ombrellone").click(function() {
-    	$.post("../../DatiOmbrelloneServlet", { 
-    		id_ombrellone : $(this).attr("id"),
-    		}, function(data, status) {
+      $.post("../DatiOmbrelloneServlet", { 
+        id_ombrellone : $(this).attr("id"),
+        }, function(data, status) {
          if (status == "success")
-			//Ombrellone ombr=(Ombrellone)session.getAttribute("ombr");
+    
             $("#id_ombr_form").attr("value", "hello" );
          });
     });
-  });	
+  });  
 </script>
 
 
-
-	<%	for(int i=1;i<25;i++){
-			if(session.getAttribute("ombrellonePrenotato"+i)!=null){
-				ClientePrenotaOmbrellone o=(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
-				String ombrellone = "ombrellone"+i;								
-			%>
-			<script type="text/javascript">
-				$(<%=ombrellone%>).css("background-color","#ff0700");//rosso		
-			</script>		
-		<%			
-			}
-		}
-	%>
-	
-	<h2 style="text-align: center;" id="informazioni">
- 	<%for(int i=1;i<25;i++){
-		if(session.getAttribute("ombrellonePrenotato"+i)!=null){
-		ClientePrenotaOmbrellone o =(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
-			if(o.getSlot_orario()==1){%>
-				 <%=o.getData_prenotazione()+" Mattina"  %>
-			<%}if(o.getSlot_orario()==2){%>
-			 	<%=o.getData_prenotazione()+" Pomeriggio" %>
-			<%}
-		break;
-		}
-	  }
- 	 %>
+  <%  for(int i=1;i<25;i++){
+      if(session.getAttribute("ombrellonePrenotato"+i)!=null){
+        String ombrellone = "ombrellone"+i;                
+      %>
+      <script type="text/javascript">
+        $(<%=ombrellone%>).css("background-color","#ff0700");//rosso    
+      </script>    
+    <%    
+   	  session.removeAttribute("ombrellonePrenotato"+i);
+      }
+    }
+  %>
+  
+  <h2 style="text-align: center;" id="informazioni">
+   <%for(int i=1;i<25;i++){
+    if(session.getAttribute("ombrellonePrenotato"+i)!=null){
+    ClientePrenotaOmbrellone o =(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
+      if(o.getSlot_orario()==1){%>
+         <%=o.getData_prenotazione()+" Mattina"  %>
+      <%}if(o.getSlot_orario()==2){%>
+         <%=o.getData_prenotazione()+" Pomeriggio" %>
+      <%}
+      session.removeAttribute("ombrellonePrenotato"+i);
+    break;
+    }
+    }
+    %>
 	
 	</h2>
 <br><br><br>
@@ -120,9 +122,4 @@ $(document).ready(function() {
 </form>
 
 </div>
-	<%	for(int i=1;i<25;i++){
-			if(session.getAttribute("ombrellonePrenotato"+i)!=null){			
-				session.removeAttribute("ombrellonePrenotato"+i);
-			}
-		}
-	%>
+	

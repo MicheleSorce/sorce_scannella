@@ -403,6 +403,101 @@ public class DBQuery {
 	}
 	
 	
+	public ArrayList<Piatto> menuFromDb() { 	// menu		
+		 ArrayList<Piatto> menu= new ArrayList<Piatto>();
+		
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM piatto");
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					Piatto piatto= new Piatto();
+					
+					piatto.setId_piatto(rs.getInt("id_piatto"));
+					piatto.setTipo(rs.getString("tipo")); 
+					piatto.setNome(rs.getString("nome"));
+					piatto.setPrezzo(rs.getFloat("prezzo"));
+					piatto.setDisponibilita(rs.getInt("disponibilita"));
+					piatto.setMenu_giorno(rs.getBoolean("menu_giorno"));
+					
+					menu.add(piatto);
+					piatto= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+
+		return menu;
+	}
+	
+	
+	public boolean updateDisponibilita( int id, int disponibilita) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE piatto SET disponibilita=? WHERE id_piatto=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setInt(1, disponibilita); 
+			statement.setInt(2, id);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+	
+	
+	public ArrayList<ClientePrenotaPiatto> ordiniPiattiFromDb() { 	// menu		
+		 ArrayList<ClientePrenotaPiatto> ordini_piatti= new ArrayList<ClientePrenotaPiatto>();
+		
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_piatto");
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					ClientePrenotaPiatto ordine= new ClientePrenotaPiatto();
+					
+					ordine.setId_ordine(rs.getInt("id_ordine"));
+					ordine.setId_cliente(rs.getInt("cliente_id_cliente"));
+					ordine.setId_piatto(rs.getInt("piatto_id_piatto"));
+					ordine.setQuantita(rs.getInt("quantita"));
+					ordine.setStato_pagamento(rs.getBoolean("stato_pagamento"));
+					ordine.setStato_completamento(rs.getString("stato_completamento"));
+			
+					
+					ordini_piatti.add(ordine);
+					ordine= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+
+		return ordini_piatti;
+	}
 	
 }	
 	
