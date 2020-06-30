@@ -29,11 +29,10 @@
       				"<tr>";
       
       	
-//       	<select id="completamento">
-//       		<option value="In consegna" selected="selected">Ingegneria Informatica</option>
-//       		<option value="Ingegneria Elettronica">Ingegneria Elettronica</option>
-//       		<option value="Ingegneria Cibernetica">Ingegneria Cibernetica</option>
-//       		<option value="Ingegneria dell'Innovazione">Ingegneria dell'Innovazione</option>
+//       	<select id="+i+">
+//       		<option value="Ordinato" selected="selected">Ordinato</option>
+//       		<option value="In Consegna">In Consegna</option>
+//       		<option value="In Preparazione">In Preparazione</option>
 //       	</select><br /><br />
 
 		%>
