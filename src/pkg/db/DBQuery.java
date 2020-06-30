@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+
 public class DBQuery {
 	// public Context ctx ;
 	public DataSource ds;
@@ -497,6 +498,64 @@ public class DBQuery {
 			}
 
 		return ordini_piatti;
+	}
+	
+	
+
+	public boolean updateStatoOrdine( int id, String stato_ordine) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE cliente_prenota_piatto SET stato_completamento=? WHERE id_ordine=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setString(1, stato_ordine); 
+			statement.setInt(2, id);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+	
+	
+	
+	//eliminaOrdine(id);  
+	//delete from student where code=?"
+	
+	public boolean eliminaOrdine(int id) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "DELETE FROM cliente_prenota_piatto WHERE id_ordine=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setInt(1, id); 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+			statement.close();
+			connection.close();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
 	}
 	
 }	

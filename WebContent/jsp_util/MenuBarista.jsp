@@ -25,7 +25,11 @@
          	 int disponibilita= piatto.getDisponibilita();
          	 
          	 
-			 String list= "<tr> <td id='"+id_lista_bevanda+"'>"+bibita+"</td><td class='Td3'>"+prezzo+"</td><td class='Td3'><input type='text' class='disponibilita' id='"+id_disp_bevanda+"' value='"+disponibilita+"'</td></tr>";
+			 String list= "<tr>"
+						+"<td id='"+id_lista_bevanda+"'>"+bibita+"</td>"
+			 			+"<td class='Td3'>"+prezzo+"</td>"
+						+"<td class='Td3'><input type='number'min='0' max='999' class='disponibilita' id='"+id_disp_bevanda+"' value='"+disponibilita+"'</td>"
+						+"</tr>";
 
 %>
            
@@ -48,7 +52,11 @@
         	 String id_disp_cibo= "disp_"+id_lista_cibo;
         	 int disponibilita= piatto.getDisponibilita();
         	 
-			 String list= "<tr> <td id='"+id_lista_cibo+"'>"+cibo+"</td><td class='Td3'>"+prezzo+"</td><td class='Td3'><input type='text' class='disponibilita' id='"+id_disp_cibo+"' value='"+disponibilita+"'</td></tr>";
+			 String list= "<tr>"
+					 +"<td id='"+id_lista_cibo+"'>"+cibo+"</td>"
+					 +"<td class='Td3'>"+prezzo+"</td>"
+					 +"<td class='Td3'><input type='number'min='0' max='999' class='disponibilita' id='"+id_disp_cibo+"' value='"+disponibilita+"'</td>"
+					 +"</tr>";
              %>
              
       	      <script type="text/javascript">      	      
@@ -153,14 +161,15 @@ $(document).ready(function() {
   <div id="menu">
   	<img src="../immagini/logo.png" width="68px" height="60px" style="text-align: left;">
     <h2>Menu MSBeach  </h2>
+    <div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div>
     <hr>
-    <h3>Bibita</h3>
+    <h3 style="font-size: 20px;">Bibita</h3>
     
 	<table class="elementi_menu" id="bibita">
 		<tr><th>Nome</th><th>Prezzo</th><th>Disponibilità</th><tr>
 	</table>
 			    
-    <h3>Panini e Insalate</h3>
+    <h3 style="font-size: 20px;">Panini e Insalate</h3>
 
 	<table class="elementi_menu" id="cibo">
 		<tr><th>Nome</th><th>Prezzo</th><th>Disponibilità</th><tr>	

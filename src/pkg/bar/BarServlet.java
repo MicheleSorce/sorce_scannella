@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import pkg.bean.ClientePrenotaPiatto;
 import pkg.bean.Piatto;
@@ -52,11 +53,12 @@ public class BarServlet extends HttpServlet {
 		if(("modifica_disponibilita").equals(operazione)) {
 
 			String id_String = request.getParameter("identificativo");
+			
 			if(id_String.length()<12) {//in caso di cibo
 				int id= Integer.parseInt(id_String.substring(9));
 				int valore = Integer.parseInt(request.getParameter("valore"));
 				
-				boolean result =db.updateDisponibilita(id,valore);
+				boolean result = db.updateDisponibilita(id,valore);
 				
 			}
 			if(id_String.length()>12) {//in caso di bevanda
@@ -81,12 +83,40 @@ public class BarServlet extends HttpServlet {
 			
 			for(int i=0; i< num_ordini; i++) {
 				int idOrdine= ordini_piatti.get(i).getId_ordine();
-
+				System.out.println("ordine"+idOrdine);
 				session.setAttribute("ordine"+idOrdine , ordini_piatti.get(i));
 			}
 			session.setAttribute("numOrdini" , num_ordini);
 
 		}
+		
+		
+		if(("modifica_stato_ordine").equals(operazione)) {
+
+			String id_ordineString = request.getParameter("id");
+			String stato_ordine = request.getParameter("stato");
+			
+			int id= Integer.parseInt(id_ordineString.substring(6));
+			
+			boolean result =db.updateStatoOrdine(id,stato_ordine);
+		}
+		
+
+		if(("elimina_ordine").equals(operazione)) {
+
+			String id_ordineString = request.getParameter("id");
+			
+			int id= Integer.parseInt(id_ordineString.substring(14));
+			
+			boolean result =db.eliminaOrdine(id);
+			
+			HttpSession session = request.getSession();
+			session.removeAttribute("ordine"+id);
+			
+			//System.out.println("result ="+result);
+		}
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
