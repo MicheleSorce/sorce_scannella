@@ -26,7 +26,7 @@ public class BarServlet extends HttpServlet {
 
     public BarServlet() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 
@@ -83,7 +83,7 @@ public class BarServlet extends HttpServlet {
 			
 			for(int i=0; i< num_ordini; i++) {
 				int idOrdine= ordini_piatti.get(i).getId_ordine();
-				System.out.println("ordine"+idOrdine);
+				
 				session.setAttribute("ordine"+idOrdine , ordini_piatti.get(i));
 			}
 			session.setAttribute("numOrdini" , num_ordini);
@@ -113,9 +113,39 @@ public class BarServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("ordine"+id);
 			
-			//System.out.println("result ="+result);
 		}
 		
+		
+		if(("modifica_quantia_piatto").equals(operazione)) {
+
+			int id = Integer.parseInt(request.getParameter("id"));
+			int quantita_usata = Integer.parseInt(request.getParameter("quantita_usata"));
+
+			boolean result =db.updateQuantitaPiatto(id,quantita_usata);
+		}
+		
+		if(("modifica_piatto_giorno").equals(operazione)) {
+
+			
+
+			String id_String = request.getParameter("identificativo");
+			
+			if(id_String.length()<=6) {//in caso di cibo
+				
+				 int id= Integer.parseInt(id_String.substring(4));	
+				 int valore = Integer.parseInt(request.getParameter("valore"));
+
+				boolean result =db.updateMenuGiorno(id,valore);
+			}
+			if(id_String.length()>6) {//in caso di bevanda			
+				
+				 int id= Integer.parseInt(id_String.substring(7));
+				 int valore = Integer.parseInt(request.getParameter("valore"));
+
+				boolean result =db.updateMenuGiorno(id,valore);
+			}
+			
+		}
 		
 	}
 

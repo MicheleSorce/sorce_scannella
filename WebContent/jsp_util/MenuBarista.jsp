@@ -100,7 +100,7 @@ button{
 }
 .elementi_menu{
 	width: 100%;
-	text-align: left;
+	text-align: center;
 }
 .elementi_menu th {
   padding-top: 12px;

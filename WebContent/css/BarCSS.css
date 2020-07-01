@@ -134,11 +134,14 @@ body{
 
 
 #opzione1 {
-  top: 130px;
+  top: 150px;
   
 }
 #opzione2 {
-  top: 235px;
+  top: 230px;
+}
+#opzione3 {
+  top: 290px;
 }
 /* Parte centrale */
 

@@ -558,6 +558,83 @@ public class DBQuery {
 		return isModified;
 	}
 	
+
+	public boolean updateQuantitaPiatto( int id, int quantita_usata) {
+		boolean isModified = false;
+		try {
+			
+			int disponibilita=0;
+			
+			Connection connection1 = ds.getConnection();		
+			PreparedStatement statement1 = connection1.prepareStatement("SELECT disponibilita FROM piatto WHERE id_piatto=?");
+			statement1.setInt(1, id);
+			
+			ResultSet rs1 = statement1.executeQuery();
+
+			while (rs1.next()) { //true-> matcha qualcosa
+				disponibilita = rs1.getInt("disponibilita");	
+			}	
+			rs1.close();
+			statement1.close();
+			connection1.close();
+
+			
+			
+			Connection connection = ds.getConnection();
+			String update = "UPDATE piatto SET disponibilita=? WHERE id_piatto=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			int nuova_quantita = disponibilita - quantita_usata;
+			
+			statement.setInt(1, nuova_quantita); 
+			statement.setInt(2, id);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+	
+
+	public boolean updateMenuGiorno( int id, int valore) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE piatto SET menu_giorno=? WHERE id_piatto=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setInt(1, valore); 
+			statement.setInt(2, id);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+	
+	
 }	
 	
 	

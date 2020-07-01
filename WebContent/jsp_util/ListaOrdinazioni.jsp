@@ -1,5 +1,3 @@
-<%@page import="com.sun.java.swing.plaf.windows.resources.windows"%>
-<%@page import="javax.swing.text.StyledEditorKit.BoldAction"%>
 <%@page import="pkg.bean.ClientePrenotaPiatto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
@@ -8,7 +6,7 @@
 	int numOrdini=50; // massimo numero di ordini 
 
 	for(int i=1;i<=numOrdini;i++){
-		System.out.println("id "+i);
+		
 		if(session.getAttribute("ordine"+i)!=null){
 			ClientePrenotaPiatto prenotazione =(ClientePrenotaPiatto) session.getAttribute("ordine"+i);
 			
@@ -20,7 +18,6 @@
       	String stato_completamento= prenotazione.getStato_completamento();
       
       	String id_ordine_tr="ordine"+id_ordine;
-
       	
       	String selOrd="";
       	String selPrep="";
@@ -37,7 +34,7 @@
    		}
       	String list= "<tr>"+
       					"<td>"+id_ordine+"</td>"+
-      					"<td>"+id_piatto+"</td>"+
+      					"<td id='piatto_"+id_ordine_tr+"'>"+id_piatto+"</td>"+
       					"<td>"+id_cliente+"</td>"+
       					"<td id='quantita_"+id_ordine_tr+"'>"+quantita+"</td>"+
       					"<td>"+stato_pagamento+"</td>"+
@@ -67,11 +64,12 @@
 $(document).ready(function() {
 	
 	$(".select_ord").change(function(){
-		var id= $(this).attr("id");
+		var id= $(this).attr("id");//ordineNUM
 		var serch= "#"+id+" option:selected"
 		var stato_ordine= $( serch ).text();
 		var serch_button="#elimina_"+id;
 		var id_quantita= "#quantita_"+id;
+		var id_piatto= "#piatto_"+id;
 		
 		$.post("../BarServlet", { 
 			operazione : "modifica_stato_ordine",
@@ -92,6 +90,14 @@ $(document).ready(function() {
 				if(result == true){
 					//Aggiungere metodo che aggiorna la disponibilità del piatto
 					//id_quantita;
+					var quantita_usata=$(id_quantita).html();
+					var id= $(id_piatto).html();
+					
+					$.post("../BarServlet", { 
+						operazione : "modifica_quantia_piatto",
+						id: id,
+						quantita_usata: quantita_usata
+			    		});
 					
 					
 					$(serch_button).show();
@@ -194,6 +200,7 @@ th,td{
 </style>
 	
     <div id="menu">
+    <img src="../immagini/logo.png" width="68px" height="60px" style="text-align: left;">
     <h2 id="title">Lista Ordinazioni</h2>
     <div><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></div>
     	<hr>
@@ -202,9 +209,8 @@ th,td{
  		<tr>	
  			<th>Id Ordine</th><th>Piatto</th><th>Cliente</th><th>Quantita</th><th>Stato Pagamento</th><th>Stato Completamento</th><th id="elmini_ordine_th"></th>
  		</tr>
-
-
  	</table>
+
  	 		
     		<hr>
     </div>

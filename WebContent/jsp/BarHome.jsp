@@ -63,8 +63,20 @@ $(document).ready(function() {
 		          
 		         });
 		    });
-});	
 
+
+		//menu Bar
+		  $("#opzione3").click(function() {
+		  	$.post("../BarServlet", { 
+		  		operazione : "menu_bar"
+		  		
+		  		}, function(data, status) {
+		       if (status == "success")	          
+		        	$('#riuso').load("../jsp_util/MenuDelGiorno.jsp");
+		        
+		       });
+		  });
+});	
 </script>
 
 
@@ -94,9 +106,9 @@ $(document).ready(function() {
 	</div>
 
 	<div id="mySidenav_left" class="sidenav" >
-	 <!-- <a href="#" id="opzione1" style="top: 170px;">Aggiungi Ordinazione</a>  --> 
 		<a href="#" id="opzione1">Lista Ordinazioni</a>
-		<a href="#" id="opzione2">Menù Bar</a> <!-- con stato dispensa-->
+		<a href="#" id="opzione2">Menù Bar</a>
+		<a href="#" id="opzione3">Menù del Giorno</a> <!-- con stato dispensa-->
 	
 	</div>
 	
