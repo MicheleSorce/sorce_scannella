@@ -211,6 +211,5 @@ th,td{
  		</tr>
  	</table>
 
- 	 		
     		<hr>
     </div>

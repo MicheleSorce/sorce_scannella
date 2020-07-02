@@ -27,7 +27,6 @@ body{
   position:absolute;
   width: 98%;
   height: 50px;
-  background-color: #123495;
   overflow: auto;
   z-index:1;
 }
@@ -104,17 +103,18 @@ body{
 /* MENU LATERALE */
 
 #mySidenav_left a {
-  position: fixed; /* Position them relative to the browser window */
-  left: -50px; /* Position them outside of the screen */
-  transition: 0.3s; /* Add transition on hover */
-  padding: 8px; /* 15px padding */
-  width: 100px; /* Set a specific width */
-  text-decoration: none; /* Remove underline */
-  font-size: 20px; /* Increase font size */
-  color: black; /* White text color */
-  border: 2px solid black;
-  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
-  z-index: 3;
+
+    position: fixed;
+    left: -5px;
+    transition: 0.3s;
+    padding: 8px;
+    width: 200px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    border: 2px solid black;
+    border-radius: 0 5px 5px 0;
+    z-index: 3;
 }
 
 #mySidenav_left a:hover {
@@ -124,14 +124,14 @@ body{
 
 
 #opzione1 {
-  top: 150px;
+  top: 135px;
 }
 #opzione2 {
   top: 210px;
   
 }
 #opzione3 {
-  top: 275px;
+  top: 285px;
 }
 /* Parte centrale */
 

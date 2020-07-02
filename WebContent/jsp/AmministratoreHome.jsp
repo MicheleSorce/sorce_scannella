@@ -10,12 +10,14 @@
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
 <link href="../css/AmministratoreCSS.css" type="text/css" rel="stylesheet">
+<link href="../css/InsertDataWindow.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
-<script>
-//pulsante lingua
 
-//*
+
+<script>
+
+//pulsante lingua
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
   
@@ -24,7 +26,6 @@ function myFunction() {
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
 	
-}
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
@@ -35,86 +36,51 @@ window.onclick = function(event) {
       }
     }
   }
+}
+
+$(function(){
+    var dtToday = new Date();
+    
+    var day = dtToday.getDate();
+    var month = dtToday.getMonth() + 1;
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var minDate = year + '-' + month + '-' + day;    
+    $('#data_scelta').attr('min', minDate);
+    $('#data_scelta').attr('value', minDate);
+});
+
   
 $(document).ready(function(){
 
-	 
+	  //lista ordinazioni
+    $("#opzione1").click(function() {
+    	$("#id_data_scelta").css('display','block');
+    });
+  	
+	$("#conferma_data").click(function(){
 
-		    $( "#opzione1" ).on( "click", function() {
-			  
-		    	$(".riuso").html('<div id="spiaggia"><img src="../immagini/mappa_vuota.jpg" width="100%" height="100%"></div>');  
-		    	
-		    	/*
-		    	
-		    	 <div  class="contenitore" >
-		    	 <a id="surfista"style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
-		    	 <a id="barchetta" style="font-size:50px;z-index:2;position:absolute;top:-3px;left:125px"> &#128675;</a>
-		    	 <a id="runner" style="font-size:50px;z-index:2;position:absolute;top:75px;left:390px">&#127939;  </a>
-		    	 <a id="granchio1" style="font-size:15px;z-index:2;position:absolute;top:110px;left:990px"> &#129408; </a>
-		    	<a id="granchio2" style="font-size:15px;z-index:2;position:absolute; top:120px;left:1010px"> &#129408; </a>
-
-		    	<a id="ombrellone1" class="img_ombrellone"style="font-size:60px;z-index:2;position:absolute;top:230px;left: 80px">&#9969;&#65039;</a>
-		    	<a id="ombrellone2" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:240px">&#9969;&#65039;</a>
-		    	<a id="ombrellone3" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:400px">&#9969;&#65039;</a>
-		    	<a id="ombrellone4" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:720px">&#9969;&#65039;</a> 
-		    	<a id="ombrellone5" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:870px">&#9969;&#65039;</a>
-		    	<a id="ombrellone6" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:1020px">&#9969;&#65039;</a>
-
-		    	<a id="ombrellone7" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left: 80px">&#9969;&#65039;</a>
-		    	<a id="ombrellone8" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:240px">&#9969;&#65039;</a>
-		    	<a id="ombrellone9" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:400px">&#9969;&#65039;</a>
-		    	<a id="ombrellone10" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:720px">&#9969;&#65039;</a> 
-		    	<a id="ombrellone11" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:870px">&#9969;&#65039;</a>
-		    	<a id="ombrellone12" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:1020px">&#9969;&#65039;</a>
-
-		    	<a id="ombrellone13" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:240px">&#9969;&#65039;</a>
-		    	<a id="ombrellone14" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:400px">&#9969;&#65039;</a>
-		    	<a id="ombrellone15" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:720px">&#9969;&#65039;</a> 
-		    	<a id="ombrellone16" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:870px">&#9969;&#65039;</a>  
-		    	 	
-		    	<a id="ombrellone17" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:80px">&#9969;&#65039;</a> 	
-		    	<a id="ombrellone18"class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:240px">&#9969;&#65039;</a> 
-		    	<a id="ombrellone19" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:720px">&#9969;&#65039;</a> 	
-		    	<a id="ombrellone20" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:870px">&#9969;&#65039;</a> 
+		$.post("../AmminServlet", { 
+			operazione : "spiaggia",
+			data_scelta : $("#data_scelta").val(),
+	    	slot_orario: $("#slot_orario").val()
+	    	
+			}, function(data, status) {
+	     if (status == "success")	
+	    	 $("#id_data_scelta").hide();
+	         $('#riuso').load("../jsp_util/MappaAmministratore.jsp");
+	      
+	     });
+	  
+	});
+	
 
 
-		    	<a id="ombrellone21" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:80px">&#9969;&#65039;</a> 
-		    	<a id="ombrellone22" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:240px">&#9969;&#65039;</a> 
-		    	<a id="ombrellone23" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:720px">&#9969;&#65039;</a> 	
-		    	<a id="ombrellone24" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:870px">&#9969;&#65039;</a>  
-		    	</div>
-
-		    	*/
-		    	
-		    //	<div id="spiaggia">
-		    //	<img src="../immagini/mappa_vuota.jpg" width="100%" height="100%">
-		    //	</div>
-		    });
-		    
-		    $( "#opzione2" ).on( "click", function() {		  
-		    	$(".riuso").html('<br><br><br><div id="pagamenti" style="height: 700px"><table style="border:2px solid blu; width: 80%; position: relative;left: 10%;"><tr><th>Numero Ombrellone</th><th>Nome Intestatario</th><th>Conto Obrellone</th><th>Stato Prezzo</th></tr><tr><td></td><td></td><td></td><td></td></tr></table></div>');
-		    	
-		    	//<div id="pagamenti" style="height: 700px">
-		    	//	<table style="border:2px solid blu; width: 80%; position: relative;left: 10%;">
-		    	//		<tr>
-		    	//			<th>Numero Ombrellone</th><th>Nome Intestatario</th><th>Conto Obrellone</th><th>Stato Prezzo</th>
-		    	//		</tr>
-		    	//		<tr>
-	    		//		<td></td><td></td><td></td><td></td>
-	    		//		</tr>
-		    	//	</table>
-		    	//</div>
-		    	
-		    });
-		    
-		    $( "#opzione3" ).on( "click", function() {	  
-		    	$(".riuso").html('<br><br><br><div id="servizi" style="height: 700px; background-color:blue;"><button>Modifica</button><button>Elimina</button></div>');
-		    	//<div id="servizi" style="height: 700px">
-		    	//   		<button>Modifica</button>
-		    	//   		<button>Elimina</button>
-		    	//   	</div>
-		    });
-		    
 		    
  
 
@@ -156,22 +122,14 @@ $(document).ready(function(){
 	</div>
 
 	<div id="mySidenav_left" class="sidenav" >
-	  <a href="#" id="opzione1" style="top: 170px;">Spiaggia</a>
-		<a href="#" id="opzione2">Stato Pagamenti</a>
-		<a href="#" id="opzione3">Servizi</a>
+	  	<a href="#" id="opzione1">Stato Occupazione Spiaggia</a>
+		<a href="#" id="opzione2">Stato Pagamenti Corrente</a>
+		<a href="#" id="opzione3">Registrazione Personale</a>
 	
 	</div>
 	
 	
-<div class="riuso" >
-
-
-<%--  <% // Using session...
-   HttpSession session1 = request.getSession();
-   String user = (String) session1.getAttribute("user");
-   %>
-<span class="session"> Welcome:<%=user%></span>
- --%>
+<div id="riuso" >
 
 
 <div class="bg_top"> 
@@ -182,6 +140,29 @@ $(document).ready(function(){
 		<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;"> Benvenuto testa di... ${ammin.nome} ${ammin.cognome}!</p>
 		
 		</div>
+	</div>
+</div>
+
+
+<div id="id_data_scelta" class="modal" style="text-align: center;">
+	<div class="modal-content">
+		<div class="container" >
+	     	<h2>Data prenotazione</h2> 
+	    	<hr> 
+	    	<div>Inserisci i dati del giorno del quale vuoi vedere le prenotazioni</div>
+	         <br><br>
+	         <b>Giorno: </b> 
+			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
+			<b>Periodo: </b> 
+			<select id="slot_orario" name="slot">
+				<option value="1"> Mattina </option>
+				<option value="2"> Pomeriggio </option>
+			</select>
+			 <br><br><br> 
+	      	<div class="clearfix"> 
+	       		 <button id="conferma_data">Conferma</button> 
+	     	</div> 
+	   </div>
 	</div>
 </div>
  

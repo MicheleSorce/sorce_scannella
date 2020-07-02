@@ -340,7 +340,6 @@ public class DBQuery {
 			if (rs.next()) { //true-> matcha qualcosa
 				
 				ombrellone.setId_ombrellone(rs.getInt("id_ombrellone"));
-	
 				ombrellone.setNum_persone(rs.getInt("num_persone"));
 				ombrellone.setNum_lettini(rs.getInt("num_lettini"));
 				ombrellone.setNum_sdraio(rs.getInt("num_sdraio"));
@@ -376,16 +375,16 @@ public class DBQuery {
 				while (rs.next()) { //true-> matcha qualcosa
 					ClientePrenotaOmbrellone prenotazione= new ClientePrenotaOmbrellone();
 					
-					result[0]=rs.getInt("cliente_id_cliente");
-					result[1]=rs.getInt("ombrellone_id_ombrellone");
-					result[2]=rs.getInt("quantita");
+					result[0]=rs.getInt("id_prenotazione");
+					result[1]=rs.getInt("cliente_id_cliente");
+					result[2]=rs.getInt("ombrellone_id_ombrellone");
 					result[3]=rs.getBoolean("stato_pagamento");
 					result[4]=rs.getDate("data_prenotazione");
 					result[5]=rs.getInt("slot_orario");
 					
-					prenotazione.setId_cliente((Integer)result[0]);
-					prenotazione.setId_ombrellone((Integer)result[1]);
-					prenotazione.setQuantita((Integer)result[2]);
+					prenotazione.setId_prenotazione((Integer)(result[0]));
+					prenotazione.setId_cliente((Integer)result[1]);
+					prenotazione.setId_ombrellone((Integer)result[2]);
 					prenotazione.setPagato((boolean)result[3]);
 					prenotazione.setData_prenotazione(data_scelta);
 					prenotazione.setSlot_orario(slot_orario);

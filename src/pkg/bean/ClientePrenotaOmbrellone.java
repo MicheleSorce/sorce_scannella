@@ -1,15 +1,21 @@
 package pkg.bean;
 
 public class ClientePrenotaOmbrellone {
+	
+	private int id_prenotazione;
 	private int id_cliente;
 	private int id_ombrellone ;
-	private int quantita;
 	private boolean pagato;
 	private  String data_prenotazione;
 	private int slot_orario; // 1 mattina 2=pm
 	
 	
-	
+	public int getId_prenotazione() {
+		return id_prenotazione;
+	}
+	public void setId_prenotazione(int id_prenotazione) {
+		this.id_prenotazione = id_prenotazione;
+	}
 	public int getSlot_orario() {
 		return slot_orario;
 	}
@@ -36,19 +42,13 @@ public class ClientePrenotaOmbrellone {
 	public void setId_cliente(int id_cliente) {
 		this.id_cliente = id_cliente;
 	}
-	public int getQuantita() {
-		return quantita;
-	}
-	public void setQuantita(int quantita) {
-		this.quantita = quantita;
-	}
 	public boolean getPagato() {
 		return pagato;
 	}
 	public void setPagato(boolean pagato) {
 		this.pagato = pagato;
 	}
-	
+
 	
 
 }

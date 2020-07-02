@@ -4,7 +4,8 @@
 
    <%  
    int elementi=16;
-  int id_lista=0;
+   int id_lista=0;
+   
    for(int i=1;i<elementi;i++){// 15 piatti nel menu
       if(session.getAttribute("piatto"+i)!=null){
     	  
@@ -21,17 +22,14 @@
          	 
          	 id_lista =i;
          	 String id_lista_bevanda= "bevanda"+id_lista;
-         	 String id_disp_bevanda= "disp_"+id_lista_bevanda;
-         	 //int disponibilita= piatto.getDisponibilita();
-         	 
+         	 String id_disp_bevanda= "disp_"+id_lista_bevanda;         	 
          	 
 			 String list= "<tr>"
 					 	+"<td class='Td1'><input type='checkbox' class='menu_giorno' id='"+id_lista_bevanda+"' "+checked+"  name='"+"' value='"+"'></td>"
 						+"<td id='"+id_lista_bevanda+"'>"+bibita+"</td>"
 			 			+"<td class='Td3'>"+prezzo+"</td>"
 						+"</tr>";
-%>
-           
+			%>        
        	      <script type="text/javascript">      	      
         	        $("#bibita").append("<%=list%>");
        	      </script>    
@@ -49,15 +47,13 @@
 	         id_lista =i;
         	 String id_lista_cibo= "cibo"+id_lista;
         	 String id_disp_cibo= "disp_"+id_lista_cibo;
-        	// int disponibilita= piatto.getDisponibilita();
         	 
 			 String list= "<tr>"
 					 +"<td class='Td1'><input type='checkbox' class='menu_giorno' id='"+id_lista_cibo+"' "+checked+"  name='"+"' value='"+"'></td>"
 					 +"<td id='"+id_lista_cibo+"'>"+cibo+"</td>"
 					 +"<td class='Td3'>"+prezzo+"</td>"
 					 +"</tr>";
-             %>
-             
+             %>            
       	      <script type="text/javascript">      	      
        	        $("#cibo").append("<%=list%>");
       	      </script>    
@@ -143,11 +139,9 @@ $(document).ready(function() {
  		var valore;
  				
  		if($(Id).prop("checked")==true) {
- 		    // mettere nel menu giorno		    
  		    valore = 1;
  		} 
  		if($(Id).prop("checked")==false) {
- 		    // togliere dal menu giorno	    
  			valore = 0;	
  		}
  		
