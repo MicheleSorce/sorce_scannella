@@ -340,9 +340,6 @@ public class DBQuery {
 			if (rs.next()) { //true-> matcha qualcosa
 				
 				ombrellone.setId_ombrellone(rs.getInt("id_ombrellone"));
-				ombrellone.setNum_persone(rs.getInt("num_persone"));
-				ombrellone.setNum_lettini(rs.getInt("num_lettini"));
-				ombrellone.setNum_sdraio(rs.getInt("num_sdraio"));
 				ombrellone.setZona(rs.getString("zona"));
 				ombrellone.setPrezzo(rs.getFloat("prezzo"));
 				ombrellone.setLibero(rs.getBoolean("stato_occupazione"));

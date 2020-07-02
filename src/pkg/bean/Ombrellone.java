@@ -3,9 +3,6 @@ package pkg.bean;
 public class Ombrellone {
 	
 	private  int id_ombrellone ;
-	private int num_persone;
-	private int num_lettini;
-	private int num_sdraio;
 
 	private  String zona; //vip superior standard
 
@@ -20,25 +17,6 @@ public class Ombrellone {
 	public void setId_ombrellone(int id_ombrellone) {
 		this.id_ombrellone = id_ombrellone;
 	}
-	public int getNum_persone() {
-		return num_persone;
-	}
-	public void setNum_persone(int num_persone) {
-		this.num_persone = num_persone;
-	}
-	public int getNum_lettini() {
-		return num_lettini;
-	}
-	public void setNum_lettini(int num_lettini) {
-		this.num_lettini = num_lettini;
-	}
-	public int getNum_sdraio() {
-		return num_sdraio;
-	}
-	public void setNum_sdraio(int num_sdraio) {
-		this.num_sdraio = num_sdraio;
-	}
-
 	
 	public Float getPrezzo() {
 		return prezzo;

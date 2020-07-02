@@ -56,10 +56,7 @@ $(document).ready(function() {
 //   				$("#libero").attr("value", data.libero );           
  				$("#zona_ombr").attr("value", data.zona  );	
    				$("#prezzo_ombr").attr("value", data.prezzo );	
-   				$("#num_persone").attr("value", data.num_persone );
-   				$("#num_lettini").attr("value", data.num_lettini );
-  				$("#num_sdraio").attr("value",  data.num_sdraio);
-  				
+			
  //  				if(${ombrellone.libero}==true){
   					
 //   					$("#libero").css("font-weight","bold");

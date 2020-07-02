@@ -76,10 +76,7 @@ public class AmminServlet extends HttpServlet {
 	//		String result2= "{'id':'"+ombrellone.getId_ombrellone()+"','zona':'"+ombrellone.getZona()+"'}";
 			String result= "{\"id\":\""+ombrellone.getId_ombrellone()+"\","
 							+ "\"zona\":\""+ombrellone.getZona()+"\","
-							+ "\"prezzo\":\""+ombrellone.getPrezzo()+"\","
-							+ "\"num_persone\":\""+ombrellone.getNum_persone()+"\","
-							+ "\"num_lettini\":\""+ombrellone.getNum_lettini()+"\","
-							+ "\"num_sdraio\":\""+ombrellone.getNum_sdraio()+"\""
+							+ "\"prezzo\":\""+ombrellone.getPrezzo()+"\""
 							+ "}";
 			
 		    out.print(result);
