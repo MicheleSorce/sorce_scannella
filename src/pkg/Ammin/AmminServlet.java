@@ -88,24 +88,8 @@ public class AmminServlet extends HttpServlet {
 							
 							+ "\"prezzo\":\""+ombrellone.getPrezzo()+"\""
 							+ "}";
-			
-		    System.out.println("id: "+ombrellone.getId_ombrellone()+
-		    		" zona:"+ombrellone.getZona()+
-		    		" num_persone:"+prenotazione.getNum_persone()+
-		    		" num_lettini:"+ prenotazione.getNum_lettini()+
-		    		" num_sdraio:"+prenotazione.getNum_sdraio()+
-		    		" pagato:"+ prenotazione.getPagato()+
-		    		" nome:"+ cliente.getNome()+
-		    		" cognome:"+ cliente.getCognome()+
-		    		" telefono:"+ cliente.getTelefono()+
-		    		" prezzo:"+ ombrellone.getPrezzo());
-		    
 		    out.print(result);
-		    
-
-			
 		
-					
 		}
 		
 
