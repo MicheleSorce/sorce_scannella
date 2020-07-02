@@ -33,14 +33,6 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	
-	
-
-
-
-     
-     
-
     
 	$(".img_ombrellone").click(function() {
 
@@ -103,15 +95,6 @@ $(document).ready(function() {
 
 
 </script>
-
-
-<div>
-<br><br><br>
-<div class="periodo">
-	 <h2 id="data"></h2>
-	 <h2 id="slot_orario"></h2>
-</div>	
-	<br><br>
 	
 <style>
 .dati{ 
@@ -130,6 +113,15 @@ $(document).ready(function() {
 }
 	
 </style>
+
+
+<div>
+<br><br><br>
+
+	 <h2 style="float: left; text-align: right; padding-right: 5%" id="data"></h2>
+	 <h2 style="padding-left: 5%;" id="slot_orario"></h2>
+<hr style="color: black; border: 1px solid;width: 50%;">
+	<br><br>
 
  <div  class="contenitore">
  
@@ -185,7 +177,7 @@ $(document).ready(function() {
 <h3>Dati ombrellone</h3>
 <hr>
 
-<form action="">
+
 
 <div class="dati">
   <fieldset >
@@ -234,7 +226,7 @@ $(document).ready(function() {
   </fieldset>
 </div>  
   
-</form>
+
 
 </div>
 </div>

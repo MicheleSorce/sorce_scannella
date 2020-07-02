@@ -13,15 +13,7 @@
     border-radius: 20px;
     	
 }
-.periodo{
-	
-	text-align: center;
-    color: black;
-    font-size: x-large;
-    font-style: italic;
-    font-family: initial;
-}
-}
+
 .form_css{
     border-radius: 10px 10px 10px 10px;
     background-image: linear-gradient(to top left, #FFFFFF 0%, lightblue 60%);
@@ -83,4 +75,20 @@
 	float:right; 
 	margin: auto;
 	
+}
+.periodo{
+	
+	border: 2px solid black;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+    font-family: cursive;
+    padding: 5%;
+}
+
+#data, #slot_orario {
+  width: 50%;
+  box-sizing: border-box;
+  float:left;
 }
