@@ -33,6 +33,14 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	
+	
+
+
+
+     
+     
+
     
 	$(".img_ombrellone").click(function() {
 
@@ -40,7 +48,8 @@ $(document).ready(function() {
 		var id=$(this).attr("id");
 		var data= $("#data").text();
 		var slot_orario= $("#slot_orario").text();
-
+		 var color = $( this ).css( "background-color" );
+		 
     	$.post("../AmminServlet", { 
     		operazione: "dati_prenotazione_ombrellone",
     		id_ombrellone : id,
@@ -52,19 +61,39 @@ $(document).ready(function() {
 	        	 
 	        	alert("ID Ombrellone Cliccato "+data.id); 
 	        	
-  				$("#id_ombr").attr("value", data.id);			
-//   				$("#libero").attr("value", data.libero );           
+	        	
+	        	var stato;
+	        	var id_ombr= "#"+id;
+	        	
+	 	        if(color == "rgb(255, 7, 0)"){
+	 	        	stato="No";  
+	 	        }else{
+	 	        	stato="Si";   
+	 	        }       
+
+	        	
+	        	$("#libero").attr("value", stato);
+  				$("#id_ombr").attr("value", data.id);			           
  				$("#zona_ombr").attr("value", data.zona  );	
-   				$("#prezzo_ombr").attr("value", data.prezzo );	
+   				$("#prezzo_ombr").attr("value", data.prezzo );  				
+   				
+   				$("#num_persone").attr("value", data.num_persone );
+   				$("#num_lettini").attr("value", data.num_lettini );
+   				$("#num_sdraio").attr("value", data.num_sdraio);
+
+				$("#nome_cliente").attr("value",data.nome);
+				$("#cognome_cliente").attr("value",data.cognome);
+				$("#tel_cliente").attr("value",data.telefono);
+				$("#pagato").attr("value",data.pagato);
 			
- //  				if(${ombrellone.libero}==true){
+  				if(stato=="Si"){
   					
-//   					$("#libero").css("font-weight","bold");
-//   					$("#nome_cliente").attr("value","NULL");
-//   					$("#cognome_cliente").attr("value","NULL");
-//   					$("#tel_cliente").attr("value","NULL");
-//   					$("#pagato").attr("value","NULL");
-//   				}
+  					$("#libero").css("font-weight","bold");
+  					$("#nome_cliente").attr("value","NULL");
+  					$("#cognome_cliente").attr("value","NULL");
+  					$("#tel_cliente").attr("value","NULL");
+  					$("#pagato").attr("value","NULL");
+  				}
   				
 	         }
 	 

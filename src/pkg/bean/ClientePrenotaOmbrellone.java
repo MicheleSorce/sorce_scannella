@@ -8,7 +8,9 @@ public class ClientePrenotaOmbrellone {
 	private boolean pagato;
 	private  String data_prenotazione;
 	private int slot_orario; // 1 mattina 2=pm
-	
+	private int num_persone;
+	private int num_lettini;
+	private int num_sdraio;
 	
 	public int getId_prenotazione() {
 		return id_prenotazione;
@@ -47,6 +49,24 @@ public class ClientePrenotaOmbrellone {
 	}
 	public void setPagato(boolean pagato) {
 		this.pagato = pagato;
+	}
+	public int getNum_persone() {
+		return num_persone;
+	}
+	public void setNum_persone(int num_persone) {
+		this.num_persone = num_persone;
+	}
+	public int getNum_lettini() {
+		return num_lettini;
+	}
+	public void setNum_lettini(int num_lettini) {
+		this.num_lettini = num_lettini;
+	}
+	public int getNum_sdraio() {
+		return num_sdraio;
+	}
+	public void setNum_sdraio(int num_sdraio) {
+		this.num_sdraio = num_sdraio;
 	}
 
 	
