@@ -9,6 +9,7 @@
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
 <link href="../css/BagninoCSS.css" type="text/css" rel="stylesheet">
+<link href="../css/InsertDataWindow.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
@@ -23,7 +24,6 @@ function myFunction() {
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
 	
-}
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
@@ -33,8 +33,59 @@ window.onclick = function(event) {
         openDropdown.classList.remove("show");
       }
     }
-  } 
-	
+  }
+}
+
+  
+
+  $(function(){
+	    var dtToday = new Date();
+	    
+	    var day = dtToday.getDate();
+	    var month = dtToday.getMonth() + 1;
+	    var year = dtToday.getFullYear();
+
+	    if(month < 10)
+	        month = '0' + month.toString();
+	    if(day < 10)
+	        day = '0' + day.toString();
+
+	    var minDate = year + '-' + month + '-' + day;    
+	    $('#data_scelta').attr('min', minDate);
+	    $('#data_scelta').attr('value', minDate);
+	});
+
+  
+  
+  $(document).ready(function(){
+
+  	  //lista ordinazioni
+      $("#opzione1").click(function() {
+      	$("#id_data_scelta").css("display","block");
+      });
+    	
+  	$("#conferma_data").click(function(){
+
+  		$.post("../BagninoServlet", { 
+  			operazione : "visualizza_spiaggia",
+  			data_scelta : $("#data_scelta").val(),
+  	    	slot_orario: $("#slot_orario").val()
+  	    	
+  			}, function(data, status) {
+  	     if (status == "success")	
+  	    	 $("#id_data_scelta").hide();
+  	         $("#riuso").load("../jsp_util/MappaBagnino.jsp");
+  	      
+  	     });
+  	  
+  	});
+  	
+
+
+  		    
+   
+
+  });	 
 
 	  
 </script>
@@ -44,7 +95,7 @@ window.onclick = function(event) {
 
 
 
-<div class="bg_top"> 
+
 	<div class="navbar" >
 		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
@@ -68,23 +119,51 @@ window.onclick = function(event) {
 	</div>
 
 	<div id="mySidenav_left" class="sidenav">
-	  <a href="#" id="opzione1">Visione Ombrellone</a>
+	  <a  id="opzione1">Visione Ombrellone</a>
 	  <a href="#" id="opzione2">Servizio Pedalò</a>
 	  <a href="#" id="opzione3">Stato Pulizia Spiaggia </a>	  
 	</div>
 
 	
 	
-<br /><br /><br /><br />
-	<div class="txt_hover" style="text-align: left; padding:2%;" >
+<br />
+
+<div id="riuso" >
+	<div class="bg_top"> 
+	<div  style="text-align: left; padding:2%;" >
 		
-		
+		<div class="descrizione txt_hover">
 		<h2 style="font-family:Sofia; font-size: 70px;text-align: center;" >Benvenuto</h2>
 		<p style="font-variant: small-caps; font-size:25px; text-align: center;"> ${bagnino.nome} ${bagnino.cognome}!!</p> 
 	</div>
+	</div>
+	</div>
 </div>
 
-<br />
+
+
+<div id="id_data_scelta" class="modal" style="text-align: center;">
+	<div class="modal-content">
+		<div class="container" >
+	     	<h2>Data prenotazione</h2> 
+	    	<hr> 
+	    	<div>Inserisci i dati del giorno del quale vuoi vedere le prenotazioni</div>
+	         <br><br>
+	         <b>Giorno: </b> 
+			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
+			<b>Periodo: </b> 
+			<select id="slot_orario" name="slot_orario">
+				<option value="1"> Mattina </option>
+				<option value="2"> Pomeriggio </option>
+			</select>
+			 <br><br><br> 
+	      	<div class="clearfix"> 
+	       		 <button id="conferma_data">Conferma</button> 
+	     	</div> 
+	   </div>
+	</div>
+</div>
+<br><br>
 <div style="text-align:center">
 	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
 	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione. </em><br /> <br />
@@ -92,90 +171,6 @@ window.onclick = function(event) {
 	<hr width="300px"/>
 </div>	
 <br />
-
-
-    
- 
-<br /><br />
- <div  class="contenitore"  >
- <a id="surfista"style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
- <a id="pedalò" class="ristorante" style="font-size:80px;z-index:2;position:absolute;top:-25px;left:125px"> &#128676;</a>
- <a id="runner" style="font-size:50px;z-index:2;position:absolute;top:75px;left:390px">&#127939;  </a>
- <a id="granchio1" style="font-size:15px;z-index:2;position:absolute;top:110px;left:990px"> &#129408; </a>
-<a id="granchio2" style="font-size:15px;z-index:2;position:absolute; top:120px;left:1010px"> &#129408; </a>
-
-<a id="ombrellone1" class="img_ombrellone"style="font-size:60px;z-index:2;position:absolute;top:230px;left: 80px">&#9969;&#65039;</a>
-<a id="ombrellone2" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:240px">&#9969;&#65039;</a>
-<a id="ombrellone3" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:400px">&#9969;&#65039;</a>
-<a id="ombrellone4" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:720px">&#9969;&#65039;</a> 
-<a id="ombrellone5" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:870px">&#9969;&#65039;</a>
-<a id="ombrellone6" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:230px;left:1020px">&#9969;&#65039;</a>
-
-<a id="ombrellone7" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left: 80px">&#9969;&#65039;</a>
-<a id="ombrellone8" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:240px">&#9969;&#65039;</a>
-<a id="ombrellone9" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:400px">&#9969;&#65039;</a>
-<a id="ombrellone10" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:720px">&#9969;&#65039;</a> 
-<a id="ombrellone11" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:870px">&#9969;&#65039;</a>
-<a id="ombrellone12" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:370px;left:1020px">&#9969;&#65039;</a>
-
-<a id="ombrellone13" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:240px">&#9969;&#65039;</a>
-<a id="ombrellone14" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:400px">&#9969;&#65039;</a>
-<a id="ombrellone15" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:720px">&#9969;&#65039;</a> 
-<a id="ombrellone16" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:510px;left:870px">&#9969;&#65039;</a>  
- 	
-<a id="ombrellone17" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:80px">&#9969;&#65039;</a> 	
-<a id="ombrellone18"class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:240px">&#9969;&#65039;</a> 
-<a id="ombrellone19" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:720px">&#9969;&#65039;</a> 	
-<a id="ombrellone20" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:680px;left:870px">&#9969;&#65039;</a> 
-
-<a id="ristorante" class="ristorante"   style="font-size:60px;z-index:2;position:absolute;top:846px;left:483px">&#127860;</a>
-
-<a id="doccia1" class="img_ombrellone"  style="font-size:20px;z-index:2;position:absolute;top:850px;left:647px">&#128705;</a> 
-<a id="doccia2" class="img_ombrellone"  style="font-size:20px;z-index:2;position:absolute;top:870px;left:647px">&#128705;</a> 
-<a id="doccia3" class="img_ombrellone"  style="font-size:20px;z-index:2;position:absolute;top:890px;left:647px">&#128705;</a> 
-<a id="doccia4" class="img_ombrellone"  style="font-size:20px;z-index:2;position:absolute;top:910px;left:647px">&#128705;</a> 
-
-<a id="ombrellone21" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:80px">&#9969;&#65039;</a> 
-<a id="ombrellone22" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:240px">&#9969;&#65039;</a> 
-<a id="ombrellone23" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:720px">&#9969;&#65039;</a> 	
-<a id="ombrellone24" class="img_ombrellone" style="font-size:60px;z-index:2;position:absolute;top:820px;left:870px">&#9969;&#65039;</a>  
-</div>
-
-
-
-
- 
-
-<!-- <br /> -->
-<!-- <div style="text-align:center"> -->
-<!-- 	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/> -->
-<!-- 	<em>I nostri servizi </em><br /> <br /> -->
-<!-- 	<div class="w3-content w3-section" style="max-width:500px; position:relative; margin-left:35%"> -->
-<!-- 	  <img  src="../immagini/vacanze-al-mare-800x400.jpg" style="width:100%; "> -->
-<!-- <!-- 	  <img class="mySlides" src="../immagini/ragazza.jpg" style="width:100%"> --> 
-<!-- <!-- 	  <img class="mySlides" src="../immagini/vacanze-al-mare-800x400.jpg"  style="width:100%"> --> 
-<!--  	</div>  -->
-<!--  <br/> -->
-<!-- 	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> -->
-<!-- 	<hr width="300px"/> -->
-<!-- </div>	 -->
-<!-- <br /> -->
-<br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/> <br/>
-
-<div style="position: absolute; top:1790px; text-align:center; margin-left:42%; background-color:red;">
-
-	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
-	<em>Operazioni</em><br /> <br />
-	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
-	<hr width="300px"/>
-</div>
-
-
-
-
-<div id="out" style="position: absolute; top:2000px; text-align:center; margin-left:42%; background-color:red;">
-</div>
-
 
 
 
