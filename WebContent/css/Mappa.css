@@ -1,0 +1,105 @@
+
+.contenitore{	
+    background-image: url(../immagini/mappa_vuota.jpg);
+    position: relative;
+    height: 1020px;
+    width: 1180px;
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
+    border: 3px solid black;
+    border-radius: 20px;
+    	
+}
+
+.form_css{
+	border-radius: 10px 10px 10px 10px ;
+	border-color: #59c2dd;
+	border-style: solid ;
+	background-image: linear-gradient(to top left, #FFFFFF 0%, #59c2dd 100%);
+	height: 400px;
+    width: 25%;
+    padding: 2%;
+    border: 1px solid black;
+    margin: 5%;
+}
+
+.form_css_bagnino{
+	border-radius: 10px 10px 10px 10px ;
+	border-color: #59c2dd;
+	border-style: solid ;
+	background-image: linear-gradient(to top left, #FFFFFF 0%, #59c2dd 100%);
+	height: 500px;
+    width: 70%;
+    padding: 2%;
+    border: 1px solid black;
+    margin: auto;
+}
+.ristorante:hover{
+	border: none ;
+	border-radius: 5px 5px 5px 5px;
+	transition: 0.2s;
+	border-style: none;
+	padding: 5px;
+	border-radius: 5px 5px 5px 5px ;
+	transform: scale(1.1); 
+}
+ 
+ .img_ombrellone:hover{
+	border: none ;
+	border-radius: 5px 5px 5px 5px;
+	transition: 0.2s;
+	border-style: none;
+	padding: 10px;
+	border-radius: 5px 5px 5px 5px ;
+	transform: scale(1.1); 	
+}
+.img_doccia{
+	font-size:20px;
+	z-index:2;
+	position:absolute;
+	background-color:#6fff45;
+}
+
+.img_doccia:hover{
+	
+	border: none ;
+	border-radius: 5px 5px 5px 5px;
+	transition: 0.2s;
+	border-style: none;
+	padding: 10px;
+	border-radius: 5px 5px 5px 5px ;
+	transform: scale(1.1); 
+}
+
+
+.img_ombrellone{
+	font-size:370%;
+	z-index:2;
+	position:absolute;
+	background-color:#6fff45;
+}
+
+.info_ombrelloni{
+	background-color: green; 
+	float:right; 
+	margin: auto;
+	
+}
+
+.dati{ 
+	float: left;
+    margin-right: 10px;
+    width: 25%;
+    height:100%;
+    position: relative;
+}
+.dati2{ 
+	float: left;
+    margin-right: 5px;
+    padding:5px;
+    width: 45%;
+    position: relative;
+}
