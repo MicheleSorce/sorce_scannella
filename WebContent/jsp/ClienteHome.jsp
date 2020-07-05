@@ -71,11 +71,10 @@ $(function(){
 
 
 $(document).ready(function() {
-    $("#opzione1").click(function() {
-   	
-   	$("#id_data_scelta").css("display","block");
-    
-  });
+	
+    $("#opzione1").click(function() {   	
+   		$("#id_data_scelta").css("display","block");    
+    });
     
     $("#conferma_data").click(function() {
     	$.post("../ClienteServlet", { 
@@ -128,26 +127,37 @@ $(document).ready(function() {
 	
 
 <div class="dropdown">
-  <button onclick="clickdropbtn1()" class="dropbtn" style=" background-color: #1a70f0; width: 110px;top: 20px;">Ombrellone</button>
+  <button onclick="clickdropbtn1()" class="dropbtn" style=" background-color: #1a70f0; width: 110px;top: 20px;">
+  	Ombrellone
+  </button>
+  
   <div id="myDropdown1" class="dropdown-content" style="top:45%; margin-left:90px">
-	  <div ><a id="opzione1"href="#">Effettua Prenotazione</a> </div>
-	    <a href="#">Modifica Prenotazione</a>
-	    <a href="#">Elimina Prenotazione</a>
-	    <a href="#">Riepilogo Costi</a>
+	  <div >
+	  	<a id="opzione1">Prenota Ombrellone</a> 
+	    <a>Modifica/Elimina Prenotazione</a>
+	   </div>
   </div>
+  
   <br/><br/>
-    <button onclick="clickdropbtn2()" class="dropbtn" style=" background-color: #a7f0ff; width: 110px;top: 250px;">Doccia</button>
+  
+   <button onclick="clickdropbtn2()" class="dropbtn" style=" background-color: #a7f0ff; width: 110px;top: 250px;">
+   	Doccia
+   </button>
+   
   <div id="myDropdown2" class="dropdown-content" style="top:365%; margin-left:80px">
-    <a href="#home">Effettua Prenotazione</a>
-    <a href="#about">Modifica Prenotazione</a>
-    <a href="#contact">Elimina Prenotazione</a>
+    <a>Prenota Doccia</a>
+    <a>Modifica/Elimina Prenotazione</a>
   </div>
+  
     <br/><br/>
-    <button onclick="clickdropbtn3()" class="dropbtn" style=" background-color: #1a70f0; width: 80px;top: 440px;">Bar</button>
+    
+   <button onclick="clickdropbtn3()" class="dropbtn" style=" background-color: #1a70f0; width: 80px;top: 440px;">
+   	Bar
+   </button>
+   
   <div id="myDropdown3" class="dropdown-content" style="top:635%; margin-left:70px">
-    <a href="#home">Effettua Ordine & Costi</a>
-
-
+    <a>Prenota Piatto/Bevanda</a>
+    <a>Modifica/Elimina Prenotazione</a>
   </div>
   
 </div>
