@@ -3,14 +3,12 @@ package pkg.bar;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import pkg.bean.ClientePrenotaPiatto;
 import pkg.bean.Piatto;
@@ -78,7 +76,6 @@ public class BarServlet extends HttpServlet {
 			
 			ArrayList<ClientePrenotaPiatto> ordini_piatti = db.ordiniPiattiFromDb();
 			
-			// potrebbe essere utile per scorrere gli ordini----------------
 			int num_ordini= ordini_piatti.size(); 
 			
 			for(int i=0; i< num_ordini; i++) {

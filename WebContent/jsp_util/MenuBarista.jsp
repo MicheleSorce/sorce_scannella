@@ -163,6 +163,8 @@ $(document).ready(function() {
     <h2>Menu MSBeach  </h2>
     <div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div>
     <hr>
+    <div>La disponibilità di ogni elemento viene aggiornata singolarmente</div>
+    <hr>
     <h3 style="font-size: 20px;">Bibita</h3>
     
 	<table class="elementi_menu" id="bibita">

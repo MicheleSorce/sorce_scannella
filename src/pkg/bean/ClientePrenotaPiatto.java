@@ -8,6 +8,7 @@ public class ClientePrenotaPiatto extends Utente {
 	private int quantita;
 	private boolean stato_pagamento;
 	private String stato_completamento;
+	private String data_ordine;
 	
 	
 	public int getId_ordine() {
@@ -55,6 +56,12 @@ public class ClientePrenotaPiatto extends Utente {
 	}
 	public void setStato_completamento(String stato_completamento) {
 		this.stato_completamento = stato_completamento;
+	}
+	public String getData_ordine() {
+		return data_ordine;
+	}
+	public void setData_ordine(String data_ordine) {
+		this.data_ordine = data_ordine;
 	}
 	
 	

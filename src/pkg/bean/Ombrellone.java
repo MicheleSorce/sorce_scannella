@@ -3,11 +3,8 @@ package pkg.bean;
 public class Ombrellone {
 	
 	private  int id_ombrellone ;
-
 	private  String zona; //vip superior standard
-
 	private  Float prezzo;
-	private  boolean libero; //true libero, false occupato
 	private  boolean pulito; //false sporco, true pulito
 	
 	
@@ -23,12 +20,6 @@ public class Ombrellone {
 	}
 	public void setPrezzo(Float prezzo) {
 		this.prezzo = prezzo;
-	}
-	public boolean getLibero() {
-		return libero;
-	}
-	public void setLibero(boolean libero) {
-		this.libero = libero;
 	}
 	public boolean getPulito() {
 		return pulito;

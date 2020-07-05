@@ -2,7 +2,6 @@ package pkg.bean;
 
 public class Cliente extends Utente {
 	private float tot_pagamento;	
-	
 	private int idCliente;
 
 	public void setIdCliente(int id) {

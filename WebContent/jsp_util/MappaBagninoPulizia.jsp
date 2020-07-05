@@ -2,7 +2,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="pkg.bean.ClientePrenotaOmbrellone" %>
 <%@ page import="pkg.bean.Ombrellone" %>
-<link href="../css/MappaAmmin.css" type="text/css" rel="stylesheet">
+<link href="../css/Mappa.css" type="text/css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
+
 <jsp:useBean id="ombrellone" scope="session" class="pkg.bean.Ombrellone"/>
 
 <!-- Colora l'ombrellone rosso o verde a seconda se era libero o occupato -->
@@ -22,7 +24,8 @@
 			<script type="text/javascript">
 				$("#data").text("<%=data%>");
 				$("#slot_orario").text("<%=slot_orario%>");
-				$(<%=ombr%>).css("background-color","#ff0700");//rosso		
+				$(<%=ombr%>).css("background-color","#ff0700");//rosso	
+				
 			</script>		
 		<%			session.removeAttribute("ombrellonePrenotato"+i);
 			}
@@ -33,107 +36,138 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    
-	$(".img_ombrellone").click(function() {
-
-		
+	
+ $(".img_ombrellone").click(function() {
 		var id=$(this).attr("id");
 		var data= $("#data").text();
 		var slot_orario= $("#slot_orario").text();
-		 var color = $( this ).css( "background-color" );
-		 
-    	$.post("../AmminServlet", { 
+		var color = $( this ).css( "background-color" );
+		$.post("../BagninoServlet", { 
     		operazione: "dati_prenotazione_ombrellone",
     		id_ombrellone : id,
     		slot_orario: slot_orario,
     		data: data
     		
     		}, function(data, status) {
-	         if (status == "success"){     	
+	         if (status == "success"){
 	        	
-	        	var stato;
-	        	var id_ombr= "#"+id;
-	        	
-	 	        if(color == "rgb(255, 7, 0)"){
-	 	        	stato="No";  
-	 	        }else{
-	 	        	stato="Si";   
-	 	        }       
+  				$("#id_ombr").attr("value", data.id);
+  				$("#zona_ombr").attr("value", data.zona  );	
+  				$("#pulizia_ombr").attr("value", data.stato_pulizia  );	
 
-	        	
-	        	$("#libero").attr("value", stato);
-  				$("#id_ombr").attr("value", data.id);			           
- 				$("#zona_ombr").attr("value", data.zona  );	
-   				$("#prezzo_ombr").attr("value", data.prezzo );  				
-   				
-   				$("#num_persone").attr("value", data.num_persone );
-   				$("#num_lettini").attr("value", data.num_lettini );
-   				$("#num_sdraio").attr("value", data.num_sdraio);
-
-				$("#nome_cliente").attr("value",data.nome);
-				$("#cognome_cliente").attr("value",data.cognome);
-				$("#tel_cliente").attr("value",data.telefono);
-				$("#pagato").attr("value",data.pagato);
-			
-  				if(stato=="Si"){
-  					
-  					$("#libero").css("font-weight","bold");
-  					$("#nome_cliente").attr("value","NULL");
-  					$("#cognome_cliente").attr("value","NULL");
-  					$("#tel_cliente").attr("value","NULL");
-  					$("#pagato").attr("value","NULL");
-  				}
-  				location.href="#div_show";
+  				
+	   			if(color == "rgb(255, 7, 0)"){
+					$("#libero").attr("value", "No");
+					$("#radio1").attr("disabled","disabled");
+					$("#radio2").attr("disabled","disabled");
+					$("#radio2").attr("checked","checked");
+					$("#aggiorna_pulizia").attr("disabled", "disabled");
+				}else{
+					$("#libero").attr("value", "Si");
+					$("#radio1").removeAttr("disabled"); 
+					$("#radio2").removeAttr("disabled"); 
+					$("#aggiorna_pulizia").removeAttr("disabled");
+					
+					
+				}	 
+	   			
+	   			
+ 				
+ 				
+ 				
 	         }
+	         
 	 
      });
-    });
+    }); 
 
-	
+ $("#aggiorna_pulizia").click(function() {
+		
+		var stato_pulizia = $('input[name="pulito"]:checked').val();
+		$.post("../BagninoServlet", { 
+	  		operazione : "pulizia_spiaggia",
+	  		id_ombr_pulire : $("#id_ombr").val(),
+		    isPulito : stato_pulizia,
+ 		
+  		}, function(data, status) {
+       if (status == "success")	 
+    	   if(data=="true"){
+           	alert("Stato pulizia aggiornato");
+			
+    	   }
+       if(data=="false"){
+       		alert("Errore aggiornamento stato pulizia.\nRiprova.");
+
+       }
+			
+      });
+ }); 
+ 
+ 
+	     
+    
+   
+    
 });
-  
+
 
 
 </script>
-	
-<style>
-.dati{ 
-	float: left;
-    margin-right: 10px;
-    width: 25%;
-    height:100%;
-    position: relative;
-}
-.dati2{ 
-	float: left;
-    margin-right: 5px;
-    padding:5px;
-    width: 45%;
-    position: relative;
-}
-	
-</style>
 
 
 <div>
 <br><br><br>
+<div style="text-align:center; ">
+	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
+	<div> <h2 id="data"></h2><h2 id="slot_orario"></h2></div>
+	<h4>Clicca sull'ombrellone desiderato per ottenere maggiori informazioni.</h4>
+	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+	<hr width="300px"/><br>
+	
+	
+</div>
+	 <h2 id="data" style="text-align: center; color: blue;"></h2><h2 id="slot_orario" style="text-align: center; color: blue;"></h2>
+	
 
-	 <h2 style="float: left; text-align: right; padding-right: 5%" id="data"></h2>
-	 <h2 style="padding-left: 5%;" id="slot_orario"></h2>
-	 
-	 <hr style="color: black; border: 1px solid;width: 50%;">
-	 
-	<br><br>
+	
 
- <div  class="contenitore">
+<div class="form_css_pul">
+
+<form id="div_show" >
+<br>
+	<fieldset>
+	<legend>Dati generali</legend>
+	
+	ID-Ombrellone:<br><input id="id_ombr"  type="text" readonly value=" "><br><br>
+	Libero:<br><input id="libero"  type="text" readonly value=""><br><br>
+	Zona:<br><input id="zona_ombr" type="text" readonly value=""><br><br>
+	Pulito:<br><input id="pulizia_ombr" type="text" readonly value=""><br><br>
+	
+	</fieldset>
+<br><br>
+	<fieldset>
+	<legend id="stato_pulizia" >Stato pulizia</legend>
+		<input type="radio" id="radio1" name="pulito" value="pulito" />Disinfettato e pulito<br/>
+		<input type="radio" id="radio2" name="pulito" value="non_pulito" />Da Disinfettare e da pulire
+		<br><br>
+		<input style="margin-right: 3px;"type="button" id="aggiorna_pulizia" value="Aggiorna" />
+	</fieldset>
+</form>
+</div>
+
+
+ <div  class="contenitore_pul" >
  
 	<a id="surfista"  style="font-size:50px;z-index:1;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
 	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:1;position:absolute;top:-25px;left:125px"> &#128676;</a>
 	<a id="runner" style="font-size:50px;z-index:1;position:absolute;top:75px;left:390px">&#127939;  </a>
 	<a id="granchio1" style="font-size:15px;z-index:1;position:absolute;top: 100px;left: 910px;"> &#129408; </a>
 	<a id="granchio2" style="font-size:15px;z-index:1;position:absolute;  top:80px;left: 900px;"> &#129408; </a>
-	
+
+
+  
 	<a id="ombrellone1" class="img_ombrellone" style=" top:230px;left: 80px; ">&#9969;&#65039;</a>	
+	
 	<a id="ombrellone2" class="img_ombrellone" style=" top:230px;left:240px;">&#9969;&#65039;</a>
 	<a id="ombrellone3" class="img_ombrellone" style=" top:230px;left:400px;">&#9969;&#65039;</a>
 	<a id="ombrellone4" class="img_ombrellone" style=" top:230px;left:720px; ">&#9969;&#65039;</a> 
@@ -157,70 +191,21 @@ $(document).ready(function() {
 	<a id="ombrellone19" class="img_ombrellone" style=" top:680px;left:720px; ">&#9969;&#65039;</a> 	
 	<a id="ombrellone20" class="img_ombrellone" style=" top:680px;left:870px; ">&#9969;&#65039;</a> 
 	
+	<a id="ristorante" class="ristorante"   style="top:846px;left:483px;">&#127860;</a>
+	
+	<a id="doccia1" class="img_doccia"  style="top:850px;left:647px;">&#128705;</a> 
+	<a id="doccia2" class="img_doccia"  style="top:870px;left:647px;">&#128705;</a> 
+	<a id="doccia3" class="img_doccia"  style="top:890px;left:647px;">&#128705;</a> 
+	<a id="doccia4" class="img_doccia"  style="top:910px;left:647px;">&#128705;</a> 
+	
+	
 	<a id="ombrellone21" class="img_ombrellone" style=" top:820px;left:80px; ">&#9969;&#65039;</a> 
 	<a id="ombrellone22" class="img_ombrellone" style=" top:820px;left:240px; ">&#9969;&#65039;</a> 
 	<a id="ombrellone23" class="img_ombrellone" style=" top:820px;left:720px; ">&#9969;&#65039;</a> 	
 	<a id="ombrellone24" class="img_ombrellone" style=" top:820px;left:870px; ">&#9969;&#65039;</a>  
+
 </div>
-
-
-
-<div id="div_show" class="form_css">
-
-
-<h3>Dati ombrellone</h3>
-<hr>
-
-
-
-<div class="dati">
-  <fieldset >
-  <legend>Dati generali</legend>
-	  ID-Ombrellone:<br><input id="id_ombr" name="id_ombr_form" type="text" readonly value=" "><br><br>
-	  Libero:<br><input id="libero" name="stato_ombr_form" type="text" readonly value=""><br><br>
-	  Zona:<br><input id="zona_ombr" name="zona_ombr_form" type="text" readonly value=""><br><br>
-	  Prezzo ombrellone €/pz:<br><input id="prezzo_ombr" name="prezzo_ombr_form" type="text" readonly value=""><br><br>
-  </fieldset>
-  </div>
-
-<div class="dati2">
-  <fieldset >
-  
-  <legend>Dati Prenotazione Cliente</legend>
-
-    <div class="dati2">
-    Numero persone: <br><input id="num_persone" name="num_persone_form" type="text" readonly value=""><br>  
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 5 persone</i>
-    <br><br>
-    Numero lettini:<br><input id="num_lettini" name="num_lettini_form" type="text" readonly value=""><br>
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 3 lettini</i>
-    <br><br>
-    Numero sdraio:<br><input id="num_sdraio" name="num_sdraio_form" type="text" readonly value=""><br>
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 3 sdraio</i>
-   </div>
-   
-  <div style="float:left;">
-  	Nome cliente:<br>
-  	<input id="nome_cliente" name="nome_cliente_form" type="text" readonly value=""><br>
-  	Cognome cliente:<br>
-  	<input id="cognome_cliente" name="cognome_cliente_form" type="text" readonly value=""><br>
-  	Telefono:<br>
-  	<input id="tel_cliente" name="tel_cliente_form" type="text" readonly value=" "><br>
-  </div>
-
-
-  
-  </fieldset>
-</div>
-  <div class="dati">
-  <fieldset >
-  	<legend>Stato Pagamento Cliente</legend>
-  	Pagamento: <br>
-  	<input id="pagato" name="pagamento_form" type="text" readonly value="">
-  </fieldset>
-</div>  
-  
 
 
 </div>
-</div>
+

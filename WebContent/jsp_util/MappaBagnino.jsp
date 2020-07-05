@@ -36,8 +36,6 @@
 $(document).ready(function() {
     
 	$(".img_ombrellone").click(function() {
-
-		
 		var id=$(this).attr("id");
 		var data= $("#data").text();
 		var slot_orario= $("#slot_orario").text();
@@ -58,16 +56,29 @@ $(document).ready(function() {
 				}else{
 					$("#libero").attr("value", "Si");	
 				}	          
- 				$("#zona_ombr").attr("value", data.zona  );	
  				$("#num_persone").attr("value", data.num_persone );
-   				$("#num_lettini").attr("value", data.num_lettini );
-   				$("#num_sdraio").attr("value", data.num_sdraio);
+ 				$("#num_lettini").attr("value", data.num_lettini );
+			    $("#num_sdraio").attr("value", data.num_sdraio);
+			    $("#zona_ombr").attr("value", data.zona);
+			    
+ 				if(data.nome=="null"){
+ 					$("#nome_cliente").attr("value", "Non disponibile" );
+ 				}else{
+ 					$("#nome_cliente").attr("value",data.nome);
+ 				}
 
-				$("#nome_cliente").attr("value",data.nome);
-				$("#cognome_cliente").attr("value",data.cognome);
-				$("#tel_cliente").attr("value",data.telefono);
+ 				if(data.cognome=="null"){
+ 					$("#cognome_cliente").attr("value", "Non disponibile" );
+ 				}else{
+ 					$("#cognome_cliente").attr("value",data.cognome);
+ 				}
+ 				if(data.telefono=="null"){
+ 					$("#tel_cliente").attr("value", "Non disponibile" );
+ 				}else{
+ 					$("#tel_cliente").attr("value",data.telefono);
+ 				}
 				
- 				 location.href = "#div_show";
+ 				location.href = "#div_show";
 	         }
 	         
 	 
@@ -87,6 +98,8 @@ $(document).ready(function() {
 <div style="text-align:center; ">
 	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
 	<div> <h2 id="data"></h2><h2 id="slot_orario"></h2></div>
+	<h4>Clicca sull'ombrellone desiderato per ottenere maggiori informazioni.</h4>
+	
 	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
 	<hr width="300px"/>
 </div>
@@ -98,13 +111,18 @@ $(document).ready(function() {
 
  <div  class="contenitore">
  
-	<a id="surfista"  style="font-size:50px;z-index:2;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
-	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:2;position:absolute;top:-25px;left:125px"> &#128676;</a>
-	<a id="runner" style="font-size:50px;z-index:2;position:absolute;top:75px;left:390px">&#127939;  </a>
-	<a id="granchio1" style="font-size:15px;z-index:2;position:absolute;top: 100px;left: 910px;"> &#129408; </a>
-	<a id="granchio2" style="font-size:15px;z-index:2;position:absolute;  top:80px;left: 900px;"> &#129408; </a>
-	
+	<a id="surfista"  style="font-size:50px;z-index:1;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
+	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:1;position:absolute;top:-25px;left:125px"> &#128676;</a>
+	<a id="runner" style="font-size:50px;z-index:1;position:absolute;top:75px;left:390px">&#127939;  </a>
+	<a id="granchio1" style="font-size:15px;z-index:1;position:absolute;top: 100px;left: 910px;"> &#129408; </a>
+	<a id="granchio2" style="font-size:15px;z-index:1;position:absolute;  top:80px;left: 900px;"> &#129408; </a>
+
+
+
+
+	  
 	<a id="ombrellone1" class="img_ombrellone" style=" top:230px;left: 80px; ">&#9969;&#65039;</a>	
+	
 	<a id="ombrellone2" class="img_ombrellone" style=" top:230px;left:240px;">&#9969;&#65039;</a>
 	<a id="ombrellone3" class="img_ombrellone" style=" top:230px;left:400px;">&#9969;&#65039;</a>
 	<a id="ombrellone4" class="img_ombrellone" style=" top:230px;left:720px; ">&#9969;&#65039;</a> 
@@ -128,7 +146,7 @@ $(document).ready(function() {
 	<a id="ombrellone19" class="img_ombrellone" style=" top:680px;left:720px; ">&#9969;&#65039;</a> 	
 	<a id="ombrellone20" class="img_ombrellone" style=" top:680px;left:870px; ">&#9969;&#65039;</a> 
 	
-	<a id="ristorante" class="ristorante"   style="font-size:60px;z-index:2;position:absolute;top:846px;left:483px;">&#127860;</a>
+	<a id="ristorante" class="ristorante"   style="top:846px;left:483px;">&#127860;</a>
 	
 	<a id="doccia1" class="img_doccia"  style="top:850px;left:647px;">&#128705;</a> 
 	<a id="doccia2" class="img_doccia"  style="top:870px;left:647px;">&#128705;</a> 
@@ -144,7 +162,7 @@ $(document).ready(function() {
 
 
 <br> <br><br> 
-<div id="div_show" class="form_css_bagnino" >
+<div id="div_show" class="form_css" >
 <a id="show_form" href=""></a>
 
 <h3>Dati ombrellone</h3>
@@ -177,8 +195,9 @@ $(document).ready(function() {
     Numero sdraio:<br><input id="num_sdraio" name="num_sdraio_form" type="text" readonly value=""><br>
     <i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 3 sdraio</i>
    </div>
-   
-  <div style="float:left;margin-left: 5%">
+<br>
+
+  <div style="float:left;">
   	Nome cliente:<br>
   	<input id="nome_cliente" name="nome_cliente_form" type="text" readonly value=""><br>
   	Cognome cliente:<br>

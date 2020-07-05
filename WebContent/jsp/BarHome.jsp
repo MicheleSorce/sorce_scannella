@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
 <link href="../css/BarCSS.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
-
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
+</head>
 <script>
 function myFunction() {
 	  document.getElementById("myDropdown").classList.toggle("show");
@@ -84,7 +84,7 @@ $(document).ready(function() {
 <body class=”it”>
 
 	<div class="navbar"  >
-		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+		  <a class="active" href="BarHome.jsp"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
 		 <a id="id_logout" href="../LogoutServlet" ><i class="fa fa-fw fa-user"></i> Logout</a> 

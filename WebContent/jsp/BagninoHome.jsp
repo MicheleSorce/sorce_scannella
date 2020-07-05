@@ -51,41 +51,103 @@ window.onclick = function(event) {
 	        day = '0' + day.toString();
 
 	    var minDate = year + '-' + month + '-' + day;    
-	    $('#data_scelta').attr('min', minDate);
-	    $('#data_scelta').attr('value', minDate);
+	    $('#data_scelta0').attr('min', minDate);
+	    $('#data_scelta0').attr('value', minDate);
+	    $('#data_scelta2').attr('min', minDate);
+	    $('#data_scelta2').attr('value', minDate);
+	    $('#data_scelta3').attr('min', minDate);
+	    $('#data_scelta3').attr('value', minDate);
 	});
 
   
   
   $(document).ready(function(){
 
+	     
   	  //lista ordinazioni
-      $("#opzione1").click(function() {
-      	$("#id_data_scelta").css("display","block");
-      });
+    $("#opzione1").click(function() {
+     $("#id_dati_scelta_doccia").hide();
+     $("#id_data_scelta_pulizia").hide();
+   	 $("#id_data_scelta").css("display","block");
+    });
     	
   	$("#conferma_data").click(function(){
-
   		$.post("../BagninoServlet", { 
   			operazione : "visualizza_spiaggia",
-  			data_scelta : $("#data_scelta").val(),
-  	    	slot_orario: $("#slot_orario").val()
+  			data_scelta0 : $("#data_scelta0").val(),
+  	    	slot_orario0 : $("#slot_orario0").val()
   	    	
   			}, function(data, status) {
-  	     if (status == "success")	
-  	    	 $("#id_data_scelta").hide();
-  	         $("#riuso").load("../jsp_util/MappaBagnino.jsp");
-  	      
+  	     if (status == "success")
+  	    	 if(data=="Nessuna Prenotazione"){
+  	           $("#id_data_scelta").hide();
+	 	       $("#id_dati_scelta_doccia").hide();
+  	           alert("Non ci sono prenotazioni per questo periodo.Scegli un'altra data.");
+  	           
+  	         }else{
+  	    		 $("#id_data_scelta").hide();
+  	        	 $("#riuso").load("../jsp_util/MappaBagnino.jsp");
+	  	     }
   	     });
   	  
   	});
   	
-
-
+  	$("#opzione2").click(function() {
+  		 $("#id_data_scelta").hide();
+  		$("#id_data_scelta_pulizia").hide();
+  	   	 $("#id_dati_scelta_doccia").css("display","block");
+  	
+  	    });
+  	$("#conferma_data2").click(function(){
+  		$.post("../BagninoServlet", { 
+  			operazione : "visualizza_docce",
+  			data_scelta2 : $("#data_scelta2").val(),
+  	    	slot_orario2: $("#slot_orario2").val()
+  	    	
+	  		}, function(data, status) {
+	  	     if (status == "success"){
+	  	   
+	  	          if(data=="Nessuna Prenotazione"){
+	  	           $("#id_data_scelta").hide();
+		 	       $("#id_dati_scelta_doccia").hide();
+	  	           alert("Le docce sono tutte libere.");
+	  	           
+	  	         }else{ 
+		  	       	$("#id_data_scelta").hide();
+		 	    	 $("#id_dati_scelta_doccia").hide();
+		 	         $("#riuso").load("../jsp_util/MappaDocceBagnino.jsp");
+	  	         }
+	  	     }
+  	         
+  	     });
+  	  
+  	});
   		    
-   
-
-  });	 
+  	$("#opzione3").click(function() {
+ 		 $("#id_data_scelta").hide();
+ 		 $("#id_dati_scelta_doccia").hide();
+ 	   	 $("#id_data_scelta_pulizia").css("display","block");
+ 	
+ 	    });
+  	$("#conferma_data3").click(function(){
+ 		$.post("../BagninoServlet", { 
+ 			operazione : "visualizza_spiaggia_pul",
+ 			data_scelta3 : $("#data_scelta3").val(),
+ 	    	slot_orario3: $("#slot_orario3").val()
+ 	    	
+	  		}, function(data, status) {
+	  	     if (status == "success"){
+	  	    		$("#id_data_scelta_pulizia").hide();
+		  	       	$("#id_data_scelta").hide();
+		 	    	 $("#id_dati_scelta_doccia").hide();
+		 	         $("#riuso").load("../jsp_util/MappaBagninoPulizia.jsp");
+	  	         }
+	  	     
+ 	         
+ 	     });
+ 	  
+ 	}); 
+ });	 
 
 	  
 </script>
@@ -97,7 +159,7 @@ window.onclick = function(event) {
 
 
 	<div class="navbar" >
-		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+		  <a class="active" href="BagninoHome.jsp"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
 		   <a  href="../LogoutServlet" ><i class="fa fa-fw fa-user"></i> Logout</a> 
@@ -119,9 +181,9 @@ window.onclick = function(event) {
 	</div>
 
 	<div id="mySidenav_left" class="sidenav">
-	  <a  id="opzione1">Visione Ombrellone</a>
-	  <a href="#" id="opzione2">Servizio Pedalò</a>
-	  <a href="#" id="opzione3">Stato Pulizia Spiaggia </a>	  
+	  <a id="opzione1">Stato Ombrelloni</a>
+	  <a id="opzione2">Stato Docce</a>
+	  <a id="opzione3">Stato Pulizia Spiaggia </a>	  
 	</div>
 
 	
@@ -145,16 +207,16 @@ window.onclick = function(event) {
 <div id="id_data_scelta" class="modal" style="text-align: center;">
 	<div class="modal-content">
 		<div class="container" >
-	     	<h2>Data prenotazione</h2> 
+	     	<h2>Dati Spiaggia</h2> 
 	    	<hr> 
-	    	<div>Inserisci i dati del giorno del quale vuoi vedere le prenotazioni</div>
+	    	<div>Inserisci i dati del giorno del quale vuoi vedere lo stato della spiaggia</div>
 	         <br><br>
 	         <b>Giorno: </b> 
-			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
+			<input id="data_scelta0" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
 			<b>Periodo: </b> 
-			<select id="slot_orario" name="slot_orario">
-				<option value="1"> Mattina </option>
-				<option value="2"> Pomeriggio </option>
+			<select id="slot_orario0">
+				<option value="3" > Mattina </option>
+				<option value="4"> Pomeriggio </option>
 			</select>
 			 <br><br><br> 
 	      	<div class="clearfix"> 
@@ -163,6 +225,65 @@ window.onclick = function(event) {
 	   </div>
 	</div>
 </div>
+
+
+<div id="id_dati_scelta_doccia" class="modal" style="text-align: center;">
+	<div class="modal-content">
+		<div class="container" >
+	     	<h2>Dati Docce</h2> 
+	    	<hr> 
+	    	<div>Inserisci i dati del giorno del quale vuoi vedere lo stato delle docce</div>
+	         <br><br>
+	         <b>Giorno: </b> 
+			<input id="data_scelta2" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
+			<b>Turno: </b> 
+			<select id="slot_orario2" >
+				<option value="1"> 9:00-9:40 </option>
+				<option value="2"> 10:00-10:40 </option>
+				<option value="3"> 11:00-11:40 </option>
+				<option value="4"> 12:00-12:40 </option>
+				<option value="5"> 15:00-15:40 </option>
+				<option value="6"> 16:00-16:40 </option>
+				<option value="7"> 17:00-17:40 </option>
+				<option value="8"> 18:00-18:40 </option>
+				<option value="9"> 19:00-19:40 </option>
+				<option value="10"> 20:00-20:40 </option>
+			</select>
+			 <br><br><br> 
+	      	<div class="clearfix"> 
+	       		 <button id="conferma_data2">Conferma</button> 
+	     	</div> 
+	   </div>
+	</div>
+</div>
+
+
+<div id="id_data_scelta_pulizia" class="modal" style="text-align: center;">
+	<div class="modal-content">
+		<div class="container" >
+	     	<h2>Dati stato Pulizia Spiaggia</h2> 
+	    	<hr> 
+	    	<div>Inserisci i dati del giorno del quale vuoi vedere lo stato della spiaggia</div>
+	         <br><br>
+	         <b>Giorno: </b> 
+			<input id="data_scelta3" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
+			<b>Periodo: </b> 
+			<select id="slot_orario3" >
+				<option value="1" > Mattina </option>
+				<option value="2"> Pomeriggio </option>
+			</select>
+			 <br><br><br> 
+	      	<div class="clearfix"> 
+	       		 <button id="conferma_data3">Conferma</button> 
+	     	</div> 
+	   </div>
+	</div>
+</div>
+
+
+
+
+
 <br><br>
 <div style="text-align:center">
 	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>

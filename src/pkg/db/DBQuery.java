@@ -32,7 +32,7 @@ public class DBQuery {
 			
 	}
 
-	public boolean isRegistrated(Cliente cliente) {
+	public boolean isClienteRegistrated(Cliente cliente) {
 		boolean res = false;
 		try {
 			
@@ -55,8 +55,81 @@ public class DBQuery {
 		}
 		return res;
 	}
-	
 
+	public boolean isAmminRegistrated(Amministratore amministratore) {
+		boolean res = false;
+		try {
+			
+			Connection connection = ds.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT email FROM amministratore WHERE email=?");
+			statement.setString(1, amministratore.getEmail());
+			
+			ResultSet rs = statement.executeQuery();
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= true;
+			}else {
+				res= false;
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public boolean isBagninoRegistrated(Bagnino bagnino) {
+		boolean res = false;
+		try {
+			
+			Connection connection = ds.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT email FROM bagnino WHERE email=?");
+			statement.setString(1, bagnino.getEmail());
+			
+			ResultSet rs = statement.executeQuery();
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= true;
+			}else {
+				res= false;
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public boolean isBaristaRegistrated(Barista barista) {
+		boolean res = false;
+		try {
+			
+			Connection connection = ds.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT email FROM barista WHERE email=?");
+			statement.setString(1, barista.getEmail());
+			
+			ResultSet rs = statement.executeQuery();
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= true;
+			}else {
+				res= false;
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+	
 	public boolean insertCliente(Cliente cliente){
 		boolean res = false;
 		try {
@@ -74,6 +147,113 @@ public class DBQuery {
 			statement.setString(7, cliente.getData());
 			statement.setInt(8, cliente.getSesso());
 			statement.setFloat(9, cliente.getTot_pagamento());
+		
+			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+
+			if(statement.executeUpdate() == 0) {
+				res= false;
+			}else {
+				res=true;
+			}
+			
+			statement.close();
+			connection1.close();
+			
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+		
+	}
+	
+	public boolean insertAmmin(Amministratore ammin){
+		boolean res = false;
+		try {
+			Connection connection1 = ds.getConnection();
+			String insert = "insert into amministratore(id_amministratore, nome, cognome, telefono, email, pw, data_nascita,sesso) values (?,?,?,?,?,?,?,?)";
+			PreparedStatement statement = connection1.prepareStatement(insert);
+			
+			statement.setInt(1, this.firstIdAmminAvailable());
+			statement.setString(2, ammin.getNome());
+			statement.setString(3, ammin.getCognome());
+			statement.setString(4, ammin.getTelefono());
+			statement.setString(5, ammin.getEmail());
+			statement.setString(6, ammin.getPw());
+			statement.setString(7, ammin.getData());
+			statement.setInt(8, ammin.getSesso());
+
+		
+			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+
+			if(statement.executeUpdate() == 0) {
+				res= false;
+			}else {
+				res=true;
+			}
+			
+			statement.close();
+			connection1.close();
+			
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+		
+	}
+	
+	public boolean insertBarista(Barista barista){
+		boolean res = false;
+		try {
+			Connection connection1 = ds.getConnection();
+			String insert = "insert into barista(id_barista, nome, cognome, telefono, email, pw, data_nascita,sesso) values (?,?,?,?,?,?,?,?)";
+			PreparedStatement statement = connection1.prepareStatement(insert);
+			
+			statement.setInt(1, this.firstIdBaristaAvailable());
+			statement.setString(2, barista.getNome());
+			statement.setString(3, barista.getCognome());
+			statement.setString(4, barista.getTelefono());
+			statement.setString(5, barista.getEmail());
+			statement.setString(6, barista.getPw());
+			statement.setString(7, barista.getData());
+			statement.setInt(8, barista.getSesso());
+
+		
+			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+
+			if(statement.executeUpdate() == 0) {
+				res= false;
+			}else {
+				res=true;
+			}
+			
+			statement.close();
+			connection1.close();
+			
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+		
+	}
+	
+	
+	public boolean insertBagnino(Bagnino bagnino){
+		boolean res = false;
+		try {
+			Connection connection1 = ds.getConnection();
+			String insert = "insert into bagnino( id_bagnino, nome, cognome, telefono, email, pw, data_nascita,sesso) values (?,?,?,?,?,?,?,?)";
+			PreparedStatement statement = connection1.prepareStatement(insert);
+			
+
+			statement.setInt(1, this.firstIdBagninoAvailable());
+			statement.setString(2, bagnino.getNome());
+			statement.setString(3, bagnino.getCognome());
+			statement.setString(4, bagnino.getTelefono());
+			statement.setString(5, bagnino.getEmail());
+			statement.setString(6, bagnino.getPw());
+			statement.setString(7, bagnino.getData());
+			statement.setInt(8, bagnino.getSesso());
+
 		
 			//statement.executeUpdate(); //0 (non ritorna niente) o 1
 
@@ -114,6 +294,84 @@ public class DBQuery {
 		return res+1;
 	}
 	
+	public int firstIdBagninoAvailable() {
+		int res = 0;
+		try {
+			
+			Connection connection2 = ds.getConnection();
+			
+			Statement statement = connection2.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id_bagnino FROM bagnino ORDER BY id_bagnino DESC	LIMIT 1");
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= rs.getInt("id_bagnino");
+			}
+			rs.close();
+			statement.close();
+			connection2.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res+1;
+	}
+	public int firstIdAmminAvailable() {
+		int res = 0;
+		try {
+			
+			Connection connection2 = ds.getConnection();
+			
+			Statement statement = connection2.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id_amministratore FROM amministratore ORDER BY id_amministratore DESC	LIMIT 1");
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= rs.getInt("id_amministratore");
+			}
+			rs.close();
+			statement.close();
+			connection2.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res+1;
+	}
+	public int firstIdBaristaAvailable() {
+		int res = 0;
+		try {
+			
+			Connection connection2 = ds.getConnection();
+			
+			Statement statement = connection2.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id_barista FROM barista ORDER BY id_barista DESC	LIMIT 1");
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= rs.getInt("id_barista");
+			}
+			rs.close();
+			statement.close();
+			connection2.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res+1;
+	}
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public String whoUserType(String email, String pw) {
@@ -149,9 +407,7 @@ public class DBQuery {
 		}		
 		return user_win;
 	}
-	
-	
-	
+		
 	public boolean checkTable(String search, Connection conn, String email,String pw) {
 		PreparedStatement statement;
 		try {
@@ -175,8 +431,7 @@ public class DBQuery {
 		return false;
 		
 	}
-	
-	
+		
 	public Object searchAmm_Bar_Bag(String email, String type_utente, String id) {
 	
 		Object[] array_fields= new Object[8];
@@ -324,7 +579,6 @@ public class DBQuery {
 		return isModified;
 	}
 
-
 	public Ombrellone getOmbrelloneFromDb(int id) { 			
 		
 		Ombrellone ombrellone= new Ombrellone();
@@ -342,7 +596,6 @@ public class DBQuery {
 				ombrellone.setId_ombrellone(rs.getInt("id_ombrellone"));
 				ombrellone.setZona(rs.getString("zona"));
 				ombrellone.setPrezzo(rs.getFloat("prezzo"));
-				ombrellone.setLibero(rs.getBoolean("stato_occupazione"));
 				ombrellone.setPulito(rs.getBoolean("stato_pulizia"));
 			}
 			rs.close();
@@ -370,6 +623,7 @@ public class DBQuery {
 				ResultSet rs = statement.executeQuery();
 			
 				while (rs.next()) { //true-> matcha qualcosa
+					
 					ClientePrenotaOmbrellone prenotazione= new ClientePrenotaOmbrellone();
 					
 					result[0]=rs.getInt("id_prenotazione");
@@ -404,8 +658,7 @@ public class DBQuery {
 			}
 		return lista;
 	}
-	
-	
+		
 	public ArrayList<Piatto> menuFromDb() { 	// menu		
 		 ArrayList<Piatto> menu= new ArrayList<Piatto>();
 		
@@ -438,8 +691,7 @@ public class DBQuery {
 
 		return menu;
 	}
-	
-	
+		
 	public boolean updateDisponibilita( int id, int disponibilita) {
 		boolean isModified = false;
 		try {
@@ -466,8 +718,7 @@ public class DBQuery {
 		}
 		return isModified;
 	}
-	
-	
+		
 	public ArrayList<ClientePrenotaPiatto> ordiniPiattiFromDb() { 	// menu		
 		 ArrayList<ClientePrenotaPiatto> ordini_piatti= new ArrayList<ClientePrenotaPiatto>();
 		
@@ -486,7 +737,7 @@ public class DBQuery {
 					ordine.setQuantita(rs.getInt("quantita"));
 					ordine.setStato_pagamento(rs.getBoolean("stato_pagamento"));
 					ordine.setStato_completamento(rs.getString("stato_completamento"));
-			
+					ordine.setData_ordine(rs.getString("data_prenotazione"));
 					
 					ordini_piatti.add(ordine);
 					ordine= null;
@@ -501,9 +752,7 @@ public class DBQuery {
 
 		return ordini_piatti;
 	}
-	
-	
-
+		
 	public boolean updateStatoOrdine( int id, String stato_ordine) {
 		boolean isModified = false;
 		try {
@@ -530,12 +779,7 @@ public class DBQuery {
 		}
 		return isModified;
 	}
-	
-	
-	
-	//eliminaOrdine(id);  
-	//delete from student where code=?"
-	
+		
 	public boolean eliminaOrdine(int id) {
 		boolean isModified = false;
 		try {
@@ -560,7 +804,6 @@ public class DBQuery {
 		return isModified;
 	}
 	
-
 	public boolean updateQuantitaPiatto( int id, int quantita_usata) {
 		boolean isModified = false;
 		try {
@@ -608,7 +851,6 @@ public class DBQuery {
 		return isModified;
 	}
 	
-
 	public boolean updateMenuGiorno( int id, int valore) {
 		boolean isModified = false;
 		try {
@@ -673,7 +915,6 @@ public class DBQuery {
 		
 	}
 	
-
 	public Cliente getCliente(int id_cliente) { 	
 		 Cliente cliente= new Cliente();
 		
@@ -708,6 +949,324 @@ public class DBQuery {
 		return cliente;
 	}
 	
+	public ArrayList<ClientePrenotaOmbrellone> getListaPrenotazioneGiornoCorrente(String data_scelta){
+		 ArrayList<ClientePrenotaOmbrellone> lista= new ArrayList<ClientePrenotaOmbrellone>();
+
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_ombrellone WHERE data_prenotazione=?");
+				statement.setString(1, data_scelta);
+
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					
+					ClientePrenotaOmbrellone prenotazione= new ClientePrenotaOmbrellone();
+
+					prenotazione.setId_prenotazione((Integer)rs.getInt("id_prenotazione"));
+					prenotazione.setId_cliente((Integer)rs.getInt("cliente_id_cliente"));
+					prenotazione.setId_ombrellone((Integer)rs.getInt("ombrellone_id_ombrellone"));
+					prenotazione.setPagato((boolean)rs.getBoolean("stato_pagamento"));
+					prenotazione.setData_prenotazione(data_scelta);
+					prenotazione.setSlot_orario((Integer)rs.getInt("slot_orario"));				
+					prenotazione.setNum_lettini((Integer)rs.getInt("num_lettini"));
+					prenotazione.setNum_persone((Integer)rs.getInt("num_persone"));
+					prenotazione.setNum_sdraio((Integer)rs.getInt("num_sdraio"));
+					
+					lista.add(prenotazione);
+					prenotazione= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+		return lista;
+	}
+	
+	public ArrayList<ClientePrenotaPiatto> ordiniPiattiGiorno(String data) { 	
+		 ArrayList<ClientePrenotaPiatto> ordini_piatti= new ArrayList<ClientePrenotaPiatto>();
+		
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_piatto WHERE data_prenotazione=?");
+				statement.setString(1, data);
+				
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					ClientePrenotaPiatto ordine= new ClientePrenotaPiatto();
+					
+					ordine.setId_ordine(rs.getInt("id_ordine"));
+					ordine.setId_cliente(rs.getInt("cliente_id_cliente"));
+					ordine.setId_piatto(rs.getInt("piatto_id_piatto"));
+					ordine.setQuantita(rs.getInt("quantita"));
+					ordine.setStato_pagamento(rs.getBoolean("stato_pagamento"));
+					ordine.setStato_completamento(rs.getString("stato_completamento"));
+					ordine.setData_ordine(rs.getString("data_prenotazione"));
+					
+					ordini_piatti.add(ordine);
+					ordine= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+
+		return ordini_piatti;
+	}
+	
+	public Piatto getPiatto(int id_piatto) { 	
+		 Piatto piatto= new Piatto();
+		
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM piatto WHERE id_piatto=? ");
+				
+				statement.setInt(1, id_piatto); 
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					
+					piatto.setId_piatto(rs.getInt("id_piatto"));
+					piatto.setTipo(rs.getString("tipo"));
+					piatto.setNome(rs.getString("nome"));
+					piatto.setPrezzo(rs.getFloat("prezzo"));
+					piatto.setMenu_giorno(rs.getBoolean("menu_giorno"));
+					piatto.setDisponibilita(rs.getInt("disponibilita"));
+
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+
+		return piatto;
+	}
+
+	public boolean eliminaPrenotazioneOmbrellone(int id) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "DELETE FROM cliente_prenota_ombrellone WHERE id_prenotazione=?";
+
+			PreparedStatement statement = connection.prepareStatement(update);	
+			statement.setInt(1, id); 
+			
+			if(statement.executeUpdate()!=0) {	//num righe che ha modificato
+				isModified= true;
+			}else {
+				isModified = false;
+			}
+			statement.close();
+			connection.close();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+	
+	public Doccia getDocciaFromDb(int id) { 			
+		
+		Doccia doccia= new Doccia();
+		
+		try {
+			Connection connection = ds.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM doccia WHERE id_doccia=?");
+			statement.setInt(1, id);
+			
+			ResultSet rs = statement.executeQuery();
+		
+				
+			if (rs.next()) { //true-> matcha qualcosa
+				
+				doccia.setId_doccia(rs.getInt("id_doccia"));
+				doccia.setAccesso_disabili(rs.getBoolean("accesso_disabili"));
+		
+				doccia.setPulito(rs.getBoolean("stato_pulizia"));
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return doccia;
+	}
+	
+	public ClientePrenotaDoccia getPrenotazioneDoccia(int id, int slot_orario, String data) {
+		ClientePrenotaDoccia prenotazione= new ClientePrenotaDoccia();
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_doccia WHERE doccia_id_doccia=? and slot_orario=? and data_prenotazione=? ");
+				
+				statement.setInt(1, id); 
+				statement.setInt(2, slot_orario);
+				statement.setString(3, data);
+				
+				
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					
+					
+					prenotazione.setId_prenota_doccia(rs.getInt("id_prenota_doccia"));
+					prenotazione.setId_cliente(rs.getInt("cliente_id_cliente"));
+					prenotazione.setId_doccia(rs.getInt("doccia_id_doccia"));
+					prenotazione.setSlot_orario(rs.getInt("slot_orario"));
+					prenotazione.setData_prenotazione(rs.getString("data_prenotazione"));
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+
+		return prenotazione;
+		
+	}
+	
+	public boolean setStatoPulito(int idOmbr, int isPulito){
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE ombrellone SET stato_pulizia=? WHERE id_ombrellone=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setInt(1, isPulito); 
+			statement.setInt(2, idOmbr);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+
+	}
+	
+	public int firstIdPrenotazioneOmbrAvailable() {  
+		int res = 0;
+		try {
+			
+			Connection connection = ds.getConnection();
+			
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id_prenotazione FROM cliente_prenota_ombrellone ORDER BY id_prenotazione DESC	LIMIT 1");
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= rs.getInt("id_prenotazione");
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res+1;
+	}
+	
+	
+	public boolean insertPrenotazioneOmbrellone( int id_prenot_disp, int id_cliente,int id_ombrellone, String data, int slot_orario,int num_persone,int num_lettini,int num_sdraio) {
+		boolean res = false;
+		try {
+			Connection connection = ds.getConnection();
+			String insert = "insert into cliente_prenota_ombrellone(id_prenotazione, cliente_id_cliente,ombrellone_id_ombrellone, stato_pagamento, data_prenotazione,slot_orario, num_persone, num_lettini, num_sdraio) values (?,?,?,?,?,?,?,?,?)";
+			PreparedStatement statement = connection.prepareStatement(insert);
+			
+			
+			statement.setInt(1, id_prenot_disp);
+			statement.setInt(2, id_cliente);
+			statement.setInt(3, id_ombrellone);
+			statement.setString(4, null ); //stato_pagamento
+			statement.setString(5, data);
+			statement.setInt(6, slot_orario);
+			statement.setInt(7, num_persone);
+			statement.setInt(8, num_lettini);
+			statement.setInt(9, num_sdraio);
+		
+			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+
+			if(statement.executeUpdate() == 0) {
+				res= false;
+			}else {
+				res=true;
+			}
+			
+			statement.close();
+			connection.close();
+			
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+		
+		
+	}
+
+	public ArrayList<ClientePrenotaDoccia> getListaPrenotazioneDocce(String data_scelta, int slot_orario){
+		 ArrayList<ClientePrenotaDoccia> lista= new ArrayList<ClientePrenotaDoccia>();
+		 Object[] result= new Object[5];
+		
+			
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_doccia WHERE data_prenotazione=? and slot_orario=?");
+				statement.setString(1, data_scelta);
+				statement.setInt(2, slot_orario);
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					ClientePrenotaDoccia prenotazione= new ClientePrenotaDoccia();
+					
+					result[0]=rs.getInt("id_prenota_doccia");
+					result[1]=rs.getInt("cliente_id_cliente");
+					result[2]=rs.getInt("doccia_id_doccia");
+					result[3]=rs.getInt("slot_orario");
+					result[4]=rs.getString("data_prenotazione");
+					
+					
+					prenotazione.setId_prenota_doccia((Integer)(result[0]));
+					prenotazione.setId_cliente((Integer)result[1]);
+					prenotazione.setId_doccia((Integer)result[2]);
+					prenotazione.setSlot_orario(slot_orario);	
+					prenotazione.setData_prenotazione(data_scelta);
+								
+					lista.add(prenotazione);
+					prenotazione= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+		return lista;
+	}
+
 }	
 	
 	

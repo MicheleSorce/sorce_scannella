@@ -46,7 +46,7 @@
 }
 .img_doccia{
 	font-size:20px;
-	z-index:2;
+	z-index:1;
 	position:absolute;
 	background-color:#6fff45;
 }
@@ -65,7 +65,7 @@
 
 .img_ombrellone{
 	font-size:370%;
-	z-index:2;
+	z-index:1;
 	position:absolute;
 	background-color:#6fff45;
 }

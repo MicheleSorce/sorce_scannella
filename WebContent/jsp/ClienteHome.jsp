@@ -19,6 +19,38 @@
 
 
 <script>
+
+
+function clickdropbtn1() {
+  document.getElementById("myDropdown1").classList.toggle("show");
+	if(document.getElementById("prenotazione_prova")){
+   		window.location.reload();
+   		document.getElementById("myDropdown1").classList.toggle("show");
+   	} 
+}
+function clickdropbtn2() {
+	  document.getElementById("myDropdown2").classList.toggle("show");
+	  
+	}
+function clickdropbtn3() {
+	  document.getElementById("myDropdown3").classList.toggle("show");
+	  
+	}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches(".dropbtn")) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+      }
+    }
+  } 
+}
+
 $(function(){
     var dtToday = new Date();
     
@@ -37,61 +69,50 @@ $(function(){
 });
 
 
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-  
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches(".dropbtn")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
-    }
-  } 
-}
-
 
 $(document).ready(function() {
+    $("#opzione1").click(function() {
+   	
+   	$("#id_data_scelta").css("display","block");
+    
+  });
+    
     $("#conferma_data").click(function() {
-    	$.post("../PrenotazioneOmbrelloneServlet", { 
+    	$.post("../ClienteServlet", { 
+    		operazione : "visualizza_spiaggia_prenot",
     		data_scelta : $("#data_scelta").val(),
-    		slot_orario: $("#slot_orario").val() 
+    		slot_orario: $("#slot_orario").val()
+    		
     		}, function(data, status) {
          if (status == "success")
           
-           $('#mappa_div').load("../jsp_util/MappaOmbrelloni2.jsp");
-           $("#id_data_scelta").hide();
-          
+         $('#riuso').load("../jsp_util/MappaPrenotazioneOmbrCliente.jsp");
+     	 $("#id_data_scelta").hide();
+	
          });
     });
   });	
 
-		
+
 </script>
+
+
+
+
 
 <body class=”it” >
 
 
 
-<div class="bg_top"> 
+
 	<div class="navbar" >
 		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
 		  <a id="id_logout" href="../LogoutServlet" ><i class="fa fa-fw fa-user"></i> Logout</a> 
 		  <a href="https://www.google.com/maps/dir/37.2669805,13.5784017/Realmonte+-+Baia+delle+Sirene-Giallonardo,+92010+Realmonte+AG/@37.3003778,13.4278911,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x131a7b97e08653c7:0x264a8eab65c24eb!2m2!1d13.4173862!2d37.3150145"><i class="fa fa-car"></i> Come arrivare</a>
-		  <div class="dropdown">
-		  <a onclick="myFunction()" class="dropbtn "> <i class="fa fa-language" aria-hidden="true"></i> Lingua</a>
-			  <div id="myDropdown" class="dropdown-content">
-			   <a > &#127470;&#127481;</a>  <a> &#127468;&#127463; </a>
-			  </div>
-		  </div>
+		
+		
 		  <div style="float:right">
 		  	  <a href="https://www.whatsapp.com/" ><i class="fa fa-whatsapp" aria-hidden="true"></i></a> 
 		  	  <a href="https://web.telegram.org/#/login"><i class="fa fa-telegram" aria-hidden="true"></i></a>
@@ -101,30 +122,51 @@ $(document).ready(function() {
 			  <a href="https://www.youtube.com/"><i class="fa fa-youtube"></i></a> 
 		  </div>
 	</div>
-
-	<div id="mySidenav_left" class="sidenav">
-
-	  <div onclick="document.getElementById('id_data_scelta').style.display='block'">
- 		  <a  id="opzione1"   style="width:auto;">Prenotazione Ombrellone</a> 
-	  </div>
-	  <a href="#" id="opzione2" style="width:auto;">Prenotazione Pedalò</a>
-	  <a href="#" id="opzione3" style="width:auto;"> Modifica Prenotazione</a>
-	  <a href="#" id="opzione4" style="width:auto;">Elimina Prenotazione</a>
-	</div>
-
-	<!-- <div id="mySidenav_right" class="sidenav">
-	  <a href="#" id="opzione5">Ordine </br> Bar</a>
-	  <a href="#" id="opzione6">Riepilogo Costo Servizi</a>
-	  <a href="#" id="opzione7">Ordine Doccia</a>
-	  <a href="#" id="opzione8">Riepilogo Costo Ombrellone</a>
-	</div> -->
 	
-<br /><br /><br /><br />
-	<div class="txt_hover" style="text-align: left; padding:2%;" >	
+	
+
+	
+
+<div class="dropdown">
+  <button onclick="clickdropbtn1()" class="dropbtn" style=" background-color: #1a70f0; width: 110px;top: 20px;">Ombrellone</button>
+  <div id="myDropdown1" class="dropdown-content" style="top:45%; margin-left:90px">
+	  <div ><a id="opzione1"href="#">Effettua Prenotazione</a> </div>
+	    <a href="#">Modifica Prenotazione</a>
+	    <a href="#">Elimina Prenotazione</a>
+	    <a href="#">Riepilogo Costi</a>
+  </div>
+  <br/><br/>
+    <button onclick="clickdropbtn2()" class="dropbtn" style=" background-color: #a7f0ff; width: 110px;top: 250px;">Doccia</button>
+  <div id="myDropdown2" class="dropdown-content" style="top:365%; margin-left:80px">
+    <a href="#home">Effettua Prenotazione</a>
+    <a href="#about">Modifica Prenotazione</a>
+    <a href="#contact">Elimina Prenotazione</a>
+  </div>
+    <br/><br/>
+    <button onclick="clickdropbtn3()" class="dropbtn" style=" background-color: #1a70f0; width: 80px;top: 440px;">Bar</button>
+  <div id="myDropdown3" class="dropdown-content" style="top:635%; margin-left:70px">
+    <a href="#home">Effettua Ordine & Costi</a>
+
+
+  </div>
+  
+</div>
+
+<br />
+
+
+<div id="riuso" >
+	<div class="bg_top"> 
+	<div  style="text-align: left; padding:2%;" >
+		
+		<div class="descrizione txt_hover">
 		<h2 style="font-family:Sofia; font-size: 70px;text-align: center;" >Benvenuto ${cliente.nome} ${cliente.cognome}</h2>
-		<p style="font-variant: small-caps; font-size:25px; text-align: center;">sulla tua HomePage!</p>
+		<p style="font-variant: small-caps; font-size:25px; text-align: center;"> sulla tua HomePage!</p> 
+	</div>
+	</div>
 	</div>
 </div>
+
 
 
 <div id="id_data_scelta" class="modal" style="text-align: center;">
@@ -167,24 +209,6 @@ $(document).ready(function() {
 
 
 
-
-
- 
-
-<!-- <br /> -->
-<!-- <div style="text-align:center"> -->
-<!-- 	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/> -->
-<!-- 	<em>I nostri servizi </em><br /> <br /> -->
-<!-- 	<div class="w3-content w3-section" style="max-width:500px; position:relative; margin-left:35%"> -->
-<!-- 	  <img  src="../immagini/vacanze-al-mare-800x400.jpg" style="width:100%; "> -->
-<!-- <!-- 	  <img class="mySlides" src="../immagini/ragazza.jpg" style="width:100%"> --> 
-<!-- <!-- 	  <img class="mySlides" src="../immagini/vacanze-al-mare-800x400.jpg"  style="width:100%"> --> 
-<!--  	</div>  -->
-<!--  <br/> -->
-<!-- 	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> -->
-<!-- 	<hr width="300px"/> -->
-<!-- </div>	 -->
-<!-- <br /> -->
 
 
 <div id="finale" class="footer-bottom" style="font-variant: small-caps; ">

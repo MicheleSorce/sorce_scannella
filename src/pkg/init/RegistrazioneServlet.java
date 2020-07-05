@@ -1,8 +1,9 @@
 package pkg.init;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pkg.bean.Cliente;
 import pkg.db.DBQuery;
+
 
 @WebServlet({"/RegistrazioneServlet", "/registrazione"})
 
@@ -33,7 +35,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		String email=request.getParameter("email");
 		String pw=request.getParameter("password");
 		String data_nascita=request.getParameter("data_nascita");
-			String gen=request.getParameter("genere");
+		String gen=request.getParameter("genere");
 		Integer genere=Integer.parseInt(gen);
 		
 		cliente.setNome(nome);										//bean
@@ -47,15 +49,24 @@ public class RegistrazioneServlet extends HttpServlet {
 		
 		request.setAttribute("cliente", cliente);
 		
-		if(db.isRegistrated(cliente)) {
-			String address="/jsp_result/registrazione_failed.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-			dispatcher.forward(request, response);
+		if(db.isClienteRegistrated(cliente)) {
+			
+			
+			response.setContentType("application/json");				
+			PrintWriter out = response.getWriter();		
+			String result= "{\"id\":\""+"registrato"+"\"}";
+			out.println(result);
+			
+
 		}else {
-		    db.insertCliente(cliente);
-			String address="/jsp_result/registrazione_success.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-			dispatcher.forward(request, response);
+			boolean x = db.insertCliente(cliente);
+			
+			response.setContentType("application/json");				
+			PrintWriter out = response.getWriter();		
+			String result= "{\"id\":\""+x+"\"}";
+			out.println(result);
+			
+
 		}
 		
 	}

@@ -13,7 +13,7 @@
 <link href="../css/InsertDataWindow.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
-
+</head>
 
 <script>
 
@@ -38,6 +38,7 @@ window.onclick = function(event) {
   }
 }
 
+var minDate ;
 $(function(){
     var dtToday = new Date();
     
@@ -50,39 +51,68 @@ $(function(){
     if(day < 10)
         day = '0' + day.toString();
 
-    var minDate = year + '-' + month + '-' + day;    
-    $('#data_scelta').attr('min', minDate);
-    $('#data_scelta').attr('value', minDate);
+    today = year + '-' + month + '-' + day;    
+    $('#data_scelta').attr('min', today);
+    $('#data_scelta').attr('value', today);
 });
 
   
 $(document).ready(function(){
-
-	  //lista ordinazioni
+		
     $("#opzione1").click(function() {
     	$("#id_data_scelta").css('display','block');
     });
   	
 	$("#conferma_data").click(function(){
-
+		
 		$.post("../AmminServlet", { 
 			operazione : "spiaggia",
 			data_scelta : $("#data_scelta").val(),
-	    	slot_orario: $("#slot_orario").val()
+	    	slot_orario: $("#slot_periodo").val()
 	    	
 			}, function(data, status) {
-	     if (status == "success")	
-	    	 $("#id_data_scelta").hide();
-	         $('#riuso').load("../jsp_util/MappaAmministratore.jsp");
-	      
+	     if (status == "success")
+	    	 
+	    	 if(data=="Nessuna Prenotazione"){
+	    		 $("#id_data_scelta").hide();
+	    		 alert("Non ci sono prenotazioni per questo periodo");
+	    		window.location.reload();
+	    	 }
+	    	 else{
+	    		 $("#id_data_scelta").hide();
+	 	         $('#riuso').load("../jsp_util/MappaAmministratore.jsp");
+	    	 }
+
 	     });
 	  
 	});
 	
 
-
-		    
- 
+    $("#opzione2").click(function() {
+    	
+		$.post("../AmminServlet", { 
+			operazione : "controllo_pagamenti",
+			data_scelta : today	    	
+			}, function(data, status) {
+	     if (status == "success")
+	    	 
+	    	 if(data=="Nessuna Prenotazione"){
+	    		 $("#id_data_scelta").hide();
+	    		 alert("Non ci sono stati ordini oggi");
+	    		 
+	    	 }
+	    	 else{
+	    		 $("#id_data_scelta").hide();
+	 	         $('#riuso').load("../jsp_util/ListaPrenotazioni.jsp");
+	    	 }
+	     });    	
+    });
+    
+    
+    $("#opzione3").click(function() {
+    	 $('#riuso').load("../jsp_util/RegistrazionePersonale.jsp");
+    });
+  	
 
 });	   
 	  
@@ -97,7 +127,7 @@ $(document).ready(function(){
 <body class=”it”>
 
 	<div class="navbar" style= "width:99% " >
-		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+		  <a class="active" href="AmministratoreHome.jsp"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
 		 
@@ -137,10 +167,23 @@ $(document).ready(function(){
 		<br /><br /><br /><br />
 		<div class="descrizione txt_hover">
 		<h2 style="font-family:Sofia;color:white;  font-size: 70px;text-align: center;" >Amministrazione</h2>
-		<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;"> Benvenuto testa di... ${ammin.nome} ${ammin.cognome}!</p>
+		<p style="font-variant: small-caps;color:white; font-size:40px; text-align: center;"> Benvenuto ${ammin.nome}!</p>
 		
 		</div>
 	</div>
+</div>
+
+
+<br />
+
+<div style="text-align:center">
+	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
+	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione. </em><br /> <br />
+	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> <br/>
+	<hr width="300px"/>
+</div>	
+
+
 </div>
 
 
@@ -154,8 +197,8 @@ $(document).ready(function(){
 	         <b>Giorno: </b> 
 			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
 			<b>Periodo: </b> 
-			<select id="slot_orario" name="slot">
-				<option value="1"> Mattina </option>
+			<select id="slot_periodo">
+				<option value="1" selected="selected"> Mattina </option>
 				<option value="2"> Pomeriggio </option>
 			</select>
 			 <br><br><br> 
@@ -165,19 +208,6 @@ $(document).ready(function(){
 	   </div>
 	</div>
 </div>
- 
-<br />
-
-<div style="text-align:center">
-	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
-	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione. </em><br /> <br />
-	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
-	<hr width="300px"/>
-</div>	
-
-
-</div>
-
 
 
 <div id="finale" class="footer-bottom" style="font-variant: small-caps;">

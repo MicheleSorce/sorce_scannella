@@ -9,48 +9,13 @@
 
 $(document).ready(function(){
 	
-	$('#nome').keypress(function (e) {
+	$('#input').keypress(function (e) {
 		  if (e.which == 13) {
-		    $('#cognome').focus();
-		    return false;  
-		  }
-	});
-	$('#cognome').keypress(function (e) {
-		  if (e.which == 13) {
-		    $('#telefono').focus();
-		    return false;  
-		  }
-	});
-	$('#telefono').keypress(function (e) {
-		  if (e.which == 13) {
-		    $('#email').focus();
-		    return false;  
-		  }
-	});
-	$('#email').keypress(function (e) {
-		  if (e.which == 13) {
-		    $('#password').focus();
+			  $("input").next().focus();
 		    return false;  
 		  }
 	});
 	
-
-	$('#password').keypress(function (e) {
-		  if (e.which == 13) {
-			
-		    $('#confermaPassword').focus();
-		    return false;  
-		  }
-	});	
- 
-	$('#confermaPassword').keypress(function (e) {
-		  if (e.which == 13) {
-			
-			  $('#date').focus();
-			    return false;
-
-		  }
-	});
 
 	$("#confermaPassword").blur(function(){
 		 var ck_password = /^[A-Za-z0-9]{8,12}$/;// controllo sulla validit� della password
@@ -80,20 +45,53 @@ $(document).ready(function(){
 
 	});
 	
-	$('#date').keypress(function (e) {
-		  if (e.which == 13) {
-		    $('#sessoM').focus();
-		    return false;  
-		  }
-	});
-	$('#sessoM').keypress(function (e) {
-		  if (e.which == 13) {
-		  	$('#submit').focus();
-		    return false;  
-		  }
-	});
 	
+	
+	$('input#submit').click( function() {
+		
+		
+		  $('form')[0].checkValidity();
+		
+// 		  {
+// 		      validateEvents: 'submit', 
+// 		      reset: function(){
+// 		        $('textarea, input', this).reset();
+// 		      }
+// 		  }
+		  
+		  
+			 $.post("../RegistrazioneServlet", { 
+				 
+				 	
+				 nome: $("#nome").val(),
+				 cognome:$("#cognome").val(),
+				 telefono:$("#telefono").val(),
+				 email:$("#email").val(),
+				 password:$("#password").val(),
+				 data_nascita:$("#data_nascita").val(),
+				 genere:$("input[name='genere']:checked").val()
 
+					}, function(data, status) {
+			     if (status == "success")
+			    	 
+			    	 var x=data.id;
+
+			    	 if(x == "registrato"){		    		 
+			    		 alert("Email gia in uso.");
+			    	 }
+			    	 if(x == "false"){		    		 
+			    		 alert("Errore di registrazione. \nCompila i campi correttamente.");
+			    	 }
+			    	 if(x== "true"){
+			    		 window.location.replace("../jsp_result/registrazione_success.jsp");
+			    	 }
+
+			     });
+
+
+	 });
+	
+	
   
 });
 
@@ -141,19 +139,19 @@ input:hover{
 <img alt="logo" src="../immagini/logo.png" id="logo" width="100px" height="100px" >
 <h1>Registrati a MSBeach </h1>
 <hr>
-<form action="../RegistrazioneServlet" method="post">
+<form id="form">
 
- <span style="font-variant: small-caps">Nome </span><br /><input type="text" name="nome"id="nome" placeholder="Mario" required="required"><br /><br />
- <span style="font-variant: small-caps">Cognome</span><br /><input type="text" name="cognome" id="cognome" placeholder="Rossi" required="required"><br /><br />
- <span style="font-variant: small-caps">Telefono</span><br /><input type="text" name="telefono" id="telefono" placeholder="+39 ..." required="required"><br /><br />
- <span style="font-variant: small-caps">E-mail</span><br /><input type="email" name="email" required="required" id="email" placeholder="mario.rossi@gmail.com"><br /><br />
- <span style="font-variant: small-caps">Password</span><br /><input type="password" name="password" id="password" required="required"><br /><br />
- <span style="font-variant: small-caps">Conferma Password</span><br /><input type="password" name="confermaPassword" id="confermaPassword" required="required"><br />
+ <span style="font-variant: small-caps">Nome </span><br /><input type="text" name="nome"id="nome" placeholder="Mario" required><br /><br />
+ <span style="font-variant: small-caps">Cognome</span><br /><input type="text" name="cognome" id="cognome" placeholder="Rossi" required><br /><br />
+ <span style="font-variant: small-caps">Telefono</span><br /><input type="text" name="telefono" id="telefono" placeholder="+39 ..." required><br /><br />
+ <span style="font-variant: small-caps">E-mail</span><br /><input type="email" name="email" required id="email" placeholder="mario.rossi@gmail.com"><br /><br />
+ <span style="font-variant: small-caps">Password</span><br /><input type="password" name="password" id="password" required><br /><br />
+ <span style="font-variant: small-caps">Conferma Password</span><br /><input type="password" name="confermaPassword" id="confermaPassword" required><br />
 <p id="print" style="color: red;font-size:x-small;"></p>
 
 <fieldset>
 <legend>Dati anagrafici</legend>
-<span style="font-variant: small-caps">Data di nascita</span><br /> <input type="date" name="data_nascita" id="date" required="required"><br /><br />
+<span style="font-variant: small-caps">Data di nascita</span><br /> <input type="date" name="data_nascita" id="data_nascita" required><br /><br />
 <span style="font-variant: small-caps">Sesso:</span><br>
 <input style="font-style: " type="radio" name="genere" value="1" id="sessoM" checked="checked">Maschio
 <input type="radio" name="genere" value="2">Femmina

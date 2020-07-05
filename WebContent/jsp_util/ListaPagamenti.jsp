@@ -37,7 +37,7 @@
       					"<td id='piatto_"+id_ordine_tr+"'>"+id_piatto+"</td>"+
       					"<td>"+id_cliente+"</td>"+
       					"<td id='quantita_"+id_ordine_tr+"'>"+quantita+"</td>"+
-      					"<td id='pagamento_"+id_ordine_tr+"'>"+stato_pagamento+"</td>"+
+      					"<td>"+stato_pagamento+"</td>"+
       					"<td>"+
       					"<select class='select_ord' id='"+id_ordine_tr+"'>"+
      	       				"<option "+selOrd+" value='Ordinato'>Ordinato</option>"+
@@ -65,12 +65,8 @@ $(document).ready(function() {
 	
 	$(".select_ord").change(function(){
 		var id= $(this).attr("id");//ordineNUM
-		
-		var serch= "#"+id+" option:selected";
-		var serch2= "#pagamento_"+id;
-		
+		var serch= "#"+id+" option:selected"
 		var stato_ordine= $( serch ).text();
-		var statoPagamento=  $(serch2).html();
 		var serch_button="#elimina_"+id;
 		var id_quantita= "#quantita_"+id;
 		var id_piatto= "#piatto_"+id;
@@ -84,30 +80,29 @@ $(document).ready(function() {
     		}, function(data, status) {
 		         if (status == "success" )	{
 		        	 window.alert("Stato ordine aggiornato correttamente!");
-		        	 //window.location.reload();
+		        	 
 		         }                   
 		});
 		
 		if(stato_ordine=="In Consegna"){
 			
-			var result = alert("La quantità del piatto verrà aggiornata nella dispensa");
-	
-			var quantita_usata=$(id_quantita).html();
-			var id= $(id_piatto).html();
-			
-			$.post("../BarServlet", { 
-				operazione : "modifica_quantia_piatto",
-				id: id,
-				quantita_usata: quantita_usata
-	    		});
-			
-			if(statoPagamento == "true" ){
-				$(serch_button).show();
-			}
-
-		}
-		
-		if(stato_ordine!="In Consegna"){
+			var result = window.confirm("La quantità del piatto verrà aggiornata nella dispensa");
+				if(result == true){
+					//Aggiungere metodo che aggiorna la disponibilità del piatto
+					//id_quantita;
+					var quantita_usata=$(id_quantita).html();
+					var id= $(id_piatto).html();
+					
+					$.post("../BarServlet", { 
+						operazione : "modifica_quantia_piatto",
+						id: id,
+						quantita_usata: quantita_usata
+			    		});
+					
+					
+					$(serch_button).show();
+				}	
+		}else{
 			$(serch_button).hide();
 		}
 		
@@ -218,3 +213,4 @@ th,td{
 
     		<hr>
     </div>
+    
