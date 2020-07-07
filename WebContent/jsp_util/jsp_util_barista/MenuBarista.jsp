@@ -147,8 +147,15 @@ $(document).ready(function() {
 
     		}, function(data, status) {
 		         if (status == "success" )	{
-		        	 window.alert("Elemento aggiornato correttamente!");
-		        	 window.location.reload();
+		        	 if(data.result=="true"){
+		        		 window.alert("Elemento aggiornato correttamente!");
+			        	 window.location.reload();
+		        	 }
+		        	 if(data.result=="false"){
+		        		 window.alert("Errore di aggiormento!");
+			        	 window.location.reload();
+		        	 }
+		        	 
 		         }                   
 		});
  	}); 

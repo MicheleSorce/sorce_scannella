@@ -83,24 +83,38 @@ $(document).ready(function() {
 
     		}, function(data, status) {
 		         if (status == "success" )	{
-		        	 window.alert("Stato ordine aggiornato correttamente!");
-		        	 //window.location.reload();
+		        	 if(data.result=="true"){
+		        		 window.alert("Stato ordine aggiornato correttamente!");
+		        	 } if(data.result=="false"){
+		        		 window.alert("Errore aggiornato stato ordine!");
+		        	 }
+		        	 
 		         }                   
 		});
 		
 		if(stato_ordine=="In Consegna"){
 			
-			var result = alert("La quantità del piatto verrà aggiornata nella dispensa");
-	
-			var quantita_usata=$(id_quantita).html();
-			var id= $(id_piatto).html();
+			var result = confirm("La quantità del piatto verrà aggiornata nella dispensa");
 			
-			$.post("../BarServlet", { 
-				operazione : "modifica_quantia_piatto",
-				id: id,
-				quantita_usata: quantita_usata
-	    		});
-			
+			if(result == "true"){
+				alert("ok");
+				var quantita_usata=$(id_quantita).html();
+				var id= $(id_piatto).html();
+				
+				$.post("../BarServlet", { 
+					operazione : "modifica_quantia_piatto",
+					id: id,
+					quantita_usata: quantita_usata
+		    		} , function(data, status) {
+				         if (status == "success" )	{
+				        	 if(data.result=="true"){
+				        	 } if(data.result=="false"){
+				        	 }
+				         }                   
+				});
+				
+
+			}
 			if(statoPagamento == "true" ){
 				$(serch_button).show();
 			}
@@ -125,8 +139,13 @@ $(document).ready(function() {
 				
 	    		}, function(data, status) {
 			         if (status == "success" )	{
-			        	 alert("Ordine eliminato");
+			        	 
+			        	 if(data.result=="true"){
+			        	 	alert("Ordine eliminato");
 			        	 window.location.reload();
+			        	 }if(data.result=="false"){
+			        		 window.alert("Errore aggiornato stato ordine!");
+			        	 }
 			         }                   
 			});
 		}

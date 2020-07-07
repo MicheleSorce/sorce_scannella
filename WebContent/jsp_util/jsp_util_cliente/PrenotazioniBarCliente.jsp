@@ -101,9 +101,7 @@ $(document).ready(function() {
 				
 				operazione : "modifica_ordine_bar",
 				id: id,
-				id_piatto: id_piatto,
-				quantita: quantita,
-				disponibilita: diponibilita_new
+				quantita: quantita
 	    		}, function(data, status) {
 			         if (status == "success" )
 			        	 

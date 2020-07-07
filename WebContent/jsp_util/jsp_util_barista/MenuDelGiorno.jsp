@@ -152,7 +152,14 @@ $(document).ready(function() {
 			valore: valore
     		}, function(data, status) {
 		         if (status == "success" )	{
-		        	 window.alert("Piatto aggiornato nel Menu Giorno!");
+		        	 
+		        	 if(data.result=="true"){
+			        	 window.alert("Piatto aggiornato nel Menu Giorno!");
+
+		        	 } if(data.result=="false"){
+			        	 window.alert("Errore aggiornamento nel Menu!");
+
+		        	 }
 		         }                   
 		});
  	}); 

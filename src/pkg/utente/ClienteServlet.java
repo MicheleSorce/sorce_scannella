@@ -515,20 +515,16 @@ if(("lista_prenotazioni_bar").equals(operazione)) {
 		if(("modifica_ordine_bar").equals(operazione)) {
 			
 			int id_ordine = Integer.parseInt(request.getParameter("id"));
-			int id_piatto = Integer.parseInt(request.getParameter("id_piatto"));
 			int quantita = Integer.parseInt(request.getParameter("quantita"));
-			int disponibilita_new= Integer.parseInt(request.getParameter("disponibilita"));
 			
-			// setta disponibilit� piatto
-			boolean update_piatto =  db.updateDisponibilita(id_piatto, disponibilita_new);
-		
+
 			// setta quantita ordine
 			boolean update_ordine = db.updateQuantitaOrdine(id_ordine, quantita);
 			
 			response.setContentType("application/json");				
 			PrintWriter out = response.getWriter();
 			
-			if(update_ordine && update_piatto) {
+			if(update_ordine) {
 
 				String result= "{\"result\":\""+"true"+"\"}";
 				out.println(result);

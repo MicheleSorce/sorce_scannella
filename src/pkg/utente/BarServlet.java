@@ -1,6 +1,7 @@
 package pkg.utente;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -52,11 +53,15 @@ public class BarServlet extends HttpServlet {
 
 			String id_String = request.getParameter("identificativo");
 			
+			boolean result=false;
+			
 			if(id_String.length()<12) {//in caso di cibo
 				int id= Integer.parseInt(id_String.substring(9));
 				int valore = Integer.parseInt(request.getParameter("valore"));
 				
-				boolean result = db.updateDisponibilita(id,valore);
+				 result = db.updateDisponibilita(id,valore);
+				
+
 				
 			}
 			if(id_String.length()>12) {//in caso di bevanda
@@ -64,9 +69,14 @@ public class BarServlet extends HttpServlet {
 				int id= Integer.parseInt(id_String.substring(12));
 				int valore = Integer.parseInt(request.getParameter("valore"));
 				
-				boolean result =db.updateDisponibilita(id,valore);
+				 result =db.updateDisponibilita(id,valore);
 
 			}
+			
+			response.setContentType("application/json");				
+			PrintWriter out = response.getWriter();		
+			String result_String= "{\"result\":\""+result+"\"}";
+			out.println(result_String);
 					
 		}
 		
@@ -96,6 +106,11 @@ public class BarServlet extends HttpServlet {
 			int id= Integer.parseInt(id_ordineString.substring(6));
 			
 			boolean result =db.updateStatoOrdine(id,stato_ordine);
+		
+			response.setContentType("application/json");				
+			PrintWriter out = response.getWriter();		
+			String result_String= "{\"result\":\""+result+"\"}";
+			out.println(result_String);
 		}
 		
 
@@ -106,7 +121,10 @@ public class BarServlet extends HttpServlet {
 			int id= Integer.parseInt(id_ordineString.substring(14));
 			
 			boolean result =db.eliminaOrdine(id);
-			
+			response.setContentType("application/json");				
+			PrintWriter out = response.getWriter();		
+			String result_String= "{\"result\":\""+result+"\"}";
+			out.println(result_String);
 			HttpSession session = request.getSession();
 			session.removeAttribute("ordine"+id);
 			
@@ -119,6 +137,12 @@ public class BarServlet extends HttpServlet {
 			int quantita_usata = Integer.parseInt(request.getParameter("quantita_usata"));
 
 			boolean result =db.updateQuantitaPiatto(id,quantita_usata);
+			
+			response.setContentType("application/json");				
+			PrintWriter out = response.getWriter();		
+			String result_String= "{\"result\":\""+result+"\"}";
+			out.println(result_String);
+		
 		}
 		
 		if(("modifica_piatto_giorno").equals(operazione)) {
@@ -126,22 +150,28 @@ public class BarServlet extends HttpServlet {
 			
 
 			String id_String = request.getParameter("identificativo");
-			
+			boolean result=false;
 			if(id_String.length()<=6) {//in caso di cibo
 				
 				 int id= Integer.parseInt(id_String.substring(4));	
 				 int valore = Integer.parseInt(request.getParameter("valore"));
 
-				boolean result =db.updateMenuGiorno(id,valore);
+				 result =db.updateMenuGiorno(id,valore);
 			}
 			if(id_String.length()>6) {//in caso di bevanda			
 				
 				 int id= Integer.parseInt(id_String.substring(7));
 				 int valore = Integer.parseInt(request.getParameter("valore"));
 
-				boolean result =db.updateMenuGiorno(id,valore);
+				 result =db.updateMenuGiorno(id,valore);
 			}
 			
+			response.setContentType("application/json");				
+			PrintWriter out = response.getWriter();		
+			String result_String= "{\"result\":\""+result+"\"}";
+			out.println(result_String);
+		
+
 		}
 		
 	}

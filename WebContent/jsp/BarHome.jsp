@@ -82,9 +82,9 @@ $(document).ready(function() {
 	</div>
 
 	<div id="mySidenav_left" class="sidenav" >
-		<a href="#" id="opzione1">Lista Ordinazioni</a>
-		<a href="#" id="opzione2">Menù Bar</a>
-		<a href="#" id="opzione3">Menù del Giorno</a> <!-- con stato dispensa-->
+		<a  id="opzione1">Lista Ordinazioni</a>
+		<a  id="opzione2">Menù Bar</a>
+		<a  id="opzione3">Menù del Giorno</a> <!-- con stato dispensa-->
 	
 	</div>
 	
