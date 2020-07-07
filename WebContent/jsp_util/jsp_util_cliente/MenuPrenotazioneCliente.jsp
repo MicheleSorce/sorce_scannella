@@ -281,9 +281,9 @@ td.Td3{
 						$("#primo_qt").attr("value", " ");
 						$("#primo_prz").attr("value", " ");
 						
-					//$(".canc_tutto").attr("value", "0");
+					
 			      	}
-			     	//$(".canc_tutto").attr("value", "0");
+			     	
 			    	
 			     });
 		});
@@ -327,13 +327,7 @@ td.Td3{
 
 			     });
 		});
-	 
-	 
-	 
 	
-	 
-	
-//fine ready	
  });
  
  </script>     
@@ -343,7 +337,7 @@ td.Td3{
 	   <h2>Menu MSBeach  </h2>
 	   <div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div>
 	   <hr>
-	   <div>Scegli la quantità di ciò che desideri</div><br>
+	   <div>Scegli la quantità di ciò che desideri e lo aggiungi all'ordine.</div><br>
 	   <hr>
 	   <h3 style="font-size: 20px;">Bibita</h3>
 	   
@@ -366,7 +360,7 @@ td.Td3{
   
       
 <div id="resoconto" >
- <h3>Resoconto</h3>
+ <h3>Ordine</h3>
  <hr>
  <div style="float:left">
 Nome : <input id="primo" type=text /> <br>

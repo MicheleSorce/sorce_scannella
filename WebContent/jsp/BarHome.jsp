@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bar</title>
+<title>Home Barista</title>
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
 <link href="../css/BarCSS.css" type="text/css" rel="stylesheet">

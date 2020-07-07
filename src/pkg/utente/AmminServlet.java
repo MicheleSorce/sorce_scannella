@@ -175,6 +175,32 @@ public class AmminServlet extends HttpServlet {
 			}	
 		
 		}
+		if(("modifica_ordine").equals(operazione)) {
+			
+			String id_String= request.getParameter("id");
+			Boolean stato_ordine = Boolean.parseBoolean(request.getParameter("stato_ordine"));
+			
+			if(id_String.length()>19) {
+				// modifica ordine piatto
+				int id= Integer.parseInt(id_String.substring(19));
+				
+				response.setContentType("text/html");				
+				PrintWriter out = response.getWriter();
+				boolean result = db.modificaStatoPagamentoPiatto(id, stato_ordine);
+				System.out.println(result);
+				out.println(result);
+				
+			}else {
+				// modifica ordine ombrellone
+				int id= Integer.parseInt(id_String.substring(17));
+
+				response.setContentType("text/html");				
+				PrintWriter out = response.getWriter();
+				boolean result = db.modificaStatoPagamentoOmbr(id, stato_ordine);
+				System.out.println(result);
+				out.println(result);
+			}
+	}
 		
 		if(("elimina_ordine").equals(operazione)) {
 		

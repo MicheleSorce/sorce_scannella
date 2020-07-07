@@ -78,10 +78,10 @@ $(document).ready(function() {
   				if(stato=="Si"){
   					
   					$("#libero").css("font-weight","bold");
-  					$("#nome_cliente").attr("value","NULL");
-  					$("#cognome_cliente").attr("value","NULL");
-  					$("#tel_cliente").attr("value","NULL");
-  					$("#pagato").attr("value","NULL");
+  					$("#nome_cliente").attr("value","Non Disponibile");
+  					$("#cognome_cliente").attr("value","Non Disponibile");
+  					$("#tel_cliente").attr("value","Non Disponibile");
+  					$("#pagato").attr("value","Non Disponibile");
   				}
   				location.href="#div_show";
 	         }
@@ -215,7 +215,7 @@ $(document).ready(function() {
   <div class="dati">
   <fieldset >
   	<legend>Stato Pagamento Cliente</legend>
-  	Pagamento: <br>
+  	Pagato: <br>
   	<input id="pagato" name="pagamento_form" type="text" readonly value="">
   </fieldset>
 </div>  

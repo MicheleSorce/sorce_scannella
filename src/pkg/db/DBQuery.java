@@ -1575,6 +1575,60 @@ public class DBQuery {
 	}
 
 	
+	public boolean modificaStatoPagamentoPiatto(int id, Boolean statoPagamento) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE cliente_prenota_piatto SET stato_pagamento=? WHERE id_ordine=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setBoolean(1, statoPagamento); 
+			statement.setInt(2, id);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+
+	public boolean modificaStatoPagamentoOmbr(int id, Boolean statoPagamento) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE cliente_prenota_ombrellone SET stato_pagamento=? WHERE id_prenotazione=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setBoolean(1, statoPagamento); 
+			statement.setInt(2, id);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+	
 }	
 	
 	

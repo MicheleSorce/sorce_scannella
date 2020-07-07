@@ -167,7 +167,7 @@ $(document).ready(function() {
 			sdraio = $(this).find(".select_sdraio").val();					
 		}
 		if(dtToday >= myDate){
-			alert("Puoi modificare solo prenotazioni successive alla data corrente.");
+			alert("Non è possibile modificare tale prenotazione in quanto precedente alla data corrente.");
 		}	
 			
 		
@@ -229,7 +229,7 @@ $(document).ready(function() {
 table {
   border: 2px solid white;
   margin: auto;
-  text-align: cente;
+  text-align: center;
 }
 th,td{
     padding: 8px;
@@ -239,10 +239,11 @@ th,td{
 #menu{
  	width: 70%;
     color: white;
-    background-color: rgba(0,0,0,0.8);
+    background-image: linear-gradient(to bottom , #FFFFFF 0%, #4293ff 100%);
     text-align: center;
     margin: auto;
-    border: 2px solid white;
+    border: 2px solid #4293ff;
+    border-radius: 6px 6px 6px 6px;
     padding: 20px;
     margin-top: 2px;
 }
@@ -258,14 +259,14 @@ th,td{
 	width: 100%;
 	text-align: center;
 	border-collapse: collapse;
-	border: 2px solid black; 
+	border: 2px solid white; 
 }
 .table th{
-	background-color: black;
+	background-color: #4293ff;
 }
 .table tr:hover {
 	
- 	background-color: rgba(160,160,160,0.48); 
+ 	background-color: #4393ff; 
 }
 
 .elim_ord{
@@ -322,7 +323,9 @@ select option { /* -----------------------NON FUNZIONA-------------------*/
     <div id="menu">
     
     <img src="../immagini/logo.png" width="68px" height="60px" style="text-align: left;">
-    <h2 id="title">Prenotazioni Ombrelloni di ${cliente.nome} ${cliente.cognome}</h2>
+    <h2 id="title" style="color: #1b7af7">Prenotazioni Ombrelloni di ${cliente.nome} ${cliente.cognome}</h2>
+    <h4>Clicca sull'ombrellone per modificare/eliminare la prenotazione.</h4>
+    <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Ricorda puoi modificare/eliminare solo le prenotazioni successive alla data odierna </h4>
     <div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div>
     <br>
 

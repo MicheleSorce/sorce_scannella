@@ -28,7 +28,7 @@ body{
 
 .navbar {
   position:relative;
-  width: 100%;
+  width: 130%;
   height: 40px;
   background-color: #004fcb;
   overflow: auto;
@@ -115,7 +115,7 @@ body{
 /* Parte bassa */
 .footer-bottom{
 	position: relative;
-	width: 100%;
+	width: 130%;
 	height: 290px; 
 	background-color: #1a70f0;
 	color: black;

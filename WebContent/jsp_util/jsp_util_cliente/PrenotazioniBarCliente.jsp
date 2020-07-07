@@ -81,9 +81,7 @@ $(document).ready(function() {
 			
 		}
 		
-		if(stato_prenotazione!="Ordinato"){
-			alert('Puoi modificare solo ordini nello stato "Ordinato"');
-		}	
+			
 			
 		
 	
@@ -156,7 +154,7 @@ $(document).ready(function() {
 table {
   border: 2px solid white;
   margin: auto;
-  text-align: cente;
+  text-align: center;
 }
 th,td{
     padding: 8px;
@@ -166,10 +164,11 @@ th,td{
 #menu{
  	width: 70%;
     color: white;
-    background-color: rgba(0,0,0,0.8);
+    background-image: linear-gradient(to bottom , #FFFFFF 0%, #4293ff 100%);
     text-align: center;
     margin: auto;
-    border: 2px solid white;
+    border: 2px solid #4293ff;
+    border-radius: 6px 6px 6px 6px;
     padding: 20px;
     margin-top: 2px;
 }
@@ -185,14 +184,14 @@ th,td{
 	width: 100%;
 	text-align: center;
 	border-collapse: collapse;
-	border: 2px solid black; 
+	border: 2px solid white; 
 }
 .table th{
-	background-color: black;
+	background-color: #4293ff;
 }
 .table tr:hover {
 	
- 	background-color: rgba(160,160,160,0.48); 
+ 	background-color: #4393ff; 
 }
 
 .elim_ord{
@@ -249,13 +248,16 @@ select option {
     <div id="menu">
     
     <img src="../immagini/logo.png" width="68px" height="60px" style="text-align: left;">
-    <h2 id="title">Prenotazioni Bar di ${cliente.nome} ${cliente.cognome}</h2>
+    <h2 id="title" style="color: #1b7af7">Prenotazioni Bar di ${cliente.nome} ${cliente.cognome}</h2>
+     <h4>Clicca sul piatto di cui vuoi modificare/eliminare la prenotazione.</h4>
+    <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Ricorda puoi eliminare/modificare solo le prenotazioni in stato ordine "Ordinato" </h4>
+    
     <div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div>
     <br>
 
     <table class="table"  id="lista_ordini_piatti">
  		<tr>	
- 			<th>ID Piatto</th><th>Piatto</th><th>Quantita</th><th>Prezzo</th><th>Disponibilità dispenza</th><th>StatoOrdine</th><th>Stato Pagamento</th><th id="modifica_ordine_th"></th><th id="elmini_ordine_th"></th>
+ 			<th>ID Piatto</th><th>Piatto</th><th>Quantità</th><th>Prezzo</th><th>Disponibilità dispensa</th><th>Stato Ordine</th><th>Stato Pagamento</th><th id="modifica_ordine_th"></th><th id="elmini_ordine_th"></th>
  		</tr>
  	</table>
 
