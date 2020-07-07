@@ -16,52 +16,30 @@
 
 <script>
 
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-  
-}
+$(function(){
+    var dtToday = new Date();
+    
+    var day = dtToday.getDate();
+    var month = dtToday.getMonth() + 1;
+    var year = dtToday.getFullYear();
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-	
-  if (!event.target.matches(".dropbtn")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
-    }
-  }
-}
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
 
-  
-
-  $(function(){
-	    var dtToday = new Date();
-	    
-	    var day = dtToday.getDate();
-	    var month = dtToday.getMonth() + 1;
-	    var year = dtToday.getFullYear();
-
-	    if(month < 10)
-	        month = '0' + month.toString();
-	    if(day < 10)
-	        day = '0' + day.toString();
-
-	    var minDate = year + '-' + month + '-' + day;    
-	    $('#data_scelta0').attr('min', minDate);
-	    $('#data_scelta0').attr('value', minDate);
-	    $('#data_scelta2').attr('min', minDate);
-	    $('#data_scelta2').attr('value', minDate);
-	    $('#data_scelta3').attr('min', minDate);
-	    $('#data_scelta3').attr('value', minDate);
-	});
+    var minDate = year + '-' + month + '-' + day;    
+    $('#data_scelta0').attr('min', minDate);
+    $('#data_scelta0').attr('value', minDate);
+    $('#data_scelta2').attr('min', minDate);
+    $('#data_scelta2').attr('value', minDate);
+    $('#data_scelta3').attr('min', minDate);
+    $('#data_scelta3').attr('value', minDate);
+});
 
   
   
-  $(document).ready(function(){
+$(document).ready(function(){
 
 	     
   	  //lista ordinazioni
@@ -86,7 +64,7 @@ window.onclick = function(event) {
   	           
   	         }else{
   	    		 $("#id_data_scelta").hide();
-  	        	 $("#riuso").load("../jsp_util/MappaBagnino.jsp");
+  	        	 $("#riuso").load("../jsp_util/jsp_util_bagnino/MappaBagnino.jsp");
 	  	     }
   	     });
   	  
@@ -115,7 +93,7 @@ window.onclick = function(event) {
 	  	         }else{ 
 		  	       	$("#id_data_scelta").hide();
 		 	    	 $("#id_dati_scelta_doccia").hide();
-		 	         $("#riuso").load("../jsp_util/MappaDocceBagnino.jsp");
+		 	         $("#riuso").load("../jsp_util/jsp_util_bagnino/MappaDocceBagnino.jsp");
 	  	         }
 	  	     }
   	         
@@ -140,7 +118,7 @@ window.onclick = function(event) {
 	  	    		$("#id_data_scelta_pulizia").hide();
 		  	       	$("#id_data_scelta").hide();
 		 	    	 $("#id_dati_scelta_doccia").hide();
-		 	         $("#riuso").load("../jsp_util/MappaBagninoPulizia.jsp");
+		 	         $("#riuso").load("../jsp_util/jsp_util_bagnino/MappaBagninoPulizia.jsp");
 	  	         }
 	  	     
  	         
@@ -164,12 +142,7 @@ window.onclick = function(event) {
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
 		   <a  href="../LogoutServlet" ><i class="fa fa-fw fa-user"></i> Logout</a> 
 		  <a href="https://www.google.com/maps/dir/37.2669805,13.5784017/Realmonte+-+Baia+delle+Sirene-Giallonardo,+92010+Realmonte+AG/@37.3003778,13.4278911,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x131a7b97e08653c7:0x264a8eab65c24eb!2m2!1d13.4173862!2d37.3150145"><i class="fa fa-car"></i> Come arrivare</a>
-		  <div class="dropdown">
-		  <a onclick="myFunction()" class="dropbtn "> <i class="fa fa-language" aria-hidden="true"></i> Lingua</a>
-			  <div id="myDropdown" class="dropdown-content">
-			   <a > &#127470;&#127481;</a>  <a> &#127468;&#127463; </a>
-			  </div>
-		  </div>
+		 
 		  <div style="float:right">
 		  	  <a href="https://www.whatsapp.com/" ><i class="fa fa-whatsapp" aria-hidden="true"></i></a> 
 		  	  <a href="https://web.telegram.org/#/login"><i class="fa fa-telegram" aria-hidden="true"></i></a>
@@ -200,6 +173,14 @@ window.onclick = function(event) {
 	</div>
 	</div>
 	</div>
+	
+	<div style="text-align:center">
+	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
+	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione. </em><br /> <br />
+	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+	<hr width="300px"/>
+</div>	
+
 </div>
 
 
@@ -285,12 +266,7 @@ window.onclick = function(event) {
 
 
 <br><br>
-<div style="text-align:center">
-	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
-	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione. </em><br /> <br />
-	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
-	<hr width="300px"/>
-</div>	
+
 <br />
 
 
@@ -324,9 +300,8 @@ window.onclick = function(event) {
 	      <i class="fa fa-clock-o"></i> Dom: Chiuso <br />
 
 
-	  <img src="../immagini/logo.png" width="68px" height="60px" style="padding-left:40%">
+	  <img src="../immagini/logo.png" width="68px" height="60px" style="padding-left:40%; z-index: 2;">
 	  <div style="color: black; text-align: center;">Copyright &copy; 2020. All Rights Reserved.</div>
-
 	 </div>	
 </div>
 </body>

@@ -1,4 +1,4 @@
-package pkg.bar;
+package pkg.utente;
 
 import java.io.IOException;
 import java.util.ArrayList;

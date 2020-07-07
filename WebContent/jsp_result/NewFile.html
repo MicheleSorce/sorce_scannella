@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Demo Widget Quantità</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+function quantityWidget(){
+    var currval;
+    $(".quantity-widget .less").click(function(){
+        currval = parseInt($(this).parent().find("input").val());
+        if (currval > 0){
+        $(this).parent().find("input").val((currval-1));
+        }
+    });
+    $(".quantity-widget .more").click(function(){
+        currval = parseInt($(this).parent().find("input").val());    
+        $(this).parent().find("input").val((currval+1));
+    });
+    
+    $(".quantity-widget input").keyup(function(){
+        currval = $(this).val();
+        var intRegex = /^\d+$/;
+        var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+        if(isNaN(currval)) {
+            alert("Inserire solo numeri");
+            $(this).val(1);
+        }
+    });
+}
+
+$(function(){
+	quantityWidget();
+});
+</script>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<h1>Widget multipli per quantità</h1>
+	
+	<div class="quantity-widget">
+		<button class="less">-</button>
+		<input type="text" value="1">
+		<button class="more">+</button>
+	</div><!--/.quantity-widget-->
+	
+	<div class="quantity-widget">
+		<button class="less">-</button>
+		<input type="text" value="1">
+		<button class="more">+</button>
+	</div><!--/.quantity-widget-->
+	
+	<div class="quantity-widget">
+		<button class="less">-</button>
+		<input type="text" value="1">
+		<button class="more">+</button>
+	</div><!--/.quantity-widget-->
+	<div class="notify">(prova ad inserire delle lettere per vedere l'avviso)</div>
+
+</div><!--/#wrapper-->
+
+</body>
+</html>

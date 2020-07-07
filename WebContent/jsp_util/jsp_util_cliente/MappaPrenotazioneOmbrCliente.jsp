@@ -14,20 +14,21 @@
 	int f=(Integer)session.getAttribute("slot_orario_sess");
 	
 	
-	String slot_orario="";
+	String slot_orario_o="";
 	if(f==1){
-		slot_orario="Mattina";
+		slot_orario_o="Mattina";
 	}if(f==2){
-		 slot_orario="Pomeriggio";
+		 slot_orario_o="Pomeriggio";
 	}
 	
 	session.removeAttribute("data_sess");
 	session.removeAttribute("slot_orario_sess");
 	
 	
-	
+	int count_ombr_prenotati=0;
 		for(int i=1;i<25;i++){
 			if(session.getAttribute("ombrellonePrenotato"+i)!=null){
+				count_ombr_prenotati++;
 				ClientePrenotaOmbrellone o=(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
 				String ombr = "ombrellone"+i;
 				
@@ -51,11 +52,15 @@
 $(document).ready(function() {
 	
 	$("#data").text("<%=data_tit%>");
-	$("#slot_orario").text("<%=slot_orario%>");
+	$("#slot_orario").text("<%=slot_orario_o%>");
 	
 	var data= $("#data").text();
-	var slot_orario= $("#slot_orario").text();
+	var slot_orario_o= $("#slot_orario").text();
 
+	if(<%=count_ombr_prenotati%>==24){
+		alert("Gli ombrelloni sono tutti prenotati.\nScegli uno slot orario diverso.");
+	}
+	
 
 	$("#hide_if_No").hide();	
  	$(".img_ombrellone").click(function() {
@@ -67,7 +72,7 @@ $(document).ready(function() {
 		$.post("../ClienteServlet", { 
     		operazione: "dati_prenotazione_ombrellone",
     		id_ombrellone : id,
-    		slot_orario: slot_orario,
+    		slot_orario: slot_orario_o,
     		data: data
     		}, function(data, status) {
 	         if (status == "success"){
@@ -118,7 +123,7 @@ $(document).ready(function() {
 		$.post("../ClienteServlet", { 
     		operazione: "prenota_ombrellone",
     		id_ombrellone : id1,
-    		slot_orario1: slot_orario,
+    		slot_orario1: slot_orario_o,
     		data1: data,
     		id_cliente: id_cli,		
 			num_persone : $("#num_persone_form").val(),

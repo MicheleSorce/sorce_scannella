@@ -125,7 +125,7 @@ $(document).ready(function() {
 				
 	    		}, function(data, status) {
 			         if (status == "success" )	{
-			        	 alert("Ordine eliminata");
+			        	 alert("Ordine eliminato");
 			        	 window.location.reload();
 			         }                   
 			});
@@ -141,7 +141,7 @@ $(document).ready(function() {
 table {
   border: 2px solid white;
   margin: auto;
-  text-align: cente;
+  text-align: center;
 }
 th,td{
  padding: 15px;

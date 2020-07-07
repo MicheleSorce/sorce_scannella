@@ -8,9 +8,10 @@
 <title>HomeCliente</title>
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
-<link href="../css/ClienteCSS.css" type="text/css" rel="stylesheet">
 
+<link href="../css/ClienteCSS.css" type="text/css" rel="stylesheet">
 <link href="../css/InsertDataWindow.css" type="text/css" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 </head>
@@ -23,13 +24,11 @@
 
 function clickdropbtn1() {
   document.getElementById("myDropdown1").classList.toggle("show");
-	if(document.getElementById("prenotazione_prova")){
-   		window.location.reload();
-   		document.getElementById("myDropdown1").classList.toggle("show");
-   	} 
+
 }
 function clickdropbtn2() {
 	  document.getElementById("myDropdown2").classList.toggle("show");
+
 	  
 	}
 function clickdropbtn3() {
@@ -37,7 +36,7 @@ function clickdropbtn3() {
 	  
 	}
 
-// Close the dropdown if the user clicks outside of it
+// Chiude il menù a tendina se l'utente clicca fuori 
 window.onclick = function(event) {
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -64,33 +63,152 @@ $(function(){
         day = '0' + day.toString();
 
     var minDate = year + '-' + month + '-' + day;    
-    $('#data_scelta').attr('min', minDate);
-    $('#data_scelta').attr('value', minDate);
+    $('#data_scelta0').attr('min', minDate);
+    $('#data_scelta0').attr('value', minDate);
+    $('#data_scelta2').attr('min', minDate);
+    $('#data_scelta2').attr('value', minDate);
 });
 
 
 
 $(document).ready(function() {
-	
-    $("#opzione1").click(function() {   	
+ 
+//sotto-opzione1->prenota ombrellone
+    $("#prenota_ombr").click(function() {   
+    	
+    	$("#id_dati_scelta_doccia").hide();
    		$("#id_data_scelta").css("display","block");    
     });
     
     $("#conferma_data").click(function() {
     	$.post("../ClienteServlet", { 
     		operazione : "visualizza_spiaggia_prenot",
-    		data_scelta : $("#data_scelta").val(),
-    		slot_orario: $("#slot_orario").val()
+    		data_scelta : $("#data_scelta0").val(),
+    		slot_orario: $("#slot_orario0").val()
     		
     		}, function(data, status) {
          if (status == "success")
           
-         $('#riuso').load("../jsp_util/MappaPrenotazioneOmbrCliente.jsp");
+         $('#riuso').load("../jsp_util/jsp_util_cliente/MappaPrenotazioneOmbrCliente.jsp");
      	 $("#id_data_scelta").hide();
 	
          });
     });
-  });	
+    
+ //sotto-opzione2->Modifica/Elimina prenotazione    
+ 
+ $("#modifica_ombr").click(function() {
+    	   	
+    	$.post("../ClienteServlet", { 
+    		
+    		operazione : "lista_prenotazioni",
+    		id_cliente : "${cliente.idCliente}"
+    		
+    		}, function(data, status) {
+		         if (status == "success")
+		        	 
+		          	if(data.result=="Nessuna Prenotazione"){
+		          		alert("Non sono ancora state effettuate prenotazioni");
+		          	}	          	
+		          	if(data.result=="true"){
+		                $('#riuso').load("../jsp_util/jsp_util_cliente/PrenotazioniOmbrCliente.jsp");
+		                
+		          	}
+				
+		         });
+    });
+	
+//sotto-opzione3-> prenota doccia
+	$("#prenota_docc").click(function() {   
+			$("#id_data_scelta").hide();
+			$("#id_dati_scelta_doccia").css("display","block");    
+	});
+	
+	$("#conferma_data2").click(function() {
+		$.post("../ClienteServlet", { 
+			operazione : "visualizza_docce",
+			data_scelta2 : $("#data_scelta2").val(),
+		  	slot_orario2: $("#slot_orario2").val()
+		  	
+			}, function(data, status) {
+		     if (status == "success")
+		      
+			     $('#riuso').load("../jsp_util/jsp_util_cliente/MappaPrenotDocceCliente.jsp");
+			 	 $("#id_dati_scelta_doccia").hide();
+		
+		     });
+	});
+
+	//sotto-opzione4-> modifica/elimina doccia
+	
+	$("#elimina_pren_doccia").click(function() {
+	   	
+    	$.post("../ClienteServlet", { 
+    		
+    		operazione : "lista_prenotazioni_doccia",
+    		id_cliente : "${cliente.idCliente}"
+    		
+    		}, function(data, status) {
+		         if (status == "success")
+		        	 
+		          	if(data.result=="Nessuna Prenotazione"){
+		          		alert("Non sono ancora stati effettuate prenotazioni alle doccie");
+		          	}	          	
+		          	if(data.result=="true"){
+		                $('#riuso').load("../jsp_util/jsp_util_cliente/PrenotazioniDocciaCliente.jsp");
+		                
+		          	}
+				
+		         });
+    });
+	
+	
+	
+	
+	//sotto-opzione5->prenotazione bar
+	$("#prenota_bar").click(function() {
+		$("#id_dati_scelta_doccia").hide();
+		$("#id_data_scelta").hide();
+			
+		$.post("../ClienteServlet", { 
+			operazione : "visualizza_menu",
+			
+			}, function(data, status) {
+		     if (status == "success")
+		      
+			     $('#riuso').load("../jsp_util/jsp_util_cliente/MenuPrenotazioneCliente.jsp");
+			 	
+		
+		     });
+	});
+	
+	//sotto-opzione6->Modifica prenotazione bar
+$("#modifica_bar").click(function() {
+	   	
+    	$.post("../ClienteServlet", { 
+    		
+    		operazione : "lista_prenotazioni_bar",
+    		id_cliente : "${cliente.idCliente}"
+    		
+    		}, function(data, status) {
+		         if (status == "success")
+		        	 
+		          	if(data.result=="Nessuna Prenotazione"){
+		          		alert("Non sono ancora stati effettuati ordini al bar");
+		          	}	          	
+		          	if(data.result=="true"){
+		                $('#riuso').load("../jsp_util/jsp_util_cliente/PrenotazioniBarCliente.jsp");
+		                
+		          	}
+				
+		         });
+    });
+
+
+
+});
+
+
 
 
 </script>
@@ -127,37 +245,37 @@ $(document).ready(function() {
 	
 
 <div class="dropdown">
-  <button onclick="clickdropbtn1()" class="dropbtn" style=" background-color: #1a70f0; width: 110px;top: 20px;">
+  <button onclick="clickdropbtn1()" class="dropbtn" style=" background-color: #1a70f0; width: 110px;top: 26px;">
   	Ombrellone
   </button>
   
-  <div id="myDropdown1" class="dropdown-content" style="top:45%; margin-left:90px">
+  <div id="myDropdown1" class="dropdown-content" style="top:49%; margin-left:97px">
 	  <div >
-	  	<a id="opzione1">Prenota Ombrellone</a> 
-	    <a>Modifica/Elimina Prenotazione</a>
+	  	<a id="prenota_ombr">Prenota Ombrellone</a> 
+	    <a id="modifica_ombr">Modifica/Elimina Prenotazione</a>
 	   </div>
   </div>
   
   <br/><br/>
   
-   <button onclick="clickdropbtn2()" class="dropbtn" style=" background-color: #a7f0ff; width: 110px;top: 250px;">
+   <button onclick="clickdropbtn2()" class="dropbtn" style=" background-color:#1a70f0 ; width: 110px;top: 180px;">
    	Doccia
    </button>
    
-  <div id="myDropdown2" class="dropdown-content" style="top:365%; margin-left:80px">
-    <a>Prenota Doccia</a>
-    <a>Modifica/Elimina Prenotazione</a>
+  <div id="myDropdown2" class="dropdown-content" style="top:265%; margin-left:80px">
+    <a id="prenota_docc">Prenota Doccia</a>
+    <a id="elimina_pren_doccia">Modifica/Elimina Prenotazione</a>
   </div>
   
     <br/><br/>
     
-   <button onclick="clickdropbtn3()" class="dropbtn" style=" background-color: #1a70f0; width: 80px;top: 440px;">
+   <button onclick="clickdropbtn3()" class="dropbtn" style=" background-color: #1a70f0; width: 80px;top: 320px;">
    	Bar
    </button>
    
-  <div id="myDropdown3" class="dropdown-content" style="top:635%; margin-left:70px">
-    <a>Prenota Piatto/Bevanda</a>
-    <a>Modifica/Elimina Prenotazione</a>
+  <div id="myDropdown3" class="dropdown-content" style="top:465%; margin-left:60px">
+    <a id="prenota_bar">Prenota Piatto/Bevanda</a>
+    <a id="modifica_bar">Modifica/Elimina Prenotazione</a>
   </div>
   
 </div>
@@ -175,6 +293,15 @@ $(document).ready(function() {
 	</div>
 	</div>
 	</div>
+	
+	<div style="text-align:center">
+	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
+	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione.</em> 
+	<br /> <br />
+	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+	<hr width="300px"/>
+</div>	
+<br />
 </div>
 
 
@@ -185,9 +312,9 @@ $(document).ready(function() {
 	     	<h2>Inserisci data di prenotazione</h2> 
 	    	<hr> 
 	         <b>Giorno: </b> 
-			<input id="data_scelta" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
+			<input id="data_scelta0" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
 			<b>Periodo: </b> 
-			<select id="slot_orario" name="slot">
+			<select id="slot_orario0" name="slot">
 				<option value="1"> Mattina </option>
 				<option value="2"> Pomeriggio </option>
 			</select>
@@ -200,15 +327,40 @@ $(document).ready(function() {
 </div>
 
 
+<div id="id_dati_scelta_doccia" class="modal" style="text-align: center;">
+	<div class="modal-content">
+		<div class="container" >
+	     	<h2>Dati Docce</h2> 
+	    	<hr> 
+	    	<div>Inserisci i dati del giorno del quale vuoi vedere lo stato delle docce</div>
+	         <br><br>
+	         <b>Giorno: </b> 
+			<input id="data_scelta2" type="date" name="data_scelta" min="2020-05-29" value="" required="required"> <br><br>
+			<b>Turno: </b> 
+			<select id="slot_orario2" >
+				<option value="1"> 9:00-9:40 </option>
+				<option value="2"> 10:00-10:40 </option>
+				<option value="3"> 11:00-11:40 </option>
+				<option value="4"> 12:00-12:40 </option>
+				<option value="5"> 15:00-15:40 </option>
+				<option value="6"> 16:00-16:40 </option>
+				<option value="7"> 17:00-17:40 </option>
+				<option value="8"> 18:00-18:40 </option>
+				<option value="9"> 19:00-19:40 </option>
+				<option value="10"> 20:00-20:40 </option>
+			</select>
+			 <br><br><br> 
+	      	<div class="clearfix"> 
+	       		 <button id="conferma_data2">Conferma</button> 
+	     	</div> 
+	   </div>
+	</div>
+</div>
+
+
+
 <br />
-<div style="text-align:center">
-	<hr width="300px"/><div><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></div> <br/>
-	<em>Relax, mare, natura, cultura e divertimento in un’unica, completa, soluzione.</em> 
-	<br /> <br />
-	<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
-	<hr width="300px"/>
-</div>	
-<br />
+
 
 
 <br /><br />

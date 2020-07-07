@@ -1,4 +1,4 @@
-package pkg.Ammin;
+package pkg.utente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -244,11 +244,11 @@ public class BagninoServlet extends HttpServlet {
 			int status=0;
 			if(isPulito.equals("pulito")) {
 				status=1;
-				System.out.println(" isPulito: " + status  );
+				
 			}
 			if(isPulito.equals("non_pulito")) {
 				status=0;
-				System.out.println(" not isPulito: " + status  );
+				
 			}
 		    boolean isModified=db.setStatoPulito(idOmbr_daPulire, status);
 		    

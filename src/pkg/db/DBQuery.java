@@ -357,23 +357,6 @@ public class DBQuery {
 			
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public String whoUserType(String email, String pw) {
 		
 		String user_win="";
@@ -1199,7 +1182,7 @@ public class DBQuery {
 			statement.setInt(1, id_prenot_disp);
 			statement.setInt(2, id_cliente);
 			statement.setInt(3, id_ombrellone);
-			statement.setString(4, null ); //stato_pagamento
+			statement.setInt(4, 0 ); //stato_pagamento
 			statement.setString(5, data);
 			statement.setInt(6, slot_orario);
 			statement.setInt(7, num_persone);
@@ -1266,7 +1249,332 @@ public class DBQuery {
 			}
 		return lista;
 	}
+	
+	
+	public int firstIdPrenotazioneDocciaAvailable() {  
+		int res = 0;
+		try {
+			
+			Connection connection = ds.getConnection();
+			
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id_prenota_doccia FROM cliente_prenota_doccia ORDER BY id_prenota_doccia DESC	LIMIT 1");
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= rs.getInt("id_prenota_doccia");
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res+1;
+	}
+	
+	public boolean insertPrenotazioneDoccia(int id_prenot_disp,int id_cliente, int id_doccia, int slot_orario, String data) {
+		boolean res = false;
+		try {
+			Connection connection = ds.getConnection();
+			String insert = "insert into cliente_prenota_doccia(id_prenota_doccia, cliente_id_cliente,doccia_id_doccia, slot_orario,data_prenotazione) values (?,?,?,?,?)";
+			PreparedStatement statement = connection.prepareStatement(insert);
+			
+			statement.setInt(1, id_prenot_disp);
+			statement.setInt(2, id_cliente);
+			statement.setInt(3, id_doccia);
+			statement.setInt(4, slot_orario);
+			statement.setString(5, data);
+			
 
+			if(statement.executeUpdate() == 0) {
+				res= false;
+			}else {
+				res=true;
+			}
+			
+			statement.close();
+			connection.close();
+			
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+		
+		
+	}
+	
+	public int firstIdPrenotazionePiattoAvailable() {
+		int res = 0;
+		try {
+			
+			Connection connection = ds.getConnection();
+			
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id_ordine FROM cliente_prenota_piatto ORDER BY id_ordine DESC	LIMIT 1");
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= rs.getInt("id_ordine");
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res+1;
+	}
+	
+	public int getOrdinePiatto(String nome_piatto) {
+		int res = 0;
+		try {
+			
+			Connection connection = ds.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT id_piatto FROM piatto WHERE nome=?");
+			statement.setString(1, nome_piatto);
+			
+			ResultSet rs = statement.executeQuery();
+		
+			if (rs.next()) { //true-> matcha qualcosa
+				res= rs.getInt("id_piatto");
+				
+			}	
+			rs.close();
+			statement.close();
+			connection.close();
+			
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public boolean insertPrenotazionePiatto(int idOrdineAvailable, int id_piatto, int id_cliente, int quantita , int stato_pagamento, String stato_completamento,String data_prenotazione ){
+		boolean res = false;
+		try {
+			Connection connection = ds.getConnection();
+			String insert = "insert into cliente_prenota_piatto(id_ordine, piatto_id_piatto,cliente_id_cliente, quantita,stato_pagamento, stato_completamento, data_prenotazione) values (?,?,?,?,?,?,?)";
+			PreparedStatement statement = connection.prepareStatement(insert);
+			
+			statement.setInt(1, idOrdineAvailable);
+			statement.setInt(2, id_piatto);
+			statement.setInt(3, id_cliente);
+			statement.setInt(4, quantita);
+			statement.setInt(5, stato_pagamento);
+			statement.setString(6, stato_completamento);
+			statement.setString(7, data_prenotazione);
+			if(statement.executeUpdate() == 0) {
+				res= false;
+			}else {
+				res=true;
+			}
+			
+			statement.close();
+			connection.close();
+			
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return res;
+		
+	}
+	
+	public ArrayList<ClientePrenotaOmbrellone> getListaPrenotazioneOmbrellonibyIdCliente(int id_cliente){
+		 ArrayList<ClientePrenotaOmbrellone> lista= new ArrayList<ClientePrenotaOmbrellone>();
+
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_ombrellone WHERE cliente_id_cliente=?");
+				statement.setInt(1, id_cliente);
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					
+					ClientePrenotaOmbrellone prenotazione= new ClientePrenotaOmbrellone();
+
+					prenotazione.setId_prenotazione((Integer)rs.getInt("id_prenotazione"));
+					prenotazione.setId_cliente((Integer)rs.getInt("cliente_id_cliente"));
+					prenotazione.setId_ombrellone((Integer)rs.getInt("ombrellone_id_ombrellone"));
+					prenotazione.setPagato((boolean)rs.getBoolean("stato_pagamento"));
+					prenotazione.setData_prenotazione(rs.getString("data_prenotazione"));
+					prenotazione.setSlot_orario((Integer)rs.getInt("slot_orario"));				
+					prenotazione.setNum_lettini((Integer)rs.getInt("num_lettini"));
+					prenotazione.setNum_persone((Integer)rs.getInt("num_persone"));
+					prenotazione.setNum_sdraio((Integer)rs.getInt("num_sdraio"));
+					
+					lista.add(prenotazione);
+					prenotazione= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+		return lista;
+	}
+		
+	public boolean modificaPrenotazioneOmbrellone(int id,int persone,int lettini,int sdraio) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE cliente_prenota_ombrellone SET num_persone=?, num_lettini=?, num_sdraio=?  WHERE id_prenotazione=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setInt(1, persone); 
+			statement.setInt(2, lettini);	  
+			statement.setInt(3, sdraio);
+			statement.setInt(4, id);
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+
+	public ArrayList<ClientePrenotaDoccia> getPrenotazioneDocciaById(int id_cliente) {
+		 ArrayList<ClientePrenotaDoccia> lista= new ArrayList<ClientePrenotaDoccia>();
+		 Object[] result= new Object[5];
+		
+			
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_doccia WHERE cliente_id_cliente=?");
+
+				statement.setInt(1, id_cliente);
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					ClientePrenotaDoccia prenotazione= new ClientePrenotaDoccia();
+					
+					result[0]=rs.getInt("id_prenota_doccia");
+					result[1]=rs.getInt("cliente_id_cliente");
+					result[2]=rs.getInt("doccia_id_doccia");
+					result[3]=rs.getInt("slot_orario");
+					result[4]=rs.getString("data_prenotazione");
+					
+					
+					prenotazione.setId_prenota_doccia((Integer)(result[0]));
+					prenotazione.setId_cliente((Integer)result[1]);
+					prenotazione.setId_doccia((Integer)result[2]);
+					prenotazione.setSlot_orario((Integer) result[3]);	
+					prenotazione.setData_prenotazione((String) result[4]);
+								
+					lista.add(prenotazione);
+					prenotazione= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+		return lista;
+	}
+
+	public boolean eliminaPrenotazioneDoccia(int id_prenotazione) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "DELETE FROM cliente_prenota_doccia WHERE id_prenota_doccia=?";
+
+			PreparedStatement statement = connection.prepareStatement(update);	
+			statement.setInt(1, id_prenotazione); 
+			
+			if(statement.executeUpdate()!=0) {	//num righe che ha modificato
+				isModified= true;
+			}else {
+				isModified = false;
+			}
+			statement.close();
+			connection.close();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+	
+	public ArrayList<ClientePrenotaPiatto> getListaOrdinibyId(int id){
+		 ArrayList<ClientePrenotaPiatto> lista= new ArrayList<ClientePrenotaPiatto>();
+
+		 try {
+				Connection connection = ds.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_prenota_piatto WHERE cliente_id_cliente=?");
+				statement.setInt(1, id);
+
+
+				ResultSet rs = statement.executeQuery();
+			
+				while (rs.next()) { //true-> matcha qualcosa
+					
+					ClientePrenotaPiatto prenotazione= new ClientePrenotaPiatto();
+
+					prenotazione.setId_ordine((Integer)rs.getInt("id_ordine"));
+					prenotazione.setId_cliente((Integer)rs.getInt("cliente_id_cliente"));
+					prenotazione.setId_piatto((Integer)rs.getInt("piatto_id_piatto"));	
+					prenotazione.setQuantita((Integer)rs.getInt("quantita"));
+					prenotazione.setStato_pagamento((Boolean)rs.getBoolean("stato_pagamento"));
+					prenotazione.setStato_completamento((String)rs.getString("stato_completamento"));
+					prenotazione.setData_ordine((String)rs.getString("data_prenotazione"));
+					
+					lista.add(prenotazione);
+					prenotazione= null;
+					
+				}	
+				rs.close();
+				statement.close();
+				connection.close();
+		 	}catch(SQLException e){
+					e.printStackTrace();
+			}
+		return lista;
+	}
+	
+	
+	
+	public boolean  updateQuantitaOrdine(int id_ordine, int quantita) {
+		boolean isModified = false;
+		try {
+			Connection connection = ds.getConnection();
+			String update = "UPDATE cliente_prenota_piatto SET quantita=? WHERE id_ordine=?";
+			
+			PreparedStatement statement = connection.prepareStatement(update);
+			
+			statement.setInt(1, quantita); 
+			statement.setInt(2, id_ordine);	  		 
+			
+			if(statement.executeUpdate()==0) {	//num righe che ha modificato
+				isModified= false;
+			}else {
+				isModified = true;
+			}
+
+			statement.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isModified;
+	}
+
+	
 }	
 	
 	

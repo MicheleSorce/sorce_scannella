@@ -76,34 +76,38 @@ transition: 0.3s;
 
 .dropbtn:hover, .dropbtn:focus {
 left: 0;
-  background-color: #2980B9;
+  background-color: #acfbff;
 }
 
 .dropdown {
   position: absolute;
   display: inline-block;
+ 
 }
 
 .dropdown-content {
+	 border-radius: 0 6px 6px 0;
+
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #4293ff ;
   min-width: 160px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+ 
 }
 
 .dropdown-content a {
 position:relative;
 
-  color: black;
+  	color: white;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown a:hover {background-color: #59abf8;}
 
 .show {display: block;}
 
@@ -145,48 +149,4 @@ position:relative;
   background-color: none;
   color: white;
 }
-
-
-/* ------Scelta lingua------- */
-/*
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}</style>*/
-
-
 

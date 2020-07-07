@@ -132,7 +132,7 @@ $(document).ready(function() {
 </div>
 	 <h2 id="data" style="text-align: center; color: blue;"></h2><h2 id="slot_orario" style="text-align: center; color: blue;"></h2>
 	
-	<br><br>
+	<br>
 	
 
 <div id="div_show" class="form_css_bagnino" >

@@ -14,26 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
 </head>
 <script>
-function myFunction() {
-	  document.getElementById("myDropdown").classList.toggle("show");
-	  
-	}
 
-	// Close the dropdown if the user clicks outside of it
-	window.onclick = function(event) {
-		
-	
-	  if (!event.target.matches(".dropbtn")) {
-	    var dropdowns = document.getElementsByClassName("dropdown-content");
-	    var i;
-	    for (i = 0; i < dropdowns.length; i++) {
-	      var openDropdown = dropdowns[i];
-	      if (openDropdown.classList.contains("show")) {
-	        openDropdown.classList.remove("show");
-	      }
-	    }
-	  } 
-	}
 	  
 $(document).ready(function() {
 		  
@@ -45,7 +26,7 @@ $(document).ready(function() {
 		    		
 		    		}, function(data, status) {
 		         if (status == "success")	          
-		          	$('#riuso').load("../jsp_util/ListaOrdinazioni.jsp");
+		          	$('#riuso').load("../jsp_util/jsp_util_barista/ListaOrdinazioni.jsp");
 		          
 		         });
 		    });
@@ -59,7 +40,7 @@ $(document).ready(function() {
 		    		
 		    		}, function(data, status) {
 		         if (status == "success")	          
-		          	$('#riuso').load("../jsp_util/MenuBarista.jsp");
+		          	$('#riuso').load("../jsp_util/jsp_util_barista/MenuBarista.jsp");
 		          
 		         });
 		    });
@@ -72,7 +53,7 @@ $(document).ready(function() {
 		  		
 		  		}, function(data, status) {
 		       if (status == "success")	          
-		        	$('#riuso').load("../jsp_util/MenuDelGiorno.jsp");
+		        	$('#riuso').load("../jsp_util/jsp_util_barista/MenuDelGiorno.jsp");
 		        
 		       });
 		  });
@@ -89,12 +70,7 @@ $(document).ready(function() {
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
 		 <a id="id_logout" href="../LogoutServlet" ><i class="fa fa-fw fa-user"></i> Logout</a> 
 		  <a href="https://www.google.com/maps/dir/37.2669805,13.5784017/Realmonte+-+Baia+delle+Sirene-Giallonardo,+92010+Realmonte+AG/@37.3003778,13.4278911,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x131a7b97e08653c7:0x264a8eab65c24eb!2m2!1d13.4173862!2d37.3150145"><i class="fa fa-car"></i> Come arrivare</a>
-		  <div class="dropdown">
-		  <a onclick="myFunction()" class="dropbtn "> <i class="fa fa-language" aria-hidden="true"></i> Lingua</a>
-			  <div id="myDropdown" class="dropdown-content">
-			   <a > &#127470;&#127481;</a>  <a> &#127468;&#127463; </a>
-			  </div>
-		  </div>
+		 
 		  <div style="float:right">
 		  	  <a href="https://www.whatsapp.com/" ><i class="fa fa-whatsapp" aria-hidden="true"></i></a> 
 		  	  <a href="https://web.telegram.org/#/login"><i class="fa fa-telegram" aria-hidden="true"></i></a>
