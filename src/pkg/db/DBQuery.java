@@ -32,13 +32,13 @@ public class DBQuery {
 			
 	}
 
-	public boolean isClienteRegistrated(Cliente cliente) {
+	public boolean isClienteRegistrated(String email) {
 		boolean res = false;
 		try {
 			
 			Connection connection = ds.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT email FROM cliente WHERE email=?");
-			statement.setString(1, cliente.getEmail());
+			statement.setString(1, email);
 			
 			ResultSet rs = statement.executeQuery();
 		
@@ -56,13 +56,13 @@ public class DBQuery {
 		return res;
 	}
 
-	public boolean isAmminRegistrated(Amministratore amministratore) {
+	public boolean isAmminRegistrated(String email) {
 		boolean res = false;
 		try {
 			
 			Connection connection = ds.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT email FROM amministratore WHERE email=?");
-			statement.setString(1, amministratore.getEmail());
+			statement.setString(1, email);
 			
 			ResultSet rs = statement.executeQuery();
 		
@@ -80,13 +80,13 @@ public class DBQuery {
 		return res;
 	}
 	
-	public boolean isBagninoRegistrated(Bagnino bagnino) {
+	public boolean isBagninoRegistrated(String email) {
 		boolean res = false;
 		try {
 			
 			Connection connection = ds.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT email FROM bagnino WHERE email=?");
-			statement.setString(1, bagnino.getEmail());
+			statement.setString(1, email);
 			
 			ResultSet rs = statement.executeQuery();
 		
@@ -104,13 +104,13 @@ public class DBQuery {
 		return res;
 	}
 	
-	public boolean isBaristaRegistrated(Barista barista) {
+	public boolean isBaristaRegistrated(String email) {
 		boolean res = false;
 		try {
 			
 			Connection connection = ds.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT email FROM barista WHERE email=?");
-			statement.setString(1, barista.getEmail());
+			statement.setString(1, email);
 			
 			ResultSet rs = statement.executeQuery();
 		

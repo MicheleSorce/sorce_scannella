@@ -58,11 +58,14 @@
      		selPer5="selected";
   		}
 		
-     	
+     	String selLet0="";
      	String selLet1="";
      	String selLet2="";
      	String selLet3="";
      	
+     	if(lettini==0){
+   		 selLet0="selected";    		
+		}
       	if(lettini==1){
     		 selLet1="selected";    		
 		}
@@ -72,11 +75,14 @@
     	if(lettini==3){
     		selLet3="selected";
  		}
-    	
+    	String selSdr0="";
      	String selSdr1="";
      	String selSdr2="";
      	String selSdr3="";
      	
+     	if(sdraio==0){
+      		selSdr0="selected";    		
+		}
       	if(sdraio==1){
       		selSdr1="selected";    		
 		}
@@ -104,6 +110,7 @@
       					"</td>"+
       					"<td>"+
       					"<select class='select_lettini' disabled='disabled'>"+
+      						"<option "+selLet0+" value='0'>0</option>"+
      	       				"<option "+selLet1+" value='1'>1</option>"+
      	      	       		"<option "+selLet2+" value='2'>2</option>"+
       	       				"<option "+selLet3+" value='3'>3</option>"+
@@ -111,6 +118,7 @@
       					"</td>"+
       					"<td>"+
       					"<select class='select_sdraio' disabled='disabled'>"+
+      						"<option "+selSdr0+" value='0'>0</option>"+
      	       				"<option "+selSdr1+" value='1'>1</option>"+
      	      	       		"<option "+selSdr2+" value='2'>2</option>"+
       	       				"<option "+selSdr3+" value='3'>3</option>"+
@@ -167,7 +175,7 @@ $(document).ready(function() {
 			sdraio = $(this).find(".select_sdraio").val();					
 		}
 		if(dtToday >= myDate){
-			alert("Non è possibile modificare tale prenotazione in quanto precedente alla data corrente.");
+			alert("Non è possibile modificare tale prenotazione in quanto coincide o precede la data corrente.");
 		}	
 			
 		

@@ -231,6 +231,43 @@ public class AmminServlet extends HttpServlet {
 				}
 		}
 		
+		if((operazione).equals("check_mail")) {
+			String email=request.getParameter("email");
+			String mansione =request.getParameter("mansione");
+			
+			if((mansione).equals("amministratore")) {
+				
+				if(db.isAmminRegistrated(email)) {
+					response.setContentType("application/json");				
+					PrintWriter out = response.getWriter();		
+					String result= "{\"id\":\""+"registrato"+"\"}";
+					out.println(result);
+				}
+
+			}
+			if((mansione).equals("bagnino")) {
+				
+				if(db.isBagninoRegistrated(email)) {
+					response.setContentType("application/json");				
+					PrintWriter out = response.getWriter();		
+					String result= "{\"id\":\""+"registrato"+"\"}";
+					out.println(result);
+						
+				}
+				
+			}
+			if((mansione).equals("barista")) {
+				
+				if(db.isBaristaRegistrated(email)) {
+					response.setContentType("application/json");				
+					PrintWriter out = response.getWriter();		
+					String result= "{\"id\":\""+"registrato"+"\"}";
+					out.println(result);
+						
+				}
+
+			}
+		}
 		
 		if(("registrazione_personale").equals(operazione)) {
 					
@@ -256,14 +293,7 @@ public class AmminServlet extends HttpServlet {
 				amministratore.setData(nascita);
 				amministratore.setSesso(sesso);
 				
-				if(db.isAmminRegistrated(amministratore)) {
-										
-					response.setContentType("application/json");				
-					PrintWriter out = response.getWriter();		
-					String result= "{\"id\":\""+"registrato"+"\"}";
-					out.println(result);
-					
-				}else {
+
 					response.setContentType("application/json");				
 					PrintWriter out = response.getWriter();	
 					
@@ -271,7 +301,7 @@ public class AmminServlet extends HttpServlet {
 					
 					String result= "{\"id\":\""+x+"\"}";
 					out.println(result);
-				}	
+				
 
 				
 			}
@@ -286,15 +316,7 @@ public class AmminServlet extends HttpServlet {
 				bagnino.setPw(password);
 				bagnino.setData(nascita);
 				bagnino.setSesso(sesso);
-				
-				if(db.isBagninoRegistrated(bagnino)) {
-					
-					response.setContentType("application/json");				
-					PrintWriter out = response.getWriter();		
-					String result= "{\"id\":\""+"registrato"+"\"}";
-					out.println(result);
-					
-				}else {
+
 					response.setContentType("application/json");				
 					PrintWriter out = response.getWriter();
 					
@@ -302,7 +324,7 @@ public class AmminServlet extends HttpServlet {
 					
 					String result= "{\"id\":\""+x+"\"}";
 					out.println(result);
-				}
+				
 				
 			}
 			if((mansione).equals("barista")) {
@@ -317,14 +339,7 @@ public class AmminServlet extends HttpServlet {
 				barista.setData(nascita);
 				barista.setSesso(sesso);
 				
-				if(db.isBaristaRegistrated(barista)) {
-					
-					response.setContentType("application/json");				
-					PrintWriter out = response.getWriter();		
-					String result= "{\"id\":\""+"registrato"+"\"}";
-					out.println(result);
-					
-				}else {
+
 					response.setContentType("application/json");				
 					PrintWriter out = response.getWriter();
 					
@@ -332,7 +347,7 @@ public class AmminServlet extends HttpServlet {
 					
 					String result= "{\"id\":\""+x+"\"}";
 					out.println(result);
-				}
+				
 				
 			}
 			

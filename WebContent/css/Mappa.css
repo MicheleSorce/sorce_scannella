@@ -28,8 +28,8 @@
     	
 }
 
-.contenitore_pul{	
-    background-image: url(../immagini/mappa_vuota.jpg);
+.contenitore_pul{  
+       background-image: url(../immagini/mappa_vuota.jpg);
     position: relative;
     height: 1020px;
     width: 1180px;
@@ -37,11 +37,27 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-left: 33%;
+    margin-left: 1%;
     border: 3px solid black;
     border-radius: 20px;
-    
-    	
+      
+}
+
+.form_css_cliente_prenotazione{
+border-radius: 10px 10px 10px 10px;
+    border-color: #59c2dd;
+    border-style: solid;
+    background-image: linear-gradient(to top left, #FFFFFF 0%, #59c2dd 100%);
+    height: 860px;
+    width: 23%;
+    padding: 2%;
+    border: 1px solid black;
+    float: left;
+    margin-top: 6%;
+    margin-left: 77%;
+    display: block;
+  
+  
 }
 
 .form_css{
@@ -82,22 +98,7 @@ border-radius: 10px 10px 10px 10px;
     margin-left: 2%;
 
 }
-.form_css_cliente_prenotazione{
-	border-radius: 10px 10px 10px 10px;
-    border-color: #59c2dd;
-    border-style: solid;
-    background-image: linear-gradient(to top left, #FFFFFF 0%, #59c2dd 100%);
-    height: 860px;
-    width: 23%;
-    padding: 2%;
-    border: 1px solid black;
-    float: left;
-margin-top: 12%;
-    margin-left: 3%;
-	display: block;
-	
-	
-}
+
 
 .ristorante{
 	font-size:60px;

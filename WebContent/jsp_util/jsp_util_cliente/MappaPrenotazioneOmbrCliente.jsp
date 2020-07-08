@@ -64,7 +64,8 @@ $(document).ready(function() {
 
 	$("#hide_if_No").hide();	
  	$(".img_ombrellone").click(function() {
-	
+
+ 		 
 		var id=$(this).attr("id");
 		
 		var color = $( this ).css( "background-color" );
@@ -91,6 +92,7 @@ $(document).ready(function() {
   				
   				$("#zona_ombr_form").attr("value", data.zona);
   				$("#zona_ombr_form").attr("readonly", "readonly");
+  				
   				$("#prezzo_ombr_form").attr("value", data.prezzo);
   				$("#prezzo_ombr_form").attr("readonly", "readonly");
   				$("#prezzo_lettino").attr("value",  "5.0");
@@ -98,23 +100,40 @@ $(document).ready(function() {
   				$("#prezzo_sdraio").attr("value", "3.0");
   				$("#prezzo_sdraio").attr("readonly", "readonly");
   				
+  
+  				
   				$("#costo_tot_ombrellone").attr("value", data.prezzo);
-  				$("#costo_tot_lettini").attr("value",  "5.0");
-  				$("#costo_tot_sdraio").attr("value",  "3.0");
-  				if(data.prezzo=="15.0"){
-  					$("#costo_totale").attr("value", "23");	
+  			
+  				
+  				$("#num_lettini_form").val("0");
+  				$("#num_sdraio_form").val("0");
+  				
+  				 var tot_sdraio,tot_lett, tot_ombr;
+  				
+  				if( $("#num_lettini_form").val() == "0" ){
+  					$("#costo_tot_lettini").val( "0");
   				}
-  				if(data.prezzo=="20.0"){
-  					$("#costo_totale").attr("value", "28");	
+  				
+  				if( $("#num_sdraio_form").val() == "0" ){
+  					$("#costo_tot_sdraio").val("0");
   				}
-  				if(data.prezzo=="25.0"){
-  					$("#costo_totale").attr("value", "33");	
-  				}
+  				
+  				var tot_sdraio=parseFloat(document.getElementById("costo_tot_sdraio").value);
+  				var tot_lett=parseFloat(document.getElementById("costo_tot_lettini").value);
+  				var tot_ombr=parseFloat(document.getElementById("costo_tot_ombrellone").value);
+  			
+  				
+  				var tot= tot_ombr+ tot_lett+ tot_sdraio;
+  				$("#costo_totale").attr("value", tot);	
+  				
+  				
 	         }
     	 });
     }); 
 
 	$("#prenota_azione").click(function() {
+		
+		
 		
 		var id1=$("#id_ombr_form").val();		
 		var color = $( this ).css( "background-color" );
@@ -150,12 +169,27 @@ $(document).ready(function() {
     
 });
 
+
+
 var a=0;
+
+
+// function changeOmbrellone() {
+	
+// 	var prezzo_ombrellone= document.getElementById("prezzo_ombr_form").value;
+// 	document.getElementById("costo_tot_ombrellone").value = prezzo_ombrellone ;
+
+// }
+
+
+
 function changeNumlettini() {
 	
 	var prezzo_lettino= document.getElementById("prezzo_lettino").value;
 	var num_lettini =document.getElementById("num_lettini_form").value;
+	
 	var tot_lettini = prezzo_lettino * num_lettini;
+
 	document.getElementById("costo_tot_lettini").value = tot_lettini ;
 
 }
@@ -209,7 +243,7 @@ $("#num_sdraio_form, #num_lettini_form").change(function(){
 	ID-Ombrellone:<br><input id="id_ombr_form" name="id_ombr_form" type="text"  value=" "><br>
 	Libero:<br><input id="stato_ombr_form" name="stato_ombr_form" type="text" value=""><br>
 	Zona:<br><input id="zona_ombr_form" name="zona_ombr_form" type="text"  value=""><br><br>
-	Prezzo ombrellone €/pz:<br><input id="prezzo_ombr_form" name="prezzo_ombr_form" type="text"  value=""><br>
+	Prezzo ombrellone €/pz:<br><input id="prezzo_ombr_form" name="prezzo_ombr_form" type="text" onchange="changeOmbrellone()" value="" ><br>
 	Prezzo lettino €/pz:<br><input id="prezzo_lettino" name="prezzo_lettino" type="text"  value=" "><br>
 	Prezzo sdraio €/pz:<br><input id="prezzo_sdraio" name="prezzo_sdraio" type="text"  value=" "><br>
 	</fieldset>
@@ -230,7 +264,7 @@ $("#num_sdraio_form, #num_lettini_form").change(function(){
 			<br><br>
 			Numero lettini:
 			<select id="num_lettini_form" onchange="changeNumlettini()" name="num_lettini"> 
-		
+				<option value="0">0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>						
 				<option value="3">3</option>
@@ -238,7 +272,8 @@ $("#num_sdraio_form, #num_lettini_form").change(function(){
 			<i class="fa fa-exclamation-triangle" aria-hidden="true"> Max 3 lettini</i>
 			<br><br>
 			Numero sdraio:
-			<select id="num_sdraio_form"  onchange="changeNumSdraio()" name="num_sdraio"> 
+			<select id="num_sdraio_form"  onchange="changeNumSdraio()"  name="num_sdraio"> 
+				<option value="0">0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>						
 				<option value="3">3</option>
@@ -251,8 +286,8 @@ $("#num_sdraio_form, #num_lettini_form").change(function(){
 		<fieldset>
 		<legend>Dati pagamento</legend>
 		Costo tot ombrellone <br><input id="costo_tot_ombrellone" name="costo_tot_ombrellone" type="text" value=""><br> 	<!-- //value lo prendo la sopra -->
-		Costo tot lettini:<br><input id="costo_tot_lettini" name="costo_tot_lettini"  type="text" value=""><br>
-		Costo tot sdraio:<br><input id="costo_tot_sdraio" name="costo_tot_sdraio" type="text" value="">
+		Costo tot lettini:<br><input id="costo_tot_lettini" name="costo_tot_lettini"  type="text" value="0"><br>
+		Costo tot sdraio:<br><input id="costo_tot_sdraio" name="costo_tot_sdraio" type="text" value="0">
 		<br/>
 		<hr style="background-color: black">
 		
@@ -271,7 +306,7 @@ $("#num_sdraio_form, #num_lettini_form").change(function(){
  <div  class="contenitore_pul" >
  
 	<a id="surfista"  style="font-size:50px;z-index:1;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
-	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:1;position:absolute;top:-25px;left:125px"> &#128676;</a>
+	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:1;position:absolute;top:-25px;left:221px"> &#128676;</a>
 	<a id="runner" style="font-size:50px;z-index:1;position:absolute;top:75px;left:390px">&#127939;  </a>
 	<a id="granchio1" style="font-size:15px;z-index:1;position:absolute;top: 100px;left: 910px;"> &#129408; </a>
 	<a id="granchio2" style="font-size:15px;z-index:1;position:absolute;  top:80px;left: 900px;"> &#129408; </a>

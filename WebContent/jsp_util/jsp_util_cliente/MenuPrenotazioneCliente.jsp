@@ -362,19 +362,19 @@ td.Td3{
 <div id="resoconto" >
  <h3>Ordine</h3>
  <hr>
- <div style="float:left">
-Nome : <input id="primo" type=text /> <br>
-Prezzo: <input id="primo_prz" type=text /> <br>
-Quantità: <input id="primo_qt" type=text /> <br>
+ <div >
+Nome  <br><input id="primo" type=text /> <br>
+Prezzo<br> <input id="primo_prz" type=text /> <br>
+Quantità <br><input id="primo_qt" type=text /> <br>
  
  <br>
-
- </div>
-
- <br><br><br><br><br>
-  <hr>
+<hr>
+ 
  	<button id='ordina_prenot'>Ordina</button>
  	<button id='ordina_prenot2'>Ordina e Paga</button>
+ </div>
+
+ 
  </div>   
       
       

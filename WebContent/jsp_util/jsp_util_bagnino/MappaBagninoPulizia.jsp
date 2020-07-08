@@ -156,7 +156,7 @@ $(document).ready(function() {
 </div>
 
 
- <div  class="contenitore_pul" >
+ <div  class="contenitore_pul" style="margin-left: 30%;" >
  
 	<a id="surfista"  style="font-size:50px;z-index:1;position:absolute;top:5px;left: 990px"> &#127940;&#8205;&#9794;&#65039; </a>
 	<a id="pedalò" class="ristorante" style="font-size:80px;z-index:1;position:absolute;top:-25px;left:125px"> &#128676;</a>
