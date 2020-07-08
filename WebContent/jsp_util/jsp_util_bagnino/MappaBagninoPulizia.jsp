@@ -8,44 +8,68 @@
 <jsp:useBean id="ombrellone" scope="session" class="pkg.bean.Ombrellone"/>
 
 <!-- Colora l'ombrellone rosso o verde a seconda se era libero o occupato -->
-	<%	for(int i=1;i<25;i++){
+	
+	<%
+	String data_tit=(String)session.getAttribute("data_sess");
+	int f=(Integer)session.getAttribute("slot_orario_sess");
+	
+	
+	String slot_orario_o="";
+	if(f==1){
+		slot_orario_o="Mattina";
+	}if(f==2){
+		 slot_orario_o="Pomeriggio";
+	}
+	
+	session.removeAttribute("data_sess");
+	session.removeAttribute("slot_orario_sess");
+	
+	
+	int count_ombr_prenotati=0;
+		for(int i=1;i<25;i++){
 			if(session.getAttribute("ombrellonePrenotato"+i)!=null){
+				count_ombr_prenotati++;
 				ClientePrenotaOmbrellone o=(ClientePrenotaOmbrellone) session.getAttribute("ombrellonePrenotato"+i);
 				String ombr = "ombrellone"+i;
-				String data = o.getData_prenotazione();
-				int slot = o.getSlot_orario();
-				String slot_orario="";
-				if(slot==1){
-					slot_orario="Mattina";
-				}if(slot==2){
-					 slot_orario="Pomeriggio";
-				}
+				
+				
 			%>
 			<script type="text/javascript">
-				$("#data").text("<%=data%>");
-				$("#slot_orario").text("<%=slot_orario%>");
 				$(<%=ombr%>).css("background-color","#ff0700");//rosso	
 				
 			</script>		
-		<%			session.removeAttribute("ombrellonePrenotato"+i);
+		<%		session.removeAttribute("ombrellonePrenotato"+i);
 			}
 			
 		}
+	
 	%>
+
 	
 <script type="text/javascript">
 
 $(document).ready(function() {
+	$("#data").text("<%=data_tit%>");
+	$("#slot_orario").text("<%=slot_orario_o%>");
+	
+	var data= $("#data").text();
+	var slot_orario_o= $("#slot_orario").text();
+
+	if(<%=count_ombr_prenotati%>==24){
+		alert("Gli ombrelloni sono tutti prenotati.\nScegli uno slot orario diverso.");
+	}
 	
  $(".img_ombrellone").click(function() {
 		var id=$(this).attr("id");
-		var data= $("#data").text();
-		var slot_orario= $("#slot_orario").text();
+		
 		var color = $( this ).css( "background-color" );
+		$("#radio1").removeAttr("checked"); 
+		$("#radio2").removeAttr("checked"); 
+		
 		$.post("../BagninoServlet", { 
     		operazione: "dati_prenotazione_ombrellone",
     		id_ombrellone : id,
-    		slot_orario: slot_orario,
+    		slot_orario: slot_orario_o,
     		data: data
     		
     		}, function(data, status) {
@@ -55,6 +79,19 @@ $(document).ready(function() {
   				$("#zona_ombr").attr("value", data.zona  );	
   				$("#pulizia_ombr").attr("value", data.stato_pulizia  );	
 
+  				
+				
+				if(data.stato_pulizia=="true"){
+					$("#radio1").attr("checked","checked");
+				 
+				}
+				if(data.stato_pulizia=="false"){
+				
+					$("#radio2").attr("checked","checked");
+					
+				}
+				
+				
   				
 	   			if(color == "rgb(255, 7, 0)"){
 					$("#libero").attr("value", "No");
@@ -69,12 +106,7 @@ $(document).ready(function() {
 					$("#aggiorna_pulizia").removeAttr("disabled");
 					
 					
-				}	 
-	   			
-	   			
- 				
- 				
- 				
+				}	 	
 	         }
 	         
 	 

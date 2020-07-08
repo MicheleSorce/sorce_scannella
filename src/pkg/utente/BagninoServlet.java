@@ -205,33 +205,39 @@ public class BagninoServlet extends HttpServlet {
 		//visualizza spiaggia pulizia
 			if(("visualizza_spiaggia_pul").equals(operazione)) {
 			
-				String data=request.getParameter("data_scelta3");
+				String data_sess=request.getParameter("data_scelta3");
 				String slot_orarioString= request.getParameter("slot_orario3");
 				
-				int slot_orario2=0;
+				int slot_orario_sess=0;
 				if((slot_orarioString).equals("1")) {
-					slot_orario2=1;
+					slot_orario_sess=1;
 				} if ((slot_orarioString).equals("2")){
-					slot_orario2=2;
+					slot_orario_sess=2;
 				}
 				
-				ArrayList<ClientePrenotaOmbrellone> listaOmbrelloniPrenotati = db.getListaPrenotazioneOmbrellone(data,slot_orario2);
-				
-				if(listaOmbrelloniPrenotati.size()==0) {
-			        response.setContentType("text/html");        
-			        PrintWriter out = response.getWriter();
-			        String result="Nessuna Prenotazione";
-			        out.print(result);
-			      }
+				ArrayList<ClientePrenotaOmbrellone> listaOmbrelloniPrenotati = db.getListaPrenotazioneOmbrellone(data_sess,slot_orario_sess);
 				
 				
-				//System.out.println("data: "+data+" slot:"+slot);
+				HttpSession session = request.getSession();
 				for(int i=0; i< listaOmbrelloniPrenotati.size(); i++) {
 					int id= listaOmbrelloniPrenotati.get(i).getId_ombrellone();
-					//System.out.println("OMBRELLONI PRENOTATI id:"+id);
-					HttpSession session = request.getSession();
 					session.setAttribute("ombrellonePrenotato"+id , listaOmbrelloniPrenotati.get(i));
 				}	
+				
+				String data_sessione = (String)session.getAttribute("data_sess");
+				if(data_sessione== null) {
+					
+					session.setAttribute("data_sess", data_sess);
+				
+					
+				}
+				
+				String slot_orario_sessione= (String)session.getAttribute("slot_orario_sess");
+				if(slot_orario_sessione==null) {
+					
+					session.setAttribute("slot_orario_sess", slot_orario_sess);
+				
+				}
 				
 			
 			}

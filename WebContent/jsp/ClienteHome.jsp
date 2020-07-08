@@ -223,7 +223,7 @@ $("#modifica_bar").click(function() {
 
 
 	<div class="navbar" >
-		  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+		  <a class="active" href="ClienteHome.jsp"><i class="fa fa-fw fa-home"></i> Home</a> 
 		 
 		  <a href="#finale" ><i class="fa fa-fw fa-envelope"></i> Contatti</a> 
 		  <a id="id_logout" href="../LogoutServlet" ><i class="fa fa-fw fa-user"></i> Logout</a> 

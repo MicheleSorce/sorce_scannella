@@ -115,7 +115,7 @@ body{
 /* Parte bassa */
 .footer-bottom{
 	position: relative;
-	width: 130%;
+	width: 100%;
 	height: 290px; 
 	background-color: #1a70f0;
 	color: black;
