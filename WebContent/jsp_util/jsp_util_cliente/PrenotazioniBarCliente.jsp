@@ -28,10 +28,10 @@
     			"<td class='id_piatto'>"+piattoID+"</td>"+
     			"<td>"+nome_piatto+"</td>"+
     			"<td>"+
-    			"<input type='number'min='0' max='20' disabled='disabled' class='quantita' value='"+quantita+"'>"+
+    			"<input type='number'min='1' max='20' disabled='disabled' class='quantita' value='"+quantita+"'>"+
     			"</td>"+
     			"<td>"+prezzo+"€"+"</td>"+
-    			"<td id='disponibilita_piatto'>"+disponibilita_piatto+"</td>"+
+    		
     			"<td class='stato_ordine'>"+statoOrdine+"</td>"+
     			"<td class='stato_pagamento'>"+stato_pagamento+"</td>"+
     			"<td><button hidden class='mod_ord' id='mod_pren_ombr"+id_prenotazione+"'>Modifica</button></td>"+
@@ -255,7 +255,7 @@ select option {
 
     <table class="table"  id="lista_ordini_piatti">
  		<tr>	
- 			<th>ID Piatto</th><th>Piatto</th><th>Quantità</th><th>Prezzo</th><th>Disponibilità dispensa</th><th>Stato Ordine</th><th>Stato Pagamento</th><th id="modifica_ordine_th"></th><th id="elmini_ordine_th"></th>
+ 			<th>ID Piatto</th><th>Piatto</th><th>Quantità</th><th>Prezzo</th><th>Stato Ordine</th><th>Stato Pagamento</th><th id="modifica_ordine_th"></th><th id="elmini_ordine_th"></th>
  		</tr>
  	</table>
 

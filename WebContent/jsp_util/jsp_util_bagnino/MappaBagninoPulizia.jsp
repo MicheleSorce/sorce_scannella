@@ -59,59 +59,58 @@ $(document).ready(function() {
 		alert("Gli ombrelloni sono tutti prenotati.\nScegli uno slot orario diverso.");
 	}
 	
- $(".img_ombrellone").click(function() {
-		var id=$(this).attr("id");
-		
-		var color = $( this ).css( "background-color" );
-		$("#radio1").removeAttr("checked"); 
-		$("#radio2").removeAttr("checked"); 
-		
-		$.post("../BagninoServlet", { 
-    		operazione: "dati_prenotazione_ombrellone",
-    		id_ombrellone : id,
-    		slot_orario: slot_orario_o,
-    		data: data
-    		
-    		}, function(data, status) {
-	         if (status == "success"){
-	        	
-  				$("#id_ombr").attr("value", data.id);
-  				$("#zona_ombr").attr("value", data.zona  );	
-  				$("#pulizia_ombr").attr("value", data.stato_pulizia  );	
+	 $(".img_ombrellone").click(function() {
+			var id=$(this).attr("id");
+			
+			var color = $( this ).css( "background-color" );
+			$("#radio1").removeAttr("checked"); 
+			$("#radio2").removeAttr("checked"); 
+			
+			$.post("../BagninoServlet", { 
+	    		operazione: "dati_prenotazione_ombrellone",
+	    		id_ombrellone : id,
+	    		slot_orario: slot_orario_o,
+	    		data: data
+	    		
+	    		}, function(data, status) {
+		         if (status == "success"){
+		        	
+	  				$("#id_ombr").attr("value", data.id);
+	  				$("#zona_ombr").attr("value", data.zona  );	
+	  				$("#pulizia_ombr").attr("value", data.stato_pulizia  );	
 
-  				
-				
-				if(data.stato_pulizia=="true"){
-					$("#radio1").attr("checked","checked");
-				 
-				}
-				if(data.stato_pulizia=="false"){
-				
-					$("#radio2").attr("checked","checked");
-					
-				}
-				
-				
-  				
-	   			if(color == "rgb(255, 7, 0)"){
-					$("#libero").attr("value", "No");
-					$("#radio1").attr("disabled","disabled");
-					$("#radio2").attr("disabled","disabled");
-					$("#radio2").attr("checked","checked");
-					$("#aggiorna_pulizia").attr("disabled", "disabled");
-				}else{
-					$("#libero").attr("value", "Si");
-					$("#radio1").removeAttr("disabled"); 
-					$("#radio2").removeAttr("disabled"); 
-					$("#aggiorna_pulizia").removeAttr("disabled");
-					
-					
-				}	 	
-	         }
-	         
-	 
-     });
-    }); 
+	  				
+
+		   			if(color == "rgb(255, 7, 0)"){
+						$("#libero").attr("value", "No");
+						$("#radio1").attr("disabled","disabled");
+						$("#radio2").attr("disabled","disabled");
+						$("#radio2").attr("checked","checked");
+						$("#aggiorna_pulizia").attr("disabled", "disabled");
+					}else{
+						
+						if(data.stato_pulizia=="true"){
+							$("#radio1").attr("checked","checked"); 
+						}
+						if(data.stato_pulizia=="false"){
+							$("#radio2").attr("checked","checked");
+						}
+
+						
+						
+						$("#libero").attr("value", "Si");
+						$("#radio1").removeAttr("disabled"); 
+						$("#radio2").removeAttr("disabled"); 
+						$("#aggiorna_pulizia").removeAttr("disabled");
+						
+						
+					}	 	
+		         }
+		         
+		 
+	     });
+	    }); 
+ 
 
  $("#aggiorna_pulizia").click(function() {
 		

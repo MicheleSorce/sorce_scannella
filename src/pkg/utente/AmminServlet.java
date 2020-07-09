@@ -187,7 +187,7 @@ public class AmminServlet extends HttpServlet {
 				response.setContentType("text/html");				
 				PrintWriter out = response.getWriter();
 				boolean result = db.modificaStatoPagamentoPiatto(id, stato_ordine);
-				System.out.println(result);
+	
 				out.println(result);
 				
 			}else {
@@ -197,7 +197,7 @@ public class AmminServlet extends HttpServlet {
 				response.setContentType("text/html");				
 				PrintWriter out = response.getWriter();
 				boolean result = db.modificaStatoPagamentoOmbr(id, stato_ordine);
-				System.out.println(result);
+			
 				out.println(result);
 			}
 	}
@@ -205,23 +205,23 @@ public class AmminServlet extends HttpServlet {
 		if(("elimina_ordine").equals(operazione)) {
 		
 				String id_String= request.getParameter("id");
-				System.out.print(id_String);
+		
 
 				if(id_String.length()>18) {
 					// elimina ordine piatto
 					int id= Integer.parseInt(id_String.substring(19));
-					System.out.print("Prenotazione piatto"+id);	
+					
 					
 					response.setContentType("text/html");				
 					PrintWriter out = response.getWriter();
 					boolean result = db.eliminaOrdine(id);
-					System.out.println(result);
+					
 					out.println(result);
 					
 				}else {
 					// elimina ordine ombrellone
 					int id= Integer.parseInt(id_String.substring(17));
-					System.out.print("Prenotazione ombrellone"+id);
+					
 
 					response.setContentType("text/html");				
 					PrintWriter out = response.getWriter();

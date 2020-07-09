@@ -53,9 +53,13 @@
     	        $("#lista_ordini").append("<%=list%>");
     	        
    	      </script>    
-	    <%   
+	    <% 
+	    session.removeAttribute("ordine"+i);
+	    
+	    
 		}
 	}
+	
 
 %>
 
@@ -231,7 +235,7 @@ th,td{
    		 <hr>
  	<table class="elementi_menu"  id="lista_ordini">
  		<tr>	
- 			<th>Id Ordine</th><th>Piatto</th><th>Cliente</th><th>Quantità</th><th>Stato Pagamento</th><th>Stato Completamento</th><th id="elmini_ordine_th"></th>
+ 			<th>Id Ordine</th><th>Id Piatto</th><th>Cliente</th><th>Quantità</th><th>Stato Pagamento</th><th>Stato Completamento</th><th id="elmini_ordine_th"></th>
  		</tr>
  	</table>
 

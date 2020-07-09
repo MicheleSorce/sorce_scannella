@@ -36,9 +36,12 @@ $(function(){
 
 $("#registrati").click(function () {
 	
-	if($("#password").val()==""||$("#confermaPassword").val()==""){
+	var bool= checkpassword();
+
+	if( ($("#password").val()=="" || $("#confermaPassword").val()=="") && bool=="false"){
 		alert("inserisci la password");
-	}else{
+	}
+	if(bool){
 		$.post("../AmminServlet", { 
 		 	
 			 operazione : "registrazione_personale",
@@ -110,7 +113,7 @@ function showTab(n) {
 	
 		    	 if(x == "registrato"){
 		    		 
-		    		 alert("Email gia in uso.\nUsane una diversa.");
+		    		 alert("Email già in uso.\nUsane una diversa.");
 		    		 $("#email").css("border","2px solid red");
 		    		 
 		    		 nextPrev(-1);
@@ -163,11 +166,13 @@ function fixStepIndicator(n) {
 
 
 
-$("#confermaPassword").blur(function(){
-	 var ck_password = /^[A-Za-z0-9]{8,12}$/;// controllo sulla validitï¿½ della password
+
+function checkpassword(){
+	 var ck_password = /^[A-Za-z0-9]{8,12}$/;// controllo sulla validità della password
 	 var password = document.getElementById("password").value;
 	 var confermapassword = document.getElementById("confermaPassword").value;	  
 	 		 
+	
 	  // controllo sugli input password
 	  if (!ck_password.test(password)) {
 			document.getElementById("print").innerHTML= "La password deve contenere almeno 8 e massimo 12 caratteri alfanumerici.";
@@ -185,12 +190,11 @@ $("#confermaPassword").blur(function(){
 		  document.getElementById("print").innerHTML= "";
 		    $('#password').css("borderColor","");
 		    $('#confermaPassword').css("borderColor","");
-			$('#date').focus();
-			return false; 
+			
+			return true; 
 	  }
 
-});
-
+}
 
 
 </script>
@@ -306,13 +310,13 @@ button:hover {
 	  <h1>Registrazione</h1>
 
 	  <div class="tab">
-	  		<h4>Mansione<h4> 
+	  		<div>Mansione</div>
 		<select style="font-size:18px;" id="mansione" name="mansione" >
 			<option value="amministratore" selected="selected" >Amministratore </option>
 			<option value="bagnino">Bagnino</option>
 			<option value="barista">Barista</option>
 		</select><br><br><br>
-	  Nome 
+	  	Nome 
 	    <p><input type="text" name="nome"id="nome" placeholder="Mario" required></p>
 	    Cognome
 	    <p><input type="text" name="cognome" id="cognome" placeholder="Rossi" required></p>

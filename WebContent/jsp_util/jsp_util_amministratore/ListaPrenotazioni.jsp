@@ -329,15 +329,17 @@ th,td{
  			<th>ID Cliente</th><th>Nome</th><th>Cognome</th><th>Telefono</th><th>Email</th>
  		</tr>
  	</table>
-    
-    	<hr>
-   		 <hr>
+    <hr>
+    <br><br>
+   	<div><h4>Lista Ombrelloni</h4></div>
+   
  	<table class="table"  id="lista_ordini_ombrelloni">
  		<tr>	
  			<th>ID Cliente</th><th>Ombrellone</th><th>Zona</th><th>Numero Persone</th><th>Lettini 5€</th><th>Sdraio 3€</th><th>Prezzo</th><th>Stato Pagamento</th><th id="elmini_ordine_th"></th>
  		</tr>
  	</table>
-    	<hr>
+    <br> <br>
+      	<div><h4>Lista Piatti</h4></div>
     <table class="table"  id="lista_ordini_piatti">
  		<tr>	
  			<th>ID Cliente</th><th>Piatto</th><th>Quantità</th><th>Prezzo</th><th>Stato Pagamento</th><th id="elmini_ordine_th"></th>

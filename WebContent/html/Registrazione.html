@@ -136,8 +136,9 @@ button:hover {
 		
 	  </div>
 	  <div class="tab">Password
-	    <p><input type="password" name="password" id="password" placeholder="password" required></p>
-	    <p><input type="password" name="confermaPassword" placeholder="conferma password" id="confermaPassword" required></p>
+	    <p><input type="password" name="password" id="password"  required></p>
+	    Conferma password
+	    <p><input type="password" name="confermaPassword" id="confermaPassword" required></p>
 		<p id="print" style="color: red;font-size:x-small;"></p>	
 	  </div>
 	  <div style="overflow:auto;">
@@ -181,32 +182,42 @@ $(function(){
 
 
 
+
+
+
+
 $("#registrati").click(function () {
-	alert("ok1");
-	$.post("../RegistrazioneServlet", { 
+	var bool= checkpassword();
+
+	if( ($("#password").val()=="" || $("#confermaPassword").val()=="") && bool=="false"){
+		alert("inserisci la password");
+	}
+	if(bool){
+		$.post("../RegistrazioneServlet", { 
 		
-  		 operazione:  "inserisci_cliente",
-  		 nome: $("#nome").val(),
-  		 cognome:$("#cognome").val(),
-  		 telefono:$("#telefono").val(),
-  		 email:$("#email").val(),
-  		 password:$("#password").val(),
-  		 data_nascita:$("#data_nascita").val(),
-  		 genere:$("input[name='genere']:checked").val()
-
-  			}, function(data, status) {
-  	     	if (status == "success")
-  	    	 
-  	    	 var x=data.id;
-
-  	    	 if(x == "false"){		    		 
-  	    		 alert("Errore di registrazione. \nCompila i campi correttamente.");
-  	    	 }
-  	    	 if(x== "true"){
-  	    		 window.location.replace("../jsp_result/registrazione_success.jsp");
-  	    	 }
-
-  	     });
+	  		 operazione:  "inserisci_cliente",
+	  		 nome: $("#nome").val(),
+	  		 cognome:$("#cognome").val(),
+	  		 telefono:$("#telefono").val(),
+	  		 email:$("#email").val(),
+	  		 password:$("#password").val(),
+	  		 data_nascita:$("#data_nascita").val(),
+	  		 genere:$("input[name='genere']:checked").val()
+	
+	  			}, function(data, status) {
+	  	     	if (status == "success")
+	  	    	 
+	  	    	 var x=data.id;
+	
+	  	    	 if(x == "false"){		    		 
+	  	    		 alert("Errore di registrazione. \nCompila i campi correttamente.");
+	  	    	 }
+	  	    	 if(x== "true"){
+	  	    		 window.location.replace("../jsp_result/registrazione_success.jsp");
+	  	    	 }
+	
+	  	     });
+	}
 	
 });
 	
@@ -302,11 +313,13 @@ function fixStepIndicator(n) {
 
 
 
-$("#confermaPassword").blur(function(){
-	 var ck_password = /^[A-Za-z0-9]{8,12}$/;// controllo sulla validitï¿½ della password
+
+function checkpassword(){
+	 var ck_password = /^[A-Za-z0-9]{8,12}$/;// controllo sulla validità della password
 	 var password = document.getElementById("password").value;
 	 var confermapassword = document.getElementById("confermaPassword").value;	  
 	 		 
+	
 	  // controllo sugli input password
 	  if (!ck_password.test(password)) {
 			document.getElementById("print").innerHTML= "La password deve contenere almeno 8 e massimo 12 caratteri alfanumerici.";
@@ -324,11 +337,11 @@ $("#confermaPassword").blur(function(){
 		  document.getElementById("print").innerHTML= "";
 		    $('#password').css("borderColor","");
 		    $('#confermaPassword').css("borderColor","");
-			$('#date').focus();
-			return false; 
+			
+			return true; 
 	  }
 
-});
+}
 
 </script>
 
