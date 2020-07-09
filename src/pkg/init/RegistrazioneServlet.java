@@ -48,7 +48,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		}
 		if((operazione).equals("inserisci_cliente")) {
 			
-			String nome =request.getParameter("nome");					//dal form
+			String nome =request.getParameter("nome");					
 			String cognome =request.getParameter("cognome");
 			String telefono=request.getParameter("telefono");
 			String email=request.getParameter("email");
@@ -57,7 +57,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			String gen=request.getParameter("genere");
 			Integer genere=Integer.parseInt(gen);
 			
-			cliente.setNome(nome);										//bean
+			cliente.setNome(nome);										
 			cliente.setCognome(cognome);
 			cliente.setTelefono(telefono);
 			cliente.setEmail(email);

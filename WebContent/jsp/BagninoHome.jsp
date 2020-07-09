@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home Bagnino</title>
 <link Rel="icon" type="image/ico" href="../immagini/logo.png"> <!-- per il logo in alto -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittua in alto -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"><!-- per la scrittura in alto -->
 <link href="../css/BagninoCSS.css" type="text/css" rel="stylesheet">
 <link href="../css/InsertDataWindow.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- Per il navbar -->

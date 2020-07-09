@@ -4,7 +4,7 @@
 
 <link href="../css/Mappa.css" type="text/css" rel="stylesheet">
 
-<!-- Colora la doccia rosso o verde a seconda se era libera o occupata -->
+
 	<%	
 	String data_tit=(String)session.getAttribute("data_sess_d");
 	int slot2=(Integer)session.getAttribute("slot_orario_sess_d");

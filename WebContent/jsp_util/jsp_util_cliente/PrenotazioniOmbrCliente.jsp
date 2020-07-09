@@ -136,7 +136,7 @@
     	        
    	      </script>    
 	    <%   
-	    session.removeAttribute("OmbrPrenotazione"+i);
+	    session.removeAttribute("prenotazione"+i);
 	    session.removeAttribute("Ombrellone"+i);
 		}
 		

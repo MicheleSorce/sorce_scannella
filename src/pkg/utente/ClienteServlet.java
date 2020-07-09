@@ -121,14 +121,10 @@ public class ClienteServlet extends HttpServlet {
 			int num_lettini = Integer.parseInt(request.getParameter("num_lettini"));
 			int num_sdraio = Integer.parseInt(request.getParameter("num_sdraio"));
 			
-		
-			
 			int id_prenot_disp=db.firstIdPrenotazioneOmbrAvailable();
-			
-			
+					
 			boolean flag=false;
 			ClientePrenotaOmbrellone ombr_verifica=db.getPrenotazioneOmbrellone(id_ombrellone, slot_orario, data);
-			
 			
 			if(ombr_verifica.getId_ombrellone()!= id_ombrellone ) {
 				flag=db.insertPrenotazioneOmbrellone(id_prenot_disp,id_cliente, id_ombrellone, data, slot_orario,num_persone, num_lettini, num_sdraio);
@@ -136,7 +132,6 @@ public class ClienteServlet extends HttpServlet {
 			}
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
-			
 			
 			String result= "{\"res\":\""+flag+"\"}";
 			out.print(result);
@@ -175,8 +170,7 @@ public class ClienteServlet extends HttpServlet {
 			}
 			String result= "{\"result\":\""+"true"+"\"}";
 			out.print(result);
-			
-			
+		
 		}
 				
 	}

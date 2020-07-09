@@ -41,7 +41,6 @@ public class BarServlet extends HttpServlet {
 			for(int i=0; i< menu.size(); i++) {
 				int id= menu.get(i).getId_piatto();
 				//passo il menu in sessione --> ogni piatto con l'id
-				
 				HttpSession session = request.getSession();
 				session.setAttribute("piatto"+id , menu.get(i));
 				
@@ -79,26 +78,7 @@ public class BarServlet extends HttpServlet {
 			out.println(result_String);
 					
 		}
-		
-	/*	if(("lista_ordinazioni").equals(operazione)) {
-			
-			HttpSession session = request.getSession();
-			
-			ArrayList<ClientePrenotaPiatto> ordini_piatti = db.ordiniPiattiFromDb();
-			
-			int num_ordini= ordini_piatti.size(); 
-			
-			for(int i=0; i< num_ordini; i++) {
-				int idOrdine= ordini_piatti.get(i).getId_ordine();
-				
-				session.setAttribute("ordine"+idOrdine , ordini_piatti.get(i));
-		
-			
-			}
-			session.setAttribute("numOrdini" , num_ordini);
 
-		}*/
-		
 		
 	if(("lista_ordinazioni").equals(operazione)) {
 			
@@ -122,30 +102,6 @@ public class BarServlet extends HttpServlet {
 			session.setAttribute("numOrdini" , num_ordini);
 
 		}
-		
-		/*if(lista_ordini.size()==0) {
-			String result= "{\"result\":\""+"Nessuna Prenotazione"+"\"}";
-			out.print(result);
-		}else {
-
-			for(int i=0; i<lista_ordini.size(); i++) {
-				
-				ClientePrenotaPiatto ordine = lista_ordini.get(i);
-				int id_piatto= lista_ordini.get(i).getId_piatto();
-				
-				Piatto piatto =(Piatto) db.getPiatto(id_piatto);		
-				
-				session.setAttribute("piatto"+i , piatto);	
-				session.setAttribute("ordine"+i, ordine);
-				
-			}
-			String result= "{\"result\":\""+"true"+"\"}";
-			out.print(result);
-						
-		}
-		*/
-		
-		
 		
 		
 		if(("modifica_stato_ordine").equals(operazione)) {

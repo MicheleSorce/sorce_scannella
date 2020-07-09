@@ -124,7 +124,7 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + address_c);
 				
 				break;
-			default: //utente non registrato perche non trova email-pw sul db
+			default: //utente non registrato perchè non trova email-pw sul db
 				String address_out="/jsp_result/login_failed.jsp";
 				response.sendRedirect(request.getContextPath() + address_out);
 				break;

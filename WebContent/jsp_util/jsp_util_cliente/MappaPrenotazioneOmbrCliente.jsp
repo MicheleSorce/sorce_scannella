@@ -173,16 +173,6 @@ $(document).ready(function() {
 
 var a=0;
 
-
-// function changeOmbrellone() {
-	
-// 	var prezzo_ombrellone= document.getElementById("prezzo_ombr_form").value;
-// 	document.getElementById("costo_tot_ombrellone").value = prezzo_ombrellone ;
-
-// }
-
-
-
 function changeNumlettini() {
 	
 	var prezzo_lettino= document.getElementById("prezzo_lettino").value;

@@ -148,7 +148,7 @@ public class DBQuery {
 			statement.setInt(8, cliente.getSesso());
 			statement.setFloat(9, cliente.getTot_pagamento());
 		
-			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+			
 
 			if(statement.executeUpdate() == 0) {
 				res= false;
@@ -183,7 +183,7 @@ public class DBQuery {
 			statement.setInt(8, ammin.getSesso());
 
 		
-			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+
 
 			if(statement.executeUpdate() == 0) {
 				res= false;
@@ -218,7 +218,7 @@ public class DBQuery {
 			statement.setInt(8, barista.getSesso());
 
 		
-			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+
 
 			if(statement.executeUpdate() == 0) {
 				res= false;
@@ -255,7 +255,7 @@ public class DBQuery {
 			statement.setInt(8, bagnino.getSesso());
 
 		
-			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+		
 
 			if(statement.executeUpdate() == 0) {
 				res= false;
@@ -1189,7 +1189,7 @@ public class DBQuery {
 			statement.setInt(8, num_lettini);
 			statement.setInt(9, num_sdraio);
 		
-			//statement.executeUpdate(); //0 (non ritorna niente) o 1
+		
 
 			if(statement.executeUpdate() == 0) {
 				res= false;
@@ -1503,7 +1503,7 @@ public class DBQuery {
 			statement.close();
 			connection.close();	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return isModified;

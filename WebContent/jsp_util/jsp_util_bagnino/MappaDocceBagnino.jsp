@@ -105,7 +105,7 @@ $(document).ready(function() {
  				}else{
 					$("#tel_cliente").attr("value",data.telefono);
  				}
- 				// location.href = "#div_show"; 
+ 				
 	         }
 	         
 	 
